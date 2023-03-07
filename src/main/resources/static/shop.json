@@ -1,0 +1,90 @@
+{
+  "status": 1,
+  "message": "success",
+  "data": {
+    "info": {
+      "merchant_id": 494644,
+      "shop_fpt_id": "2024316030",
+      "seller_admin_id": 494644,
+      "name": "chippro shop",
+      "shop_slogan": "Chippro Shop uy tín là phương châm , là cách làm việc của chúng tôi !",
+      "shop_background": "#ffcc00",
+      "shop_cover": "https://media3.scdn.vn/img4/2020/06_16/FIcJyGYiPxhopv0rHrcB.jpg",
+      "shop_cover_small": "https://media3.scdn.vn/img4/2020/06_16/FIcJyGYiPxhopv0rHrcB_simg_0194b3_124x31_maxb.jpg",
+      "shop_cover_small_width": 124,
+      "shop_cover_small_height": 31,
+      "shop_logo": "https://media3.scdn.vn/img4/2021/03_09/dejNj53PQPOoSREfIjat.jpg",
+      "shop_description": "Chippro Shop",
+      "shop_phone": "0854605526",
+      "shop_email": "vohuythanh176211@gmail.com",
+      "shop_warehouse": "Huyện Hoài Đức, Hà Nội",
+      "shop_address": "Huyện Hoài Đức, Hà Nội",
+      "shop_join_from": "4 năm 3 tháng",
+      "images": null,
+      "link_video": "",
+      "shop_url": "https://www.sendo.vn/shop/chippro-shop",
+      "shop_type": 1,
+      "shop_level": 5,
+      "like": 3340,
+      "rating": 4.6,
+      "rating_detail": {
+        "star_1": 177,
+        "star_2": 112,
+        "star_3": 205,
+        "star_4": 442,
+        "star_5": 3593,
+        "is_image": 244,
+        "total_star": 20749,
+        "total_rate": 4529,
+        "rate_percent": 4.5813646,
+        "total_score": 3746
+      },
+      "online_status": "online",
+      "response_rate": "82%",
+      "response_time": "Thường trả lời trong vài giờ",
+      "response_time_short": "Trong vài giờ",
+      "total_product": "198",
+      "search_link": "https://www.sendo.vn/tim-kiem?seller_admin_id=494644",
+      "reputation_point": 3746,
+      "percent_good_review": 0,
+      "averaged_prepare_time": "2 giờ",
+      "is_shop_plus": true,
+      "code": "chippro-shop",
+      "shop_icons": [
+        "https://media3.scdn.vn/img4/2022/08_30/kBuLMejE9aDW1hGDuTFu.png"
+      ]
+    },
+    "dropdown_menu": [
+      {
+        "type": "dropdown_menu_item_home",
+        "title": "Trang chủ",
+        "link": "https://www.sendo.vn/",
+        "icon": "https://media3.scdn.vn/img4/2022/10_25/vkdmhenmuXr7KWLTecuZ.png"
+      },
+      {
+        "type": "dropdown_menu_item_cart",
+        "title": "Giỏ hàng",
+        "link": "https://www.sendo.vn/gio-hang",
+        "icon": ""
+      },
+      {
+        "type": "dropdown_menu_item_wish_list",
+        "title": "Sản phẩm yêu thích",
+        "link": "https://profile.sendo.vn/san-pham-quan-tam/",
+        "icon": "https://media3.scdn.vn/img4/2022/10_25/8aks81B6KRiC0x44uv0z.png"
+      },
+      {
+        "type": "dropdown_menu_item_my_voucher",
+        "title": "Mã giảm giá của tôi",
+        "link": "https://profile.sendo.vn/ma-giam-gia/?tab=shop",
+        "icon": "https://media3.scdn.vn/img4/2022/10_25/PDD4UOo95nQji0prIwci.png"
+      },
+      {
+        "type": "share",
+        "title": "Chia sẻ",
+        "link": "https://www.sendo.vn/shop/chippro-shop",
+        "icon": "https://media3.scdn.vn/img4/2022/10_25/p30K7m861uaMPGfmZ6hd.png"
+      }
+    ]
+  }
+}
