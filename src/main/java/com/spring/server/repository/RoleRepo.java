@@ -1,7 +1,7 @@
 package com.spring.server.repository;
 
-import com.spring.server.entity.ERole;
-import com.spring.server.entity.Role;
+import com.spring.server.model.entity.ERole;
+import com.spring.server.model.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepo extends JpaRepository<Role, Long> {

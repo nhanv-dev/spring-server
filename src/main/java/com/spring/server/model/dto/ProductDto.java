@@ -1,12 +1,11 @@
 package com.spring.server.model.dto;
 
-import com.spring.server.entity.Shop;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -22,5 +21,6 @@ public class ProductDto extends BaseDto {
     private SubCategoryDto subCategory;
     private ShopDto shopDto;
     private RatingInfoDto ratingInfo;
+    private Set<ProductImageDto> images;
 
 }

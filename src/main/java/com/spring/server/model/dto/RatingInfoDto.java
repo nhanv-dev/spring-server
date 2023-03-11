@@ -10,5 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RatingInfoDto extends BaseDto {
-    private String type;
+    private Integer star1, star2, star3, star4, star5;
+
+    private Integer totalRating;
+
+    private Double avgRating;
 }

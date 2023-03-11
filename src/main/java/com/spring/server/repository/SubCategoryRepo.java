@@ -1,6 +1,6 @@
 package com.spring.server.repository;
 
-import com.spring.server.entity.SubCategory;
+import com.spring.server.model.entity.SubCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

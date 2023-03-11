@@ -1,10 +1,10 @@
 package com.spring.server.controller.common;
 
-import com.spring.server.entity.User;
+import com.spring.server.model.entity.User;
 import com.spring.server.model.dto.UserDto;
+import com.spring.server.model.mapper.UserMapper;
 import com.spring.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +23,8 @@ public class UserController {
 
     @GetMapping("/email")
     public ResponseEntity<?> getUserByEmail(@RequestParam String email) {
-        UserDto user = userService.findOneByEmail(email);
-        return ResponseEntity.ok(user);
+        User user = userService.findOneByEmail(email);
+        return ResponseEntity.ok(UserMapper.toDto(user));
     }
 }
 

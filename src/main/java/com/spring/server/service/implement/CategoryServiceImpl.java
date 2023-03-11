@@ -1,7 +1,7 @@
 package com.spring.server.service.implement;
 
-import com.spring.server.entity.Category;
-import com.spring.server.entity.SubCategory;
+import com.spring.server.model.entity.Category;
+import com.spring.server.model.entity.SubCategory;
 import com.spring.server.model.dto.CategoryDto;
 import com.spring.server.model.dto.SubCategoryDto;
 import com.spring.server.model.mapper.CategoryMapper;
@@ -36,6 +36,13 @@ public class CategoryServiceImpl implements com.spring.server.service.CategorySe
     @Override
     public List<CategoryDto> findAll() {
         List<Category> list = categoryEntityRepo.findAll();
+//        for (Category category : list) {
+//            category.setSlug(SlugGenerator.toSlug(category.getTitle()));
+//            for (SubCategory sub : category.getSubCategories()) {
+//                sub.setSlug(SlugGenerator.toSlug(sub.getTitle()));
+//            }
+//            categoryEntityRepo.save(category);
+//        }
         return CategoryMapper.toDto(list);
     }
 

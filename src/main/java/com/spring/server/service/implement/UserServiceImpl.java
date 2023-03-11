@@ -1,6 +1,6 @@
 package com.spring.server.service.implement;
 
-import com.spring.server.entity.User;
+import com.spring.server.model.entity.User;
 import com.spring.server.model.dto.UserDto;
 import com.spring.server.model.mapper.UserMapper;
 import com.spring.server.repository.UserRepo;
@@ -22,10 +22,10 @@ public class UserServiceImpl implements UserService {
         Optional<User> list = userEntityRepo.findById(id);
         return UserMapper.toDto(list.get());
     }
-
+    
     @Override
-    public UserDto findOneByEmail(String email) {
-        return UserMapper.toDto(userEntityRepo.findOneByEmail(email));
+    public User findOneByEmail(String email) {
+        return userEntityRepo.findOneByEmail(email);
     }
 
     @Override

@@ -1,15 +1,21 @@
-package com.spring.server.entity;
+package com.spring.server.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.List;
+import java.io.Serial;
+import java.io.Serializable;
 
 
 @Entity
 @Table(name = "shop")
-public class Shop extends BaseEntity {
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class Shop extends BaseEntity implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Getter
     @Setter
     @Column
@@ -20,17 +26,18 @@ public class Shop extends BaseEntity {
     private String city, district, wards, addressDetail, warehouseRegionName;
     @Getter
     @Setter
-    @Column
-    private String responseTime, timePrepareProduct;
+    @Column(columnDefinition = "varchar(255) default 'Đang cập nhật'")
+    private String responseTime = "Đang cập nhật", timePrepareProduct = "Đang cập nhật";
     @Getter
     @Setter
-    @Column
-    private Integer productTotal;
+    @Column(columnDefinition = "bigint default 0")
+    private Integer productTotal = 0;
     @Getter
     @Setter
-    @Column
+    @Column(columnDefinition = "boolean default false")
     private boolean isOfficialShop, isDeleted;
     @Getter
+    @Setter
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;

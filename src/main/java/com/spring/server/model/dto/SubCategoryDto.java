@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SubCategoryDto extends BaseDto {
+public class SubCategoryDto {
+    private Long id;
     private String title, slug, icon;
 }

@@ -1,6 +1,5 @@
 package com.spring.server.model.dto;
 
-import com.spring.server.entity.Shop;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShopDto extends BaseDto {
+public class ShopDto {
+    private Long id;
     private String shopName;
     private String shopPhone;
     private String shopEmail;
@@ -22,5 +22,5 @@ public class ShopDto extends BaseDto {
     private boolean isDeleted, isOfficial;
     private Integer productTotal;
     private Integer orderCount;
-    private RatingInfoDto ratingInfoDto;
+    private RatingInfoDto ratingInfo;
 }

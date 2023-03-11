@@ -1,10 +1,8 @@
 package com.spring.server.controller.common;
 
-import com.spring.server.entity.ERole;
-import com.spring.server.entity.Role;
-import com.spring.server.entity.User;
-import com.spring.server.model.dto.UserDto;
-import com.spring.server.model.mapper.UserMapper;
+import com.spring.server.model.entity.ERole;
+import com.spring.server.model.entity.Role;
+import com.spring.server.model.entity.User;
 import com.spring.server.payload.request.LoginRequest;
 import com.spring.server.payload.request.SignUpRequest;
 import com.spring.server.payload.response.JwtResponse;
@@ -27,7 +25,6 @@ import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -55,6 +52,11 @@ public class AuthenticationController {
         return ResponseEntity.ok(
                 new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), userDetails.getName(), roles)
         );
+    }
+
+    @GetMapping("/re-login")
+    public ResponseEntity<?> reLogin(Authentication authentication) { 
+        return ResponseEntity.status(400).build();
     }
 
     @PostMapping("/sign-up")

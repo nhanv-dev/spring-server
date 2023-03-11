@@ -19,9 +19,11 @@ public class CategoryController {
     CategoryService categoryService;
 
     @GetMapping("")
-    public ResponseEntity<?> getCategoryByLimit(@RequestParam(required = false) Integer page) {
+    public ResponseEntity<?> getCategoryByLimit(
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer limit) {
         if (page == null) return ResponseEntity.ok(categoryService.findAll());
-        Pageable pageable = PageRequest.of(page, 60);
+        Pageable pageable = PageRequest.of(page - 1, limit);
         return ResponseEntity.ok(categoryService.findLimit(pageable));
     }
 
@@ -31,6 +33,7 @@ public class CategoryController {
 
         return ResponseEntity.ok(category);
     }
+
     @GetMapping("/{id}/sub-categories")
     public ResponseEntity<?> getSubCategoryByCategoryId(@PathVariable(value = "id") Long id) {
         List<SubCategoryDto> category = categoryService.findSubCategoryByCategoryId(id);

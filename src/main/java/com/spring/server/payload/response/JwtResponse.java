@@ -1,7 +1,5 @@
 package com.spring.server.payload.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.spring.server.entity.ERole;
 import lombok.Getter;
 import lombok.Setter;
 

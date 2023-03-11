@@ -1,10 +1,10 @@
-package com.spring.server.entity;
+package com.spring.server.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "attribute_option")
@@ -24,5 +24,8 @@ public class ProductAttributeOption extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attribute_id", nullable = false)
     private ProductAttribute attribute;
+
+    @ManyToMany
+    private Set<ProductVariant> variant;
 
 }

@@ -1,6 +1,6 @@
 package com.spring.server.repository;
 
-import com.spring.server.entity.Category;
+import com.spring.server.model.entity.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

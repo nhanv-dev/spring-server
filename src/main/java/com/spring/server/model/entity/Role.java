@@ -1,13 +1,15 @@
-package com.spring.server.entity;
+package com.spring.server.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "role")
+@NoArgsConstructor
 public class Role extends BaseEntity {
     @Getter
     @Setter
@@ -17,7 +19,9 @@ public class Role extends BaseEntity {
     @Getter
     @Setter
     @ManyToMany(mappedBy = "roles")
-    private List<User> users;
+    private Set<User> users;
 
-
+    public Role(ERole type) {
+        this.type = type;
+    }
 }
