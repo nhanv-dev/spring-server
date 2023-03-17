@@ -11,37 +11,26 @@ import java.util.List;
 import java.util.Set;
 
 
-@Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "user")
 public class User extends BaseEntity {
-
-    @Getter
-    @Setter
     @Column
     private String name;
-    @Getter
-    @Setter
     @Column(unique = true)
     private String email;
-    @Getter
-    @Setter
     @Column
     private String password;
-    @Getter
-    @Setter
     @Column
     private String phoneNumber;
-    @Getter
-    @Setter
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserAddress> addresses;
+    private Set<UserAddress> addresses = new HashSet<>();
 
-    @Getter
-    @Setter
     @ManyToMany
-    @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     @OneToOne(mappedBy = "user")

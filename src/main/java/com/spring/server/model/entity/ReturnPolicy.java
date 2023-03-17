@@ -22,4 +22,5 @@ public class ReturnPolicy extends BaseEntity {
     @Setter
     @ManyToMany(mappedBy = "returnPolicies")
     private List<Product> products;
+
 }

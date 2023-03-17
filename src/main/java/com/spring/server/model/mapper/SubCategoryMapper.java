@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class SubCategoryMapper {
@@ -16,6 +17,14 @@ public class SubCategoryMapper {
         result.setSlug(category.getSlug());
         result.setIcon(category.getIcon());
         return result;
+    }
+
+    public static List<SubCategoryDto> toDto(Set<SubCategory> categories) {
+        List<SubCategoryDto> list = new ArrayList<>();
+        for (SubCategory category : categories)
+            list.add(SubCategoryMapper.toDto(category));
+
+        return list;
     }
 
     public static List<SubCategoryDto> toDto(List<SubCategory> categories) {

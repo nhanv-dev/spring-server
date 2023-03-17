@@ -33,6 +33,11 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
+    public ShopDto findOneByUserId(Long id) {
+        return ShopMapper.toDto(shopRepo.findOneByUserId(id));
+    }
+
+    @Override
     public ShopDto save(Shop shop) {
         Shop savedShop = shopRepo.saveAndFlush(shop);
         savedShop.setSlug(SlugGenerator.toSlug(savedShop.getShopName() + "-" + savedShop.getId()));

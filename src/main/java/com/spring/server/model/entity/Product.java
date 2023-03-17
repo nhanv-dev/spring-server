@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Getter
 @Setter
@@ -19,26 +21,30 @@ public class Product extends BaseEntity {
     Double price;
     @Column
     private boolean isPublic, isDeleted;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sub_category_id", referencedColumnName = "id")
     private SubCategory subCategory;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProductImage> images;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "rating_id", referencedColumnName = "id")
     private RatingInfo ratingInfo;
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "discount_id", referencedColumnName = "id")
+    private Discount discount;
     @ManyToOne(fetch = FetchType.LAZY)
     private Shop shop;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OrderColumn(name = "id ASC")
+    private Set<ProductImage> images = new HashSet<>();
     @ManyToMany
     @JoinTable(name = "product_return_policy", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "policy_id"))
-    private Set<ReturnPolicy> returnPolicies;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProductAttribute> attributes;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProductVariant> variants;
+    private Set<ReturnPolicy> returnPolicies = new HashSet<>();
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, orphanRemoval = true)
+    private Set<ProductAttribute> attributes = new HashSet<>();
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, orphanRemoval = true)
+    private Set<ProductVariant> variants = new HashSet<>();
     @Column
     private Date createdAt, updatedAt;
 }

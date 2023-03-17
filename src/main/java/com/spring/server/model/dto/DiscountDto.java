@@ -9,6 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RoleDto extends BaseDto {
-    private String type;
+public class DiscountDto extends BaseDto {
+    private Double price, finalPrice, discountPercent;
+
+    private Boolean isRunning, isDeleted;
 }

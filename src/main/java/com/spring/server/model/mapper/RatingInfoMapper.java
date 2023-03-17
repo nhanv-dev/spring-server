@@ -23,5 +23,17 @@ public class RatingInfoMapper {
         result.setAvgRating(((double) Math.round(avg * 10)) / 10);
         return result;
     }
+    public static RatingInfo toEntity(RatingInfoDto ratingInfo) {
+        RatingInfo result = new RatingInfo();
+
+        result.setId(ratingInfo.getId());
+        result.setStar1(ratingInfo.getStar1());
+        result.setStar2(ratingInfo.getStar2());
+        result.setStar3(ratingInfo.getStar3());
+        result.setStar4(ratingInfo.getStar4());
+        result.setStar5(ratingInfo.getStar5());
+
+        return result;
+    }
 
 }

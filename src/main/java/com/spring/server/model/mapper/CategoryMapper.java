@@ -39,16 +39,22 @@ public class CategoryMapper {
         return list;
     }
 
+    public static List<CategoryDto> toDtoWithoutSub(List<Category> categories) {
+        List<CategoryDto> list = new ArrayList<>();
+        for (Category category : categories) {
+            list.add(CategoryMapper.toDtoWithoutSub(category));
+        }
+        return list;
+    }
+
     public static Category toEntity(CategoryDto category) {
         Category result = new Category();
         result.setId(category.getId());
         result.setTitle(category.getTitle());
         result.setSlug(category.getSlug());
         result.setIcon(category.getIcon());
-        result.setSubCategories(SubCategoryMapper.toEntity(category.getSubCategories()));
-        for (SubCategory subCategory : result.getSubCategories()) {
-
-        }
+//        if (category.getSubCategories() != null && category.getSubCategories().size() > 0)
+//            result.setSubCategories(SubCategoryMapper.toEntity(category.getSubCategories()));
         return result;
     }
 }

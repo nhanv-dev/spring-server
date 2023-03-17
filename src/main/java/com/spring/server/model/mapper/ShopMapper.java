@@ -38,7 +38,24 @@ public class ShopMapper {
     }
 
     public static Shop toEntity(ShopDto shop) {
+        Shop result = new Shop();
 
-        return null;
+        result.setId(shop.getId());
+        result.setShopName(shop.getShopName());
+        result.setSlug(shop.getSlug());
+        result.setShopLogo(shop.getShopLogo());
+        result.setShopBackground(shop.getShopBackground());
+        result.setResponseTime(shop.getResponseTime());
+        result.setTimePrepareProduct(shop.getTimePrepareProduct());
+        result.setProductTotal(shop.getProductTotal());
+        result.setOfficialShop(shop.isOfficial());
+        result.setRatingInfo(RatingInfoMapper.toEntity(shop.getRatingInfo()));
+
+        result.setCity(shop.getCity());
+        result.setDistrict(shop.getDistrict());
+        result.setWards(shop.getWards());
+        result.setWarehouseRegionName(shop.getWarehouseRegionName());
+        result.setDeleted(shop.isDeleted());
+        return result;
     }
 }

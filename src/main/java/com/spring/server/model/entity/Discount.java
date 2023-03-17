@@ -3,24 +3,20 @@ package com.spring.server.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
 @Getter
 @Setter
+@ToString
 @Entity
-@Table(name = "user")
+@Table(name = "discount")
 public class Discount extends BaseEntity {
     @Column
-    private String name;
-    @Column(unique = true)
-    private String email;
+    private Double price, finalPrice, discountPercent;
     @Column
-    private String password;
-    @Column
-    private String phoneNumber;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserAddress> addresses;
-
-
+    private Boolean isRunning, isDeleted;
+    @OneToOne(mappedBy = "discount")
+    private Product product;
 }

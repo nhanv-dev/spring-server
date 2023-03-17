@@ -2,6 +2,7 @@ package com.spring.server.controller.common;
 
 import com.spring.server.model.dto.CategoryDto;
 import com.spring.server.model.dto.SubCategoryDto;
+import com.spring.server.model.mapper.CategoryMapper;
 import com.spring.server.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -21,10 +22,14 @@ public class CategoryController {
     @GetMapping("")
     public ResponseEntity<?> getCategoryByLimit(
             @RequestParam(required = false) Integer page,
-            @RequestParam(required = false) Integer limit) {
-        if (page == null) return ResponseEntity.ok(categoryService.findAll());
+            @RequestParam(required = false) Integer limit,
+            @RequestParam(required = false) String type) {
+        if (page == null) {
+            if (type != null && type.equals("short")) return ResponseEntity.ok(categoryService.findAllWithoutSub());
+            return ResponseEntity.ok(categoryService.findAll());
+        }
         Pageable pageable = PageRequest.of(page - 1, limit);
-        return ResponseEntity.ok(categoryService.findLimit(pageable));
+        return ResponseEntity.ok(categoryService.findByPageable(pageable));
     }
 
     @GetMapping("/{id}")

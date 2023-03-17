@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "attribute")
-public class ProductAttribute extends BaseEntity {
+public class ProductAttribute extends BaseEntity{
     @Getter
     @Setter
     @Column
@@ -24,5 +24,6 @@ public class ProductAttribute extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
+
 
 }
