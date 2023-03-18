@@ -34,6 +34,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedOrigins("*").allowedHeaders("*");
     }
+
     @Bean
     public JwtAuthenticationFilter authenticationJwtTokenFilter() {
         return new JwtAuthenticationFilter();
@@ -66,9 +67,10 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/products/**").permitAll()
                 .requestMatchers("/api/categories/**").permitAll()
                 .requestMatchers("/api/users/**").permitAll()
-                .requestMatchers("/api/products/**").permitAll()
+                .requestMatchers("/api/shops/**").permitAll()
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());
