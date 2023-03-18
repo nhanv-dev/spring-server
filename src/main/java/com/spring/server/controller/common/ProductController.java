@@ -7,6 +7,7 @@ import com.spring.server.model.entity.User;
 import com.spring.server.model.mapper.ProductDetailMapper;
 import com.spring.server.model.mapper.ProductMapper;
 import com.spring.server.service.ProductService;
+import com.spring.server.service.ReturnPolicyService;
 import com.spring.server.service.ShopService;
 import com.spring.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class ProductController {
     private ShopService shopService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ReturnPolicyService returnPolicyService;
 
     @GetMapping("")
     public ResponseEntity<?> getProducts(@RequestParam(required = false, defaultValue = "1") Integer page) {
@@ -39,6 +42,11 @@ public class ProductController {
     public ResponseEntity<?> getProductBySlug(@PathVariable String slug) {
         ProductDto product = productService.findOneBySlug(slug);
         return ResponseEntity.ok(product);
+    }
+
+    @GetMapping("/return-policy")
+    public ResponseEntity<?> getReturnPolicyProduct() {
+        return ResponseEntity.ok(returnPolicyService.findAll());
     }
 
     @GetMapping("/category/{categorySlug}")
