@@ -2,6 +2,8 @@ package com.spring.server.model.mapper;
 
 import com.spring.server.model.dto.ProductAttributeOptionDto;
 import com.spring.server.model.dto.ProductVariantDto;
+import com.spring.server.model.entity.Product;
+import com.spring.server.model.entity.ProductAttribute;
 import com.spring.server.model.entity.ProductAttributeOption;
 import com.spring.server.model.entity.ProductVariant;
 import org.springframework.stereotype.Component;
@@ -16,25 +18,41 @@ public class ProductVariantMapper {
         ProductVariantDto result = new ProductVariantDto();
         result.setId(variant.getId());
         result.setAttributeHash(variant.getAttributeHash());
+        result.setSkuUser(variant.getSkuUser());
         result.setPrice(variant.getPrice());
         result.setQuantity(variant.getQuantity());
         result.setDeleted(variant.isDeleted());
-        Set<ProductAttributeOptionDto> options = new HashSet<>();
-        for (ProductAttributeOption option : variant.getOptions()) {
-            options.add(new ProductAttributeOptionDto(
-                    option.getId(), null, option.getName(), option.getValue(), option.getImage(), option.isDeleted()
-            ));
-        }
-        result.setOptions(options);
+        result.setOptions(ProductAttributeOptionMapper.toDtos(variant.getOptions()));
         return result;
     }
 
-    public static Set<ProductVariantDto> toDto(Set<ProductVariant> variants) {
+    public static Set<ProductVariantDto> toDtos(Set<ProductVariant> variants) {
+        if (variants == null || variants.isEmpty()) return null;
         Set<ProductVariantDto> list = new HashSet<>();
-        for (ProductVariant variant : variants) {
-            list.add(ProductVariantMapper.toDto(variant));
-        }
+        for (ProductVariant variant : variants) list.add(ProductVariantMapper.toDto(variant));
         return list;
+    }
+
+    public static ProductVariant toEntity(ProductVariantDto variant, Product product) {
+        ProductVariant result = new ProductVariant();
+        result.setId(variant.getId());
+        result.setAttributeHash(variant.getAttributeHash());
+        result.setSkuUser(variant.getSkuUser());
+        result.setPrice(variant.getPrice());
+        result.setQuantity(variant.getQuantity());
+        result.setDeleted(variant.isDeleted());
+        result.setProduct(product);
+        result.setOptions(ProductAttributeOptionMapper.toEntities(variant.getOptions(), result, product));
+        return result;
+    }
+
+    public static Set<ProductVariant> toEntities(Set<ProductVariantDto> variants, Product product) {
+        if (variants == null || variants.isEmpty()) return null;
+        Set<ProductVariant> result = new HashSet<>();
+        for (ProductVariantDto variant : variants) {
+            result.add(ProductVariantMapper.toEntity(variant, product));
+        }
+        return result;
     }
 }
 

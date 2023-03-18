@@ -6,13 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "return_policy")
-public class ReturnPolicy extends BaseEntity {
+public class ReturnPolicy extends BaseEntity implements Serializable {
     @Getter
     @Setter
     @Column

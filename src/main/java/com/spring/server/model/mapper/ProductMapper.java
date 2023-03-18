@@ -25,16 +25,14 @@ public class ProductMapper {
         result.setSubCategory(SubCategoryMapper.toDto(product.getSubCategory()));
         result.setRatingInfo(RatingInfoMapper.toDto(product.getRatingInfo()));
         result.setShop(ShopMapper.toDto(product.getShop()));
-        result.setDiscount(DiscountMapper.toDto(product.getDiscount()));
+        result.setDiscount(DiscountMapper.toDtoWithRunning(product.getDiscounts()));
+        result.setImages(ProductImageMapper.toDto(product.getImages()));
 
-        Set<ProductImageDto> images = new TreeSet<>();
-        for (ProductImage image : product.getImages()) images.add(new ProductImageDto(image.getId(), image.getUrl()));
-        result.setImages(images);
 
         return result;
     }
 
-    public static Page<ProductDto> toDto(Page<Product> products) {
+    public static Page<ProductDto> toDtos(Page<Product> products) {
         return products.map(new Function<Product, ProductDto>() {
             @Override
             public ProductDto apply(Product product) {
@@ -55,23 +53,9 @@ public class ProductMapper {
 
         result.setCategory(CategoryMapper.toEntity(product.getCategory()));
         result.setSubCategory(SubCategoryMapper.toEntity(product.getSubCategory()));
-        result.setDiscount(DiscountMapper.toEntity(product.getDiscount()));
         result.setShop(ShopMapper.toEntity(product.getShop()));
-        if (product.getRatingInfo() == null)
-            result.setRatingInfo(new RatingInfo());
-        else
-            result.setRatingInfo(RatingInfoMapper.toEntity(product.getRatingInfo()));
-
-        if (product.getImages() != null && product.getImages().size() > 0) {
-            Set<ProductImage> images = new HashSet<>();
-            for (ProductImageDto image : product.getImages()) {
-                ProductImage productImage = new ProductImage();
-                productImage.setUrl(image.getUrl());
-                productImage.setProduct(result);
-                images.add(productImage);
-            }
-            result.setImages(images);
-        }
+        result.setRatingInfo(RatingInfoMapper.toEntity(product.getRatingInfo()));
+        result.setImages(ProductImageMapper.toEntity(product.getImages(), result));
 
         return result;
     }

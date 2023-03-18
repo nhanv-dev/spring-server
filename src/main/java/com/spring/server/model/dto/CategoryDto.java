@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -12,8 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CategoryDto {
+public class CategoryDto implements Comparable<CategoryDto> {
     private Long id;
     private String title, slug, icon;
-    private List<SubCategoryDto> subCategories;
+    private Set<SubCategoryDto> subCategories;
+    @Override
+    public int compareTo(CategoryDto o) {
+        return id.compareTo(o.getId());
+    }
 }

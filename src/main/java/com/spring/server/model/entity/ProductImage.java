@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 @Getter
@@ -14,7 +15,7 @@ import java.util.Comparator;
 @AllArgsConstructor
 @Entity
 @Table(name = "product_image")
-public class ProductImage extends BaseEntity  {
+public class ProductImage extends BaseEntity  implements Serializable {
 
     @Column
     private String url;

@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 
 @Entity
 @Table(name = "rating_info")
-public class RatingInfo extends BaseEntity {
+public class RatingInfo extends BaseEntity implements Serializable {
     @Getter
     @Setter
     @Column(columnDefinition = "tinyint default 0")

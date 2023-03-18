@@ -5,11 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "attribute")
-public class ProductAttribute extends BaseEntity{
+public class ProductAttribute extends BaseEntity implements Serializable {
     @Getter
     @Setter
     @Column

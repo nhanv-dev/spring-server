@@ -9,7 +9,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "discount")
 public class Discount extends BaseEntity {
@@ -17,6 +16,7 @@ public class Discount extends BaseEntity {
     private Double price, finalPrice, discountPercent;
     @Column
     private Boolean isRunning, isDeleted;
-    @OneToOne(mappedBy = "discount")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
     private Product product;
 }

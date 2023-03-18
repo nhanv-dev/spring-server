@@ -8,6 +8,7 @@ import com.spring.server.model.mapper.CategoryMapper;
 import com.spring.server.model.mapper.SubCategoryMapper;
 import com.spring.server.repository.CategoryRepo;
 import com.spring.server.repository.SubCategoryRepo;
+import com.spring.server.service.CategoryService;
 import com.spring.server.util.SlugGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +20,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Component
-public class CategoryServiceImpl implements com.spring.server.service.CategoryService {
+public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryRepo categoryEntityRepo;
@@ -45,7 +46,7 @@ public class CategoryServiceImpl implements com.spring.server.service.CategorySe
             }
             categoryEntityRepo.save(category);
         }
-        return CategoryMapper.toDto(list);
+        return CategoryMapper.toDtos(list);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class CategoryServiceImpl implements com.spring.server.service.CategorySe
     @Override
     public List<SubCategoryDto> findSubCategoryByCategoryId(long id) {
         List<SubCategory> list = subCategoryRepo.findByCategoryId(id);
-        return SubCategoryMapper.toDto(list);
+        return SubCategoryMapper.toDtos(list);
     }
 
     @Override

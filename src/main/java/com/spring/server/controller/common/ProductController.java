@@ -30,7 +30,7 @@ public class ProductController {
 
     @GetMapping("")
     public ResponseEntity<?> getProducts(@RequestParam(required = false, defaultValue = "1") Integer page) {
-        Pageable pageable = PageRequest.of(page - 1, 60);
+        Pageable pageable = PageRequest.of(page - 1, 30);
         Page<ProductDto> products = productService.findByOrderByCreatedAt(pageable);
         return ResponseEntity.ok(products);
     }
@@ -58,7 +58,6 @@ public class ProductController {
         User user = userService.findOneByEmail(authentication.getName());
         ShopDto shop = shopService.findOneByUserId(user.getId());
         productDto.setShop(shop);
-        System.out.println(productDto);
         ProductDto product = productService.save(productDto);
         return ResponseEntity.ok(product);
     }

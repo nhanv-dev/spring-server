@@ -29,7 +29,7 @@ public class Category extends BaseEntity {
     @Setter
     @OneToMany(mappedBy = "category", cascade = CascadeType.MERGE, orphanRemoval = true)
     @OrderBy("id")
-    private Set<SubCategory> subCategories = new TreeSet<>();
+    private Set<SubCategory> subCategories = new HashSet<>();
     @OneToMany(mappedBy = "category", cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<Product> products = new HashSet<>();
 

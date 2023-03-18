@@ -25,9 +25,11 @@ public class ProductDto extends BaseDto {
     private DiscountDto discount;
     private ShopDto shop;
     private RatingInfoDto ratingInfo;
+    private Boolean isDeleted, isPublic;
     private Set<ReturnPolicyDto> returnPolicies;
     private Set<ProductImageDto> images;
     private Set<ProductAttributeDto> attributes;
     private Set<ProductVariantDto> variants;
+    private Set<DiscountDto> discounts;
 
 }

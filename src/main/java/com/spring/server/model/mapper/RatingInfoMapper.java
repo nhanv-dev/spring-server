@@ -3,6 +3,7 @@ package com.spring.server.model.mapper;
 import com.spring.server.model.entity.RatingInfo;
 import com.spring.server.model.dto.RatingInfoDto;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class RatingInfoMapper {
@@ -23,16 +24,17 @@ public class RatingInfoMapper {
         result.setAvgRating(((double) Math.round(avg * 10)) / 10);
         return result;
     }
-    public static RatingInfo toEntity(RatingInfoDto ratingInfo) {
-        RatingInfo result = new RatingInfo();
 
+    public static RatingInfo toEntity(RatingInfoDto ratingInfo) {
+        if (ratingInfo == null) return null;
+
+        RatingInfo result = new RatingInfo();
         result.setId(ratingInfo.getId());
         result.setStar1(ratingInfo.getStar1());
         result.setStar2(ratingInfo.getStar2());
         result.setStar3(ratingInfo.getStar3());
         result.setStar4(ratingInfo.getStar4());
         result.setStar5(ratingInfo.getStar5());
-
         return result;
     }
 

@@ -4,9 +4,7 @@ import com.spring.server.model.entity.SubCategory;
 import com.spring.server.model.dto.SubCategoryDto;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class SubCategoryMapper {
@@ -19,15 +17,15 @@ public class SubCategoryMapper {
         return result;
     }
 
-    public static List<SubCategoryDto> toDto(Set<SubCategory> categories) {
-        List<SubCategoryDto> list = new ArrayList<>();
+    public static Set<SubCategoryDto> toDtos(Set<SubCategory> categories) {
+        Set<SubCategoryDto> list = new TreeSet<>();
         for (SubCategory category : categories)
             list.add(SubCategoryMapper.toDto(category));
 
         return list;
     }
 
-    public static List<SubCategoryDto> toDto(List<SubCategory> categories) {
+    public static List<SubCategoryDto> toDtos(List<SubCategory> categories) {
         List<SubCategoryDto> list = new ArrayList<>();
         for (SubCategory category : categories)
             list.add(SubCategoryMapper.toDto(category));
@@ -44,8 +42,8 @@ public class SubCategoryMapper {
         return result;
     }
 
-    public static List<SubCategory> toEntity(List<SubCategoryDto> categories) {
-        List<SubCategory> list = new ArrayList<>();
+    public static Set<SubCategory> toEntities(Set<SubCategoryDto> categories) {
+        Set<SubCategory> list = new HashSet<>();
         for (SubCategoryDto category : categories) {
             list.add(SubCategoryMapper.toEntity(category));
         }

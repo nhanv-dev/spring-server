@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "user")
-public class User extends BaseEntity {
+public class User extends BaseEntity implements Serializable {
     @Column
     private String name;
     @Column(unique = true)
