@@ -1,11 +1,9 @@
 package com.spring.server.service.implement;
 
-import com.spring.server.model.entity.ERole;
-import com.spring.server.model.entity.Role;
-import com.spring.server.model.entity.Shop;
-import com.spring.server.model.entity.User;
 import com.spring.server.model.dto.ShopDto;
+import com.spring.server.model.entity.*;
 import com.spring.server.model.mapper.ShopMapper;
+import com.spring.server.repository.RatingInfoRepo;
 import com.spring.server.repository.RoleRepo;
 import com.spring.server.repository.ShopRepo;
 import com.spring.server.repository.UserRepo;
@@ -26,6 +24,8 @@ public class ShopServiceImpl implements ShopService {
     private UserRepo userRepo;
     @Autowired
     private RoleRepo roleRepo;
+    @Autowired
+    private RatingInfoRepo ratingInfoRepo;
 
     @Override
     public ShopDto findOneById(Long id) {
@@ -39,15 +39,17 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public ShopDto save(Shop shop) {
-        Shop savedShop = shopRepo.saveAndFlush(shop);
+        RatingInfo ratingInfo = ratingInfoRepo.save(new RatingInfo());
+        shop.setRatingInfo(ratingInfo);
+        Shop savedShop = shopRepo.save(shop);
         savedShop.setSlug(SlugGenerator.toSlug(savedShop.getShopName() + "-" + savedShop.getId()));
-        savedShop = shopRepo.saveAndFlush(savedShop);
+        savedShop = shopRepo.save(savedShop);
 
         User user = shop.getUser();
         Set<Role> roles = user.getRoles();
         roles.add(roleRepo.findOneByType(ERole.ROLE_SHOP));
         user.setRoles(roles);
-        userRepo.saveAndFlush(user);
+        userRepo.save(user);
         return ShopMapper.toDto(savedShop);
     }
 }

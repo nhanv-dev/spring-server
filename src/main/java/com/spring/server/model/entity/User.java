@@ -19,23 +19,27 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity implements Serializable {
-    @Column
+    @Column(columnDefinition = "varchar(255) not null")
     private String name;
-    @Column(unique = true)
+    @Column(columnDefinition = "varchar(255) not null unique")
     private String email;
-    @Column
+    @Column(columnDefinition = "varchar(255) not null")
     private String password;
-    @Column
+    @Column(columnDefinition = "varchar(10) not null")
     private String phoneNumber;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user")
+    private Shop shop;
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
+    private Set<Order> orders = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<UserAddress> addresses = new HashSet<>();
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
+    private Set<ProductReviews> reviews = new HashSet<>();
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
-    @OneToOne(mappedBy = "user")
-    private Shop shop;
 
     public User(String email, String password, String name, String phoneNumber) {
         this.email = email;

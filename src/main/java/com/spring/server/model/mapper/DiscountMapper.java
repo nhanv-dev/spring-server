@@ -14,14 +14,14 @@ public class DiscountMapper {
         result.setPrice(discount.getPrice());
         result.setFinalPrice(discount.getFinalPrice());
         result.setDiscountPercent(discount.getDiscountPercent());
-        result.setIsRunning(discount.getIsRunning());
-        result.setIsDeleted(discount.getIsDeleted());
+        result.setIsRunning(discount.isRunning());
+        result.setIsDeleted(discount.isDeleted());
         return result;
     }
 
     public static DiscountDto toDtoWithRunning(Set<Discount> discounts) {
         for (Discount discount : discounts) {
-            if (discount.getIsRunning()) return DiscountMapper.toDto(discount);
+            if (discount.isRunning()) return DiscountMapper.toDto(discount);
         }
         return null;
     }
@@ -34,8 +34,8 @@ public class DiscountMapper {
             mapped.setPrice(discount.getPrice());
             mapped.setFinalPrice(discount.getFinalPrice());
             mapped.setDiscountPercent(discount.getDiscountPercent());
-            mapped.setIsRunning(discount.getIsRunning());
-            mapped.setIsDeleted(discount.getIsDeleted());
+            mapped.setIsRunning(discount.isRunning());
+            mapped.setIsDeleted(discount.isDeleted());
             result.add(mapped);
         }
         return result;
@@ -47,8 +47,8 @@ public class DiscountMapper {
         result.setPrice(discount.getPrice());
         result.setFinalPrice(discount.getFinalPrice());
         result.setDiscountPercent(discount.getDiscountPercent());
-        result.setIsRunning(discount.getIsRunning());
-        result.setIsDeleted(discount.getIsDeleted());
+        result.setRunning(discount.getIsRunning());
+        result.setDeleted(discount.getIsDeleted());
         result.setProduct(product);
 
         return result;

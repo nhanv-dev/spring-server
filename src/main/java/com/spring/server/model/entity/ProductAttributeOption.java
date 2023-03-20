@@ -1,7 +1,9 @@
 package com.spring.server.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
@@ -9,14 +11,16 @@ import java.util.Set;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "attribute_option")
 public class ProductAttributeOption extends BaseEntity implements Serializable {
-    @Column(nullable = false)
+    @Column(columnDefinition = "varchar(100) not null")
     private String name, value;
-    @Column
+    @Column(columnDefinition = "text")
     private String image;
-    @Column(nullable = false)
+    @Column(columnDefinition = "boolean default false")
     private boolean isDeleted;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attribute_id", nullable = false)
