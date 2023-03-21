@@ -6,12 +6,13 @@ import com.spring.server.model.entity.Product;
 import com.spring.server.model.entity.ProductImage;
 import com.spring.server.model.entity.RatingInfo;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Function;
-
+@Component
 public class ProductImageMapper {
     public static Set<ProductImageDto> toDto(Set<ProductImage> images) {
         Set<ProductImageDto> result = new TreeSet<>();

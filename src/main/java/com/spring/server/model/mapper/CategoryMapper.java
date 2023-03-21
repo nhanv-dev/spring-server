@@ -12,7 +12,6 @@ import java.util.TreeSet;
 
 @Component
 public class CategoryMapper {
-
     public static CategoryDto toDto(Category category) {
         CategoryDto result = new CategoryDto();
         result.setId(category.getId());

@@ -5,29 +5,23 @@ import com.spring.server.model.entity.ProductImage;
 import com.spring.server.model.dto.*;
 import com.spring.server.model.entity.RatingInfo;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Function;
-
+@Component
 public class ProductMapper {
     public static ProductDto toDto(Product product) {
-        ProductDto result = new ProductDto();
-        result.setId(product.getId());
-        result.setName(product.getName());
-        result.setSlug(product.getSlug());
+        ProductDto result = ProductMinimalMapper.toDto(product);
+
         result.setOrderCount(product.getOrderCount());
-        result.setPrice(product.getPrice());
         result.setQuantity(product.getQuantity());
 
         result.setCategory(CategoryMapper.toDtoWithoutSub(product.getCategory()));
         result.setSubCategory(SubCategoryMapper.toDto(product.getSubCategory()));
-        result.setRatingInfo(RatingInfoMapper.toDto(product.getRatingInfo()));
         result.setShop(ShopMapper.toDto(product.getShop()));
-        result.setDiscount(DiscountMapper.toDtoWithRunning(product.getDiscounts()));
-        result.setImages(ProductImageMapper.toDto(product.getImages()));
-
 
         return result;
     }

@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "cart_item")
+@Table(name = "order_item")
 public class OrderItem extends BaseEntity implements Serializable {
     @Column(columnDefinition = "double not null")
     private double discountPercent;

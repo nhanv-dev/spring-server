@@ -11,7 +11,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProductDto extends BaseDto {
+public class ProductDto {
+    private Long id;
     private String name;
     private String slug;
     private String description;

@@ -57,8 +57,8 @@ public class Product extends BaseEntity implements Serializable {
     private Set<ProductAttribute> attributes = new HashSet<>();
     @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<ProductVariant> variants = new HashSet<>();
-    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, orphanRemoval = true)
-    private Set<ProductReviews> reviews = new HashSet<>();
+//    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, orphanRemoval = true)
+//    private Set<ProductReviews> reviews = new HashSet<>();
     @ManyToMany
     @JoinTable(name = "product_return_policy", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "policy_id"))
     private Set<ReturnPolicy> returnPolicies = new HashSet<>();

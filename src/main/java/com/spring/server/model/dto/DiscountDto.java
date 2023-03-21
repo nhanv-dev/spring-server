@@ -9,7 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DiscountDto extends BaseDto implements Comparable<DiscountDto>{
+public class DiscountDto implements Comparable<DiscountDto> {
+    private Long id;
     private Double price, finalPrice, discountPercent;
 
     private Boolean isRunning, isDeleted;

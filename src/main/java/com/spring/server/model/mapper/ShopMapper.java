@@ -4,25 +4,20 @@ import com.spring.server.model.entity.Shop;
 import com.spring.server.model.dto.ShopDto;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 public class ShopMapper {
 
     public static ShopDto toDto(Shop shop) {
-        ShopDto result = new ShopDto();
+        ShopDto result = ShopMinimalMapper.toDto(shop);
 
-        result.setId(shop.getId());
-        result.setShopName(shop.getShopName());
-        result.setSlug(shop.getSlug());
-        result.setShopLogo(shop.getShopLogo());
+
         result.setShopBackground(shop.getShopBackground());
         result.setResponseTime(shop.getResponseTime());
         result.setTimePrepareProduct(shop.getTimePrepareProduct());
-        result.setProductTotal(shop.getProductTotal());
-        result.setOfficial(shop.isOfficialShop());
         result.setRatingInfo(RatingInfoMapper.toDto(shop.getRatingInfo()));
-
         result.setCity(shop.getCity());
         result.setDistrict(shop.getDistrict());
         result.setWards(shop.getWards());
@@ -32,9 +27,11 @@ public class ShopMapper {
         return result;
     }
 
-    public static List<ShopDto> toDto(List<Shop> shops) {
-
-        return null;
+    public static Set<ShopDto> toDto(Set<Shop> shops) {
+        if (shops == null || shops.isEmpty()) return null;
+        Set<ShopDto> result = new HashSet<>();
+        for (Shop shop : shops) result.add(toDto(shop));
+        return result;
     }
 
     public static Shop toEntity(ShopDto shop) {

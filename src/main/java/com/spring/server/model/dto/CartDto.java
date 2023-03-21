@@ -1,7 +1,10 @@
 package com.spring.server.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.spring.server.model.entity.Product;
 import lombok.*;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -9,7 +12,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RoleDto {
+public class CartDto {
     private Long id;
-    private String type;
+    private Long userId;
+    private ShopDto shop;
+    private Set<CartItemDto> items;
+
 }

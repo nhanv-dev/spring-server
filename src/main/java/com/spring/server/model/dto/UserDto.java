@@ -12,7 +12,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserDto extends BaseDto {
+public class UserDto {
+    private Long id;
     private String email;
     private String name;
     private String password;

@@ -9,10 +9,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RatingInfoDto extends BaseDto {
+public class RatingInfoDto {
+    private Long id;
     private Integer star1, star2, star3, star4, star5;
-
     private Integer totalRating;
-
     private Double avgRating;
 }

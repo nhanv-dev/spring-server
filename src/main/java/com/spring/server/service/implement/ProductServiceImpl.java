@@ -34,14 +34,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto findOneById(Long id) {
-        return ProductDetailMapper.toDto(productRepo.findOneById(id));
+        Product product = productRepo.findOneById(id);
+        if (product == null) return null;
+        return ProductDetailMapper.toDto(product);
     }
 
     @Override
     public ProductDto findOneBySlug(String slug) {
-        return ProductDetailMapper.toDto(productRepo.findOneBySlug(slug));
+        Product product = productRepo.findOneBySlug(slug);
+        if (product == null) return null;
+        return ProductDetailMapper.toDto(product);
     }
-
 
     @Override
     public Page<ProductDto> findByOrderByCreatedAt(Pageable pageable) {

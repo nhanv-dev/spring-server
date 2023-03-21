@@ -17,12 +17,13 @@ import java.util.Set;
 @Entity
 @Table(name = "cart")
 public class Cart extends BaseEntity implements Serializable {
-    @Column(columnDefinition = "double not null")
-    private double totalPrice;
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, unique = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shop_id", referencedColumnName = "id", nullable = false)
+    private Shop shop;
     @OneToMany(mappedBy = "cart", cascade = CascadeType.MERGE, orphanRemoval = true)
-    private Set<CartItem> items;
+    private Set<CartItem> items = new HashSet<>();
 
 }

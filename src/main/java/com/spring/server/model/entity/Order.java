@@ -21,6 +21,10 @@ public class Order extends BaseEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shop_id")
+    private Shop shop;
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<OrderItem> items;
 

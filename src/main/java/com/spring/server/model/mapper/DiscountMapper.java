@@ -4,10 +4,11 @@ import com.spring.server.model.dto.DiscountDto;
 import com.spring.server.model.entity.Discount;
 import com.spring.server.model.entity.Product;
 import com.spring.server.model.entity.RatingInfo;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
-
+@Component
 public class DiscountMapper {
     public static DiscountDto toDto(Discount discount) {
         DiscountDto result = new DiscountDto();

@@ -4,9 +4,11 @@ import com.spring.server.model.entity.Role;
 import com.spring.server.model.entity.User;
 import com.spring.server.model.dto.RoleDto;
 import com.spring.server.model.dto.UserDto;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 
+@Component
 public class UserMapper {
     public static UserDto toDto(User user) {
         UserDto result = new UserDto();
@@ -16,8 +18,7 @@ public class UserMapper {
         result.setPhoneNumber(user.getPhoneNumber());
         result.setRoles(new HashSet<>());
         for (Role role : user.getRoles()) {
-            RoleDto roleDto = new RoleDto(role.getType().name());
-            roleDto.setId(role.getId());
+            RoleDto roleDto = new RoleDto(role.getId(), role.getType().name());
             result.getRoles().add(roleDto);
         }
         return result;

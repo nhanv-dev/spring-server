@@ -2,11 +2,12 @@ package com.spring.server.model.mapper;
 
 import com.spring.server.model.entity.*;
 import com.spring.server.model.dto.*;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
+@Component
 public class ProductDetailMapper {
     public static ProductDto toDto(Product product) {
         ProductDto result = ProductMapper.toDto(product);

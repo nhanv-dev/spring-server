@@ -9,11 +9,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ReturnPolicyDto implements Comparable<ReturnPolicyDto> {
+public class CartItemDto implements Comparable<CartItemDto> {
     private Long id;
-    private String title, tooltipTitle, tooltipContent;
+    private ProductDto product;
+    private Integer quantity;
     @Override
-    public int compareTo(ReturnPolicyDto o) {
-        return this.getId().compareTo(o.getId());
+    public int compareTo(CartItemDto o) {
+        return id.compareTo(o.getId());
     }
 }
