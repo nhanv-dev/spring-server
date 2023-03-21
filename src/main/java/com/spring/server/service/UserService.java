@@ -4,6 +4,7 @@ import com.spring.server.model.entity.User;
 import com.spring.server.model.dto.UserDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     UserDto findOneById(Long id);
@@ -18,4 +19,9 @@ public interface UserService {
 
     UserDto save(User user);
 
+
+
+    User updateUser(User currentUser);
+
+    User findById(Long id);
 }

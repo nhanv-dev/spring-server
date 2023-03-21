@@ -19,7 +19,9 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity implements Serializable {
+
     @Column(columnDefinition = "varchar(255) not null")
+
     private String name;
     @Column(columnDefinition = "varchar(255) not null unique")
     private String email;
@@ -27,6 +29,9 @@ public class User extends BaseEntity implements Serializable {
     private String password;
     @Column(columnDefinition = "varchar(10) not null")
     private String phoneNumber;
+
+
+
     @OneToOne(mappedBy = "user")
     private Shop shop;
     @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
