@@ -1,14 +1,15 @@
 package com.spring.server.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoleDto extends BaseDto {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class RoleDto {
+    private Long id;
     private String type;
 }

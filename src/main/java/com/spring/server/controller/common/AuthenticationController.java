@@ -54,8 +54,8 @@ public class AuthenticationController {
         );
     }
 
-    @GetMapping("/re-login")
-    public ResponseEntity<?> reLogin(Authentication authentication) { 
+    @GetMapping("/refresh-token")
+    public ResponseEntity<?> reLogin(Authentication authentication) {
         return ResponseEntity.status(400).build();
     }
 

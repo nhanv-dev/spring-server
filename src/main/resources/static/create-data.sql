@@ -376,60 +376,60 @@ values (1, 'ROLE_USER'),
        (2, 'ROLE_SHOP'),
        (3, 'ROLE_ADMIN');
 # ========================================== USER ==========================================
-insert into ecommerce.user(id, email, password, name, phone_number)
-values (1, 'nhanvapp@gmail.com', '123', 'Trần Thanh Nhân', '0936216883');
+# insert into ecommerce.user(id, email, password, name, phone_number)
+# values (1, 'nhanvapp@gmail.com', '123', 'Trần Thanh Nhân', '0936216883');
 
 # ========================================== ACCOUNT_ROLE ==========================================
-insert into ecommerce.account_role(user_id, role_id)
-values (1, 1),
-       (1, 2),
-       (1, 3);
+# insert into ecommerce.account_role(user_id, role_id)
+# values (1, 1),
+#        (1, 2),
+#        (1, 3);
 
 # ========================================== RATING_INFO ==========================================
-insert into ecommerce.rating_info (id, star1, star2, star3, star4, star5)
-values (1, 23, 16, 32, 372, 1294);
-insert into ecommerce.rating_info (id, star1, star2, star3, star4, star5)
-values (2, 23, 16, 32, 372, 1294);
+# insert into ecommerce.rating_info (id, star1, star2, star3, star4, star5)
+# values (1, 23, 16, 32, 372, 1294);
+# insert into ecommerce.rating_info (id, star1, star2, star3, star4, star5)
+# values (2, 23, 16, 32, 372, 1294);
 # ========================================== SHOP ==========================================
-insert into ecommerce.shop(user_id, rating_id, shop_name, slug, email, phone_number, shop_slogan, shop_logo,
-                           shop_background, city, district, wards, address_detail, warehouse_region_name)
-values (1, 1, 'Pigeon Official', 'pigeon-official', 'tthanhnhan1512@gmail.com', '0936216883',
-        'Chippro Shop uy tín là phương châm , là cách làm việc của chúng tôi !',
-        'https://media3.scdn.vn/img4/2021/03_09/dejNj53PQPOoSREfIjat.jpg',
-        'https://media3.scdn.vn/img4/2021/03_09/dejNj53PQPOoSREfIjat.jpg',
-        'Thành phố Hồ Chí Minh', 'Quận 5', 'Phường 12', '80 Lạc Long Quân', 'TP. Hồ Chí Mính');
+# insert into ecommerce.shop(user_id, rating_id, shop_name, slug, email, phone_number, shop_slogan, shop_logo,
+#                            shop_background, city, district, wards, address_detail, warehouse_region_name)
+# values (1, 1, 'Pigeon Official', 'pigeon-official', 'tthanhnhan1512@gmail.com', '0936216883',
+#         'Chippro Shop uy tín là phương châm , là cách làm việc của chúng tôi !',
+#         'https://media3.scdn.vn/img4/2021/03_09/dejNj53PQPOoSREfIjat.jpg',
+#         'https://media3.scdn.vn/img4/2021/03_09/dejNj53PQPOoSREfIjat.jpg',
+#         'Thành phố Hồ Chí Minh', 'Quận 5', 'Phường 12', '80 Lạc Long Quân', 'TP. Hồ Chí Mính');
 
 # ========================================== PRODUCT ==========================================
-insert into ecommerce.product(id, shop_id, category_id, sub_category_id, discount__id, rating_id, name, slug, price,
-                              description, short_description, quantity, order_count, keywords, is_public, is_deleted)
-values (1, 1, 1, 1, null, 2,
-        'Áo Hoodie Form Rộng Unisex Lá thư ranshopm, Áo khoác Sweater Chất Nỉ Dày dặn',
-        'ao-hoodi-form-rong-unisex',
-        119000,
-        'Áo Hoodie Form Rộng Unisex Lá thư ranshopm, Áo khoác Sweater Chất Nỉ Dày dặn',
-        'Áo Hoodie Form Rộng Unisex Lá thư ranshopm, Áo khoác Sweater Chất Nỉ Dày dặn',
-        87, 17,
-        'ao hoodie, ao nam',
-        true, false);
-
-insert into ecommerce.product_image(id, product_id, url)
-values (1, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/1f/99/a3/49989797c980a65a0a474cda8a330250.jpg.webp'),
-       (2, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/c8/c0/7f/bbdbcf10c4efc5d11abc07cb54aeaf7f.jpg.webp'),
-       (3, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/3b/19/0f/c3f32714fbabb7e880bc127a2603b2ba.jpg.webp'),
-       (4, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/b1/26/e4/1132e69689c8c842f93c8487bbcccca3.jpg.webp'),
-       (5, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/32/dd/33/db4a8bedcf328292bfe91fc2cfff240a.jpg.webp')
+# insert into ecommerce.product(id, shop_id, category_id, sub_category_id, discount__id, rating_id, name, slug, price,
+#                               description, short_description, quantity, order_count, keywords, is_public, is_deleted)
+# values (1, 1, 1, 1, null, 2,
+#         'Áo Hoodie Form Rộng Unisex Lá thư ranshopm, Áo khoác Sweater Chất Nỉ Dày dặn',
+#         'ao-hoodi-form-rong-unisex',
+#         119000,
+#         'Áo Hoodie Form Rộng Unisex Lá thư ranshopm, Áo khoác Sweater Chất Nỉ Dày dặn',
+#         'Áo Hoodie Form Rộng Unisex Lá thư ranshopm, Áo khoác Sweater Chất Nỉ Dày dặn',
+#         87, 17,
+#         'ao hoodie, ao nam',
+#         true, false);
+#
+# insert into ecommerce.product_image(id, product_id, url)
+# values (1, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/1f/99/a3/49989797c980a65a0a474cda8a330250.jpg.webp'),
+#        (2, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/c8/c0/7f/bbdbcf10c4efc5d11abc07cb54aeaf7f.jpg.webp'),
+#        (3, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/3b/19/0f/c3f32714fbabb7e880bc127a2603b2ba.jpg.webp'),
+#        (4, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/b1/26/e4/1132e69689c8c842f93c8487bbcccca3.jpg.webp'),
+#        (5, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/32/dd/33/db4a8bedcf328292bfe91fc2cfff240a.jpg.webp')
 
 # ========================================== ACCOUNT_ROLE ==========================================
 
-
-INSERT INTO ecommerce.variant (id, product_id, discount_id, attribute_hash, sku_user, price, quantity, is_deleted,
-                               created_at,
-                               updated_at)
-VALUES (1, 1, null, 'den-kaki', 'den-kaki', 119000, 32, 0, '2023-03-10 11:27:19', '2023-03-10 11:30:49');
-INSERT INTO ecommerce.variant (id, product_id, discount_id, attribute_hash, sku_user, price, quantity, is_deleted,
-                               created_at,
-                               updated_at)
-VALUES (2, 1, null, 'xam-kaki', 'xam-kaki', 119000, 32, 0, '2023-03-10 11:30:49', '2023-03-10 11:30:49');
+#
+# INSERT INTO ecommerce.variant (id, product_id, discount_id, attribute_hash, sku_user, price, quantity, is_deleted,
+#                                created_at,
+#                                updated_at)
+# VALUES (1, 1, null, 'den-kaki', 'den-kaki', 119000, 32, 0, '2023-03-10 11:27:19', '2023-03-10 11:30:49');
+# INSERT INTO ecommerce.variant (id, product_id, discount_id, attribute_hash, sku_user, price, quantity, is_deleted,
+#                                created_at,
+#                                updated_at)
+# VALUES (2, 1, null, 'xam-kaki', 'xam-kaki', 119000, 32, 0, '2023-03-10 11:30:49', '2023-03-10 11:30:49');
 
 
 

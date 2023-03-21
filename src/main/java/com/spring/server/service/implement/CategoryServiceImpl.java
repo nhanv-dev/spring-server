@@ -8,6 +8,8 @@ import com.spring.server.model.mapper.CategoryMapper;
 import com.spring.server.model.mapper.SubCategoryMapper;
 import com.spring.server.repository.CategoryRepo;
 import com.spring.server.repository.SubCategoryRepo;
+import com.spring.server.service.CategoryService;
+import com.spring.server.util.SlugGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +20,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Component
-public class CategoryServiceImpl implements com.spring.server.service.CategoryService {
+public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryRepo categoryEntityRepo;
@@ -36,14 +38,21 @@ public class CategoryServiceImpl implements com.spring.server.service.CategorySe
     @Override
     public List<CategoryDto> findAll() {
         List<Category> list = categoryEntityRepo.findAll();
-//        for (Category category : list) {
-//            category.setSlug(SlugGenerator.toSlug(category.getTitle()));
-//            for (SubCategory sub : category.getSubCategories()) {
-//                sub.setSlug(SlugGenerator.toSlug(sub.getTitle()));
-//            }
-//            categoryEntityRepo.save(category);
-//        }
-        return CategoryMapper.toDto(list);
+        for (Category category : list) {
+            if (category.getSlug() != null) break;
+            category.setSlug(SlugGenerator.toSlug(category.getTitle()));
+            for (SubCategory sub : category.getSubCategories()) {
+                sub.setSlug(SlugGenerator.toSlug(sub.getTitle()));
+            }
+            categoryEntityRepo.save(category);
+        }
+        return CategoryMapper.toDtos(list);
+    }
+
+    @Override
+    public List<CategoryDto> findAllWithoutSub() {
+        List<Category> list = categoryEntityRepo.findAll();
+        return CategoryMapper.toDtoWithoutSub(list);
     }
 
     @Override
@@ -52,27 +61,25 @@ public class CategoryServiceImpl implements com.spring.server.service.CategorySe
     }
 
     @Override
-    public Page<CategoryDto> findLimit(Pageable pageable) {
+    public Page<CategoryDto> findByPageable(Pageable pageable) {
         Page<Category> entities = categoryEntityRepo.findLimit(pageable);
-        Page<CategoryDto> dto = entities.map(new Function<Category, CategoryDto>() {
+        return entities.map(new Function<Category, CategoryDto>() {
             @Override
             public CategoryDto apply(Category category) {
                 return CategoryMapper.toDto(category);
             }
         });
-        return dto;
     }
 
     @Override
     public List<SubCategoryDto> findSubCategoryByCategoryId(long id) {
         List<SubCategory> list = subCategoryRepo.findByCategoryId(id);
-        return SubCategoryMapper.toDto(list);
+        return SubCategoryMapper.toDtos(list);
     }
 
     @Override
     public void update(CategoryDto category) {
         Category categoryEntity = CategoryMapper.toEntity(category);
-
         categoryEntityRepo.save(categoryEntity);
     }
 

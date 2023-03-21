@@ -1,39 +1,65 @@
 package com.spring.server.model.mapper;
 
-import com.spring.server.model.entity.Product;
-import com.spring.server.model.entity.ProductImage;
+import com.spring.server.model.entity.*;
 import com.spring.server.model.dto.*;
-import com.spring.server.model.entity.ProductVariant;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
-
+@Component
 public class ProductDetailMapper {
-    public static ProductDetailDto toDto(Product product) {
-        ProductDetailDto result = new ProductDetailDto();
+    public static ProductDto toDto(Product product) {
+        ProductDto result = ProductMapper.toDto(product);
 
-        result.setId(product.getId());
-        result.setName(product.getName());
-        result.setSlug(product.getSlug());
-        result.setOrderCount(product.getOrderCount());
-        result.setPrice(product.getPrice());
-        result.setQuantity(product.getQuantity());
         result.setDescription(product.getDescription());
         result.setShortDescription(product.getShortDescription());
-
-        result.setCategory(CategoryMapper.toDtoWithoutSub(product.getCategory()));
-        result.setSubCategory(SubCategoryMapper.toDto(product.getSubCategory()));
-        result.setRatingInfo(RatingInfoMapper.toDto(product.getRatingInfo()));
-        result.setShop(ShopMapper.toDto(product.getShop()));
-        result.setAttributes(ProductAttributeMapper.toDto(product.getAttributes()));
-        result.setVariants(ProductVariantMapper.toDto(product.getVariants()));
-
-        Set<ProductImageDto> images = new HashSet<>();
-        for (ProductImage image : product.getImages()) images.add(new ProductImageDto(image.getId(), image.getUrl()));
-        result.setImages(images);
+        result.setReturnPolicies(ReturnPolicyMapper.toDtos(product.getReturnPolicies()));
+        result.setDiscounts(DiscountMapper.toDtos(product.getDiscounts()));
+        result.setAttributes(ProductAttributeMapper.toDtos(product.getAttributes()));
+        result.setVariants(ProductVariantMapper.toDtos(product.getVariants()));
 
         return result;
     }
 
+    public static Product toEntity(ProductDto product) {
+        Product result = ProductMapper.toEntity(product);
+
+        result.setDescription(product.getDescription());
+        result.setShortDescription(product.getShortDescription());
+        result.setReturnPolicies(ReturnPolicyMapper.toEntities(product.getReturnPolicies()));
+        result.setDiscounts(DiscountMapper.toEntities(product.getDiscount(), result));
+        result.setAttributes(ProductAttributeMapper.toEntities(product.getAttributes(), result));
+
+        if (product.getVariants() != null && !product.getVariants().isEmpty()) {
+            Set<ProductVariant> variants = new HashSet<>();
+            for (ProductVariantDto variantDto : product.getVariants()) {
+                ProductVariant variant = new ProductVariant();
+                variant.setPrice(variantDto.getPrice());
+                variant.setSkuUser(variantDto.getSkuUser());
+                variant.setAttributeHash(variantDto.getAttributeHash());
+                variant.setQuantity(variantDto.getQuantity());
+                variant.setProduct(result);
+                Set<ProductAttributeOption> options = new HashSet<>();
+                for (ProductAttributeOptionDto optionDto : variantDto.getOptions()) {
+                    A:
+                    for (ProductAttribute attribute : result.getAttributes()) {
+                        for (ProductAttributeOption option : attribute.getOptions()) {
+                            if (!Objects.equals(option.getName(), optionDto.getName())) continue;
+                            if (!Objects.equals(option.getValue(), optionDto.getValue())) continue;
+                            if (!Objects.equals(option.getImage(), optionDto.getImage())) continue;
+                            options.add(option);
+                            break A;
+                        }
+                    }
+                }
+                variant.setOptions(options);
+                variants.add(variant);
+            }
+            result.setVariants(variants);
+        }
+
+        return result;
+    }
 
 }

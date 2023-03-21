@@ -26,8 +26,6 @@ public class SalesRegisterController {
     private UserService userService;
     @Autowired
     private ShopService shopService;
-    @Autowired
-    private EntityManager entityManager;
 
     @PostMapping("")
     public ResponseEntity<?> authenticateUser(Authentication authentication, @Valid @RequestBody SalesRegisterRequest req) {

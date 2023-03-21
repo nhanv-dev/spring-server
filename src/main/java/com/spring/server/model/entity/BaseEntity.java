@@ -1,18 +1,21 @@
 package com.spring.server.model.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+@Getter
+@Setter
 @MappedSuperclass
 public abstract class BaseEntity {
     @Id
-    @Getter
-    @Setter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    protected Long id;
+    @Column(columnDefinition = "datetime default CURRENT_TIMESTAMP")
+    protected Date createdAt;
+    @Column(columnDefinition = "datetime default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    protected Date updatedAt;
 }

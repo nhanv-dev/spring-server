@@ -5,12 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "role")
 @NoArgsConstructor
-public class Role extends BaseEntity {
+public class Role extends BaseEntity implements Serializable {
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)

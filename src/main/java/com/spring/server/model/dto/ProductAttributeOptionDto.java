@@ -1,20 +1,22 @@
 package com.spring.server.model.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductAttributeOptionDto {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ProductAttributeOptionDto implements Comparable<ProductAttributeOptionDto> {
     private Long id, attributeId;
     private String name, value, image;
     private boolean isDeleted;
 
+    @Override
+    public int compareTo(ProductAttributeOptionDto o) {
+        return this.id.compareTo(o.getId());
+    }
 }

@@ -1,15 +1,19 @@
 package com.spring.server.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReturnPolicyDto extends BaseDto {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ReturnPolicyDto implements Comparable<ReturnPolicyDto> {
+    private Long id;
     private String title, tooltipTitle, tooltipContent;
-
+    @Override
+    public int compareTo(ReturnPolicyDto o) {
+        return this.getId().compareTo(o.getId());
+    }
 }

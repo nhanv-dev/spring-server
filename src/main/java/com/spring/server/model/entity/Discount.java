@@ -1,26 +1,25 @@
 package com.spring.server.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "user")
-public class Discount extends BaseEntity {
-    @Column
-    private String name;
-    @Column(unique = true)
-    private String email;
-    @Column
-    private String password;
-    @Column
-    private String phoneNumber;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserAddress> addresses;
-
-
+@Table(name = "discount")
+public class Discount extends BaseEntity implements Serializable {
+    @Column(nullable = false)
+    private double price, finalPrice, discountPercent;
+    @Column(columnDefinition = "boolean default false")
+    private boolean isRunning;
+    @Column(columnDefinition = "boolean default false")
+    private boolean isDeleted;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
 }

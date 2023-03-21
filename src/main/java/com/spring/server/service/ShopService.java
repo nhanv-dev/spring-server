@@ -6,5 +6,7 @@ import com.spring.server.model.dto.ShopDto;
 public interface ShopService {
     ShopDto findOneById(Long id);
 
+    ShopDto findOneByUserId(Long id);
+
     ShopDto save(Shop shop);
 }

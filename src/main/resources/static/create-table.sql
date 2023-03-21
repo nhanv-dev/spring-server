@@ -22,7 +22,7 @@ create table ecommerce.role
     type varchar(50) not null unique
 );
 
-create table ecommerce.account_role
+create table ecommerce.user_role
 (
     id      bigint not null primary key auto_increment,
     user_id bigint not null,
@@ -116,21 +116,6 @@ create table ecommerce.return_policy
     updated_at      datetime     null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-create table ecommerce.discount
-(
-    id          bigint   not null primary key auto_increment,
-    price       double   not null,
-    final_price double   not null,
-    percent     double   not null,
-    is_running  boolean  not null default false,
-    start_time  datetime null     default CURRENT_TIMESTAMP,
-    end_time    datetime null,
-    is_deleted  boolean  not null default false,
-    created_at  datetime null     default CURRENT_TIMESTAMP,
-    updated_at  datetime null     default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
-
 create table ecommerce.category
 (
     id    bigint       not null primary key auto_increment,
@@ -155,15 +140,14 @@ create table ecommerce.product
     shop_id           bigint       not null,
     category_id       bigint       not null,
     sub_category_id   bigint       not null,
-    discount__id      bigint       null,
     rating_id         bigint       not null unique,
     `name`            varchar(255) not null,
-    slug              varchar(255) unique,
+    slug              varchar(255) null unique,
     price             double       not null,
     `description`     text         null,
     short_description text         null,
-    quantity          bigint       not null default 0,
-    order_count       int          not null default 0,
+    quantity          bigint       null     default 0,
+    order_count       int          null     default 0,
     keywords          varchar(255) null,
     is_public         boolean      not null default true,
     is_deleted        boolean      not null default false,
@@ -173,6 +157,22 @@ create table ecommerce.product
     foreign key (category_id) references category (id),
     foreign key (sub_category_id) references sub_category (id),
     foreign key (rating_id) references rating_info (id)
+);
+
+create table ecommerce.discount
+(
+    id               bigint   not null primary key auto_increment,
+    product_id       bigint   not null,
+    price            double   not null,
+    final_price      double   not null,
+    discount_percent double   not null,
+    is_running       boolean  not null default false,
+    start_time       datetime null     default CURRENT_TIMESTAMP,
+    end_time         datetime null,
+    is_deleted       boolean  not null default false,
+    created_at       datetime null     default CURRENT_TIMESTAMP,
+    updated_at       datetime null     default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    foreign key (product_id) references product (id)
 );
 
 create table ecommerce.product_image
@@ -208,7 +208,7 @@ create table ecommerce.attribute
 create table ecommerce.attribute_option
 (
     id           bigint       not null primary key auto_increment,
-    attribute_id bigint       not null,
+    attribute_id bigint       ,
     `name`       varchar(100) not null,
     `value`      varchar(100) not null,
     image        text         null,
@@ -220,16 +220,16 @@ create table ecommerce.attribute_option
 
 create table ecommerce.variant
 (
-    id             bigint       not null primary key auto_increment,
-    product_id bigint      not null,
+    id             bigint   not null primary key auto_increment,
+    product_id     bigint   not null,
     discount_id    bigint,
-    attribute_hash varchar(255) not null,
-    sku_user       varchar(100) not null,
-    price          double       not null,
-    quantity       int          not null default 0,
-    is_deleted     boolean      not null default false,
-    created_at     datetime     null     default CURRENT_TIMESTAMP,
-    updated_at     datetime     null     default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    attribute_hash varchar(255),
+    sku_user       varchar(100),
+    price          double   not null,
+    quantity       int      not null default 0,
+    is_deleted     boolean  not null default false,
+    created_at     datetime null     default CURRENT_TIMESTAMP,
+    updated_at     datetime null     default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     foreign key (discount_id) references discount (id),
     foreign key (product_id) references product (id)
 );
@@ -237,8 +237,8 @@ create table ecommerce.variant
 create table ecommerce.variant_option
 (
     id         bigint not null primary key auto_increment,
-    variant_id bigint not null,
-    option_id  bigint not null,
+    variant_id bigint,
+    option_id  bigint,
     foreign key (variant_id) references variant (id),
     foreign key (option_id) references attribute_option (id)
 );
@@ -302,19 +302,18 @@ create table ecommerce.order
 
 create table ecommerce.order_item
 (
-    id               bigint   not null primary key auto_increment,
-    order_id         bigint   not null,
-    product_id       bigint   not null,
-    variant_id       bigint   null,
-    price            double   not null,
-    final_price      double   not null,
-    discount_percent double   not null,
-    quantity         int      not null,
-    created_at       datetime null default CURRENT_TIMESTAMP,
-    updated_at       datetime null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    id          bigint   not null primary key auto_increment,
+    order_id    bigint   not null,
+    product_id  bigint   not null,
+    variant_id  bigint   null,
+    discount_id bigint   null,
+    quantity    int      not null,
+    created_at  datetime null default CURRENT_TIMESTAMP,
+    updated_at  datetime null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     foreign key (order_id) references `order` (id),
     foreign key (product_id) references product (id),
-    foreign key (variant_id) references variant (id)
+    foreign key (variant_id) references variant (id),
+    foreign key (discount_id) references discount (id)
 );
 
 # Table of reviews function

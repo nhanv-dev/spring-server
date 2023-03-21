@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Entity()
 @Table(name = "user_address")
-public class UserAddress extends BaseEntity {
+public class UserAddress extends BaseEntity implements Serializable {
     @Getter
     @Setter
     @Column

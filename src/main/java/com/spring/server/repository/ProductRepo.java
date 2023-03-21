@@ -13,5 +13,8 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
     @Query()
     Product findOneBySlug(String slug);
     @Query()
-    Page<Product> findByOrderByCreatedAt(Pageable pageable);
+    Page<Product> findByOrderByCreatedAtDesc(Pageable pageable);
+
+    @Query()
+    Page<Product> findByOrderByCreatedAtAsc(Pageable pageable);
 }

@@ -3,34 +3,30 @@ package com.spring.server.model.mapper;
 import com.spring.server.model.entity.Product;
 import com.spring.server.model.entity.ProductImage;
 import com.spring.server.model.dto.*;
+import com.spring.server.model.entity.RatingInfo;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Function;
-
+@Component
 public class ProductMapper {
     public static ProductDto toDto(Product product) {
-        ProductDto result = new ProductDto();
-        result.setId(product.getId());
-        result.setName(product.getName());
-        result.setSlug(product.getSlug());
+        ProductDto result = ProductMinimalMapper.toDto(product);
+
         result.setOrderCount(product.getOrderCount());
-        result.setPrice(product.getPrice());
         result.setQuantity(product.getQuantity());
 
         result.setCategory(CategoryMapper.toDtoWithoutSub(product.getCategory()));
         result.setSubCategory(SubCategoryMapper.toDto(product.getSubCategory()));
-        result.setRatingInfo(RatingInfoMapper.toDto(product.getRatingInfo()));
-
-        Set<ProductImageDto> images = new HashSet<>();
-        for (ProductImage image : product.getImages()) images.add(new ProductImageDto(image.getId(), image.getUrl()));
-        result.setImages(images);
+        result.setShop(ShopMapper.toDto(product.getShop()));
 
         return result;
     }
 
-    public static Page<ProductDto> toDto(Page<Product> products) {
+    public static Page<ProductDto> toDtos(Page<Product> products) {
         return products.map(new Function<Product, ProductDto>() {
             @Override
             public ProductDto apply(Product product) {
@@ -38,4 +34,24 @@ public class ProductMapper {
             }
         });
     }
+
+
+    public static Product toEntity(ProductDto product) {
+        Product result = new Product();
+        result.setId(product.getId());
+        result.setName(product.getName());
+        result.setSlug(product.getSlug());
+        result.setOrderCount(product.getOrderCount());
+        result.setPrice(product.getPrice());
+        result.setQuantity(product.getQuantity());
+
+        result.setCategory(CategoryMapper.toEntity(product.getCategory()));
+        result.setSubCategory(SubCategoryMapper.toEntity(product.getSubCategory()));
+        result.setShop(ShopMapper.toEntity(product.getShop()));
+        result.setRatingInfo(RatingInfoMapper.toEntity(product.getRatingInfo()));
+        result.setImages(ProductImageMapper.toEntity(product.getImages(), result));
+
+        return result;
+    }
+
 }

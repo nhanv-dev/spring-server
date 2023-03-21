@@ -2,6 +2,7 @@ package com.spring.server.util;
 
 import java.text.Normalizer;
 import java.util.Locale;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class SlugGenerator {
@@ -14,6 +15,15 @@ public class SlugGenerator {
         String normalized = Normalizer.normalize(noSeparators, Normalizer.Form.NFD);
         String slug = NONLATIN.matcher(normalized).replaceAll("");
         return slug.toLowerCase(Locale.ENGLISH).replaceAll("-{2,}", "-").replaceAll("^-|-$", "");
+    }
+
+    public static String toHash(Set<String> strs) {
+        StringBuilder hash = new StringBuilder();
+        for (String str : strs) {
+            hash.append(toSlug(str));
+            hash.append("-");
+        }
+        return hash.toString();
     }
 
     public static String deAccent(String input) {
