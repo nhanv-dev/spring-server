@@ -3,6 +3,7 @@ package com.spring.server.controller.common;
 import com.spring.server.model.entity.User;
 import com.spring.server.model.dto.UserDto;
 import com.spring.server.model.mapper.UserMapper;
+import com.spring.server.payload.response.MessageResponse;
 import com.spring.server.service.UserService;
 import org.apache.catalina.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,15 +44,16 @@ public class UserController {
         System.out.println(userDto.toString());
         User currentUser = userService.findById(id);
 
-        if (currentUser.getId()==null) {
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+//        if (currentUser.getId()==null) {
+//            return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
 
+        System.out.println(currentUser.getId());
         currentUser.setName(userDto.getName());
         currentUser.setPhoneNumber(userDto.getPhoneNumber());
 
         userService.updateUser(currentUser);
-        return ResponseEntity.ok(currentUser);
+        return ResponseEntity.ok(new MessageResponse("upadte success"));
     }
 }
 
