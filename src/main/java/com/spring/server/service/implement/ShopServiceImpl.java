@@ -32,7 +32,11 @@ public class ShopServiceImpl implements ShopService {
     public ShopDto findOneById(Long id) {
         return ShopMapper.toDto(shopRepo.findOneById(id));
     }
-
+    @Override
+    public Shop findById(Long id) {
+        Optional<Shop> list = shopRepo.findById(id);
+        return list.get();
+    }
     @Override
     public ShopDto findOneByUserId(Long id) {
         return ShopMapper.toDto(shopRepo.findOneByUserId(id));
@@ -60,9 +64,5 @@ public class ShopServiceImpl implements ShopService {
         return shop;
     }
 
-    @Override
-    public Shop findById(long id) {
-        Optional<Shop> list = shopRepo.findById(id);
-        return list.get();
-    }
+
 }

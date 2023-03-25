@@ -3,6 +3,7 @@ package com.spring.server.controller.common;
 
 import com.spring.server.model.dto.ProductDto;
 import com.spring.server.model.dto.ShopDto;
+import com.spring.server.model.entity.Shop;
 import com.spring.server.model.entity.User;
 import com.spring.server.payload.response.MessageResponse;
 import com.spring.server.security.jwt.JwtUtils;
@@ -10,6 +11,7 @@ import com.spring.server.service.ProductService;
 import com.spring.server.service.ShopService;
 import com.spring.server.service.UserService;
 
+import com.spring.server.util.SlugGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -70,6 +72,28 @@ public class ShopController {
     public ResponseEntity<?> deleteProduct(@PathVariable(value = "id") Long id) {
         productService.delete(id);
         return ResponseEntity.ok(new MessageResponse("Deleted product with id " + id));
+    }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_SHOP')")
+
+    public ResponseEntity<?> updateUser(@PathVariable( "id") Long id, @RequestBody ShopDto shopDto, Authentication authentication){
+        User user = userService.findOneByEmail(authentication.getName());
+        Shop currentShop = shopService.findById(id);
+       if(user.getShop().getId()!= id )
+           return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("Update Fail"));
+
+        currentShop.setShopName(shopDto.getShopName());
+        currentShop.setEmail(shopDto.getShopEmail());
+        currentShop.setPhoneNumber(shopDto.getShopPhone());
+        currentShop.setSlug(SlugGenerator.toSlug(currentShop.getShopName() + "-" + currentShop.getId()));
+        currentShop.setShopSlogan(shopDto.getShopSlogan());
+        currentShop.setShopLogo(shopDto.getShopLogo());
+        currentShop.setShopBackground(shopDto.getShopBackground());
+
+        shopService.updateShop(currentShop);
+
+        return ResponseEntity.ok(new MessageResponse("User saved successfully!!"));
     }
 
 }
