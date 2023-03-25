@@ -9,14 +9,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DiscountDto implements Comparable<DiscountDto> {
+public class DealDto implements Comparable<DealDto> {
     private Long id;
     private Double price, finalPrice, discountPercent;
-
-    private Boolean isRunning, isDeleted;
-
     @Override
-    public int compareTo(DiscountDto o) {
+    public int compareTo(DealDto o) {
         return this.getId().compareTo(o.getId());
     }
 }

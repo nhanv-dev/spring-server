@@ -37,8 +37,7 @@ public class UserController {
     }
 
 
-
-    @PutMapping ("/user-profile/{id}")
+    @PutMapping("/user-profile/{id}")
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody UserDto userDto) {
         System.out.println(userDto.toString());
@@ -49,7 +48,9 @@ public class UserController {
         currentUser.setPhoneNumber(userDto.getPhoneNumber());
 
         userService.updateUser(currentUser);
-        return ResponseEntity.ok(new MessageResponse("Update successfully"));
+
+        return ResponseEntity.ok(new MessageResponse("User saved successfully!!"));
+
     }
 }
 

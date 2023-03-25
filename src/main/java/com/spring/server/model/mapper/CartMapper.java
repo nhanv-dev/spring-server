@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Component
 public class CartMapper {
@@ -14,12 +15,13 @@ public class CartMapper {
         result.setId(cart.getId());
         result.setUserId(cart.getUser().getId());
         result.setItems(CartItemMapper.toDtos(cart.getItems()));
+        result.setShop(ShopMinimalMapper.toDto(cart.getShop()));
         return result;
     }
 
     public static Set<CartDto> toDtos(Set<Cart> carts) {
         if (carts == null || carts.isEmpty()) return null;
-        Set<CartDto> result = new HashSet<>();
+        Set<CartDto> result = new TreeSet<>();
         for (Cart cart : carts) result.add(toDto(cart));
         return result;
     }

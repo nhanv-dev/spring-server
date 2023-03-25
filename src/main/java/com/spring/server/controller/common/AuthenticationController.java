@@ -12,7 +12,9 @@ import com.spring.server.security.services.UserDetailsImpl;
 import com.spring.server.service.RoleService;
 import com.spring.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -57,6 +59,18 @@ public class AuthenticationController {
     @GetMapping("/refresh-token")
     public ResponseEntity<?> reLogin(Authentication authentication) {
         return ResponseEntity.status(400).build();
+    }
+
+    @GetMapping("/token-valid")
+    public ResponseEntity<?> validateToken(Authentication authentication) {
+        if (authentication == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
+        return ResponseEntity.ok(
+                new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), userDetails.getName(), roles)
+        );
     }
 
     @PostMapping("/sign-up")

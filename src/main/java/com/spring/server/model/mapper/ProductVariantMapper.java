@@ -10,25 +10,26 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Component
 public class ProductVariantMapper {
 
     public static ProductVariantDto toDto(ProductVariant variant) {
+        if (variant == null) return null;
         ProductVariantDto result = new ProductVariantDto();
         result.setId(variant.getId());
         result.setAttributeHash(variant.getAttributeHash());
-        result.setSkuUser(variant.getSkuUser());
-        result.setPrice(variant.getPrice());
         result.setQuantity(variant.getQuantity());
         result.setDeleted(variant.isDeleted());
+        result.setDeal(DealMapper.toDto(variant.getDeal()));
         result.setOptions(ProductAttributeOptionMapper.toDtos(variant.getOptions()));
         return result;
     }
 
     public static Set<ProductVariantDto> toDtos(Set<ProductVariant> variants) {
         if (variants == null || variants.isEmpty()) return null;
-        Set<ProductVariantDto> list = new HashSet<>();
+        Set<ProductVariantDto> list = new TreeSet<>();
         for (ProductVariant variant : variants) list.add(ProductVariantMapper.toDto(variant));
         return list;
     }
@@ -37,11 +38,10 @@ public class ProductVariantMapper {
         ProductVariant result = new ProductVariant();
         result.setId(variant.getId());
         result.setAttributeHash(variant.getAttributeHash());
-        result.setSkuUser(variant.getSkuUser());
-        result.setPrice(variant.getPrice());
         result.setQuantity(variant.getQuantity());
         result.setDeleted(variant.isDeleted());
         result.setProduct(product);
+
         result.setOptions(ProductAttributeOptionMapper.toEntities(variant.getOptions(), result, product));
         return result;
     }

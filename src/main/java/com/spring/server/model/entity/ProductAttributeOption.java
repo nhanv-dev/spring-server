@@ -25,7 +25,6 @@ public class ProductAttributeOption extends BaseEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attribute_id", nullable = false)
     private ProductAttribute attribute;
-
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<ProductVariant> variant;
 

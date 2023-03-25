@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,33 +31,31 @@ public class Product extends BaseEntity implements Serializable {
     private Integer quantity;
     @Column(columnDefinition = "bigint")
     private Integer orderCount;
-    @Column(columnDefinition = "decimal(15,2) not null")
-    Double price;
     @Column(columnDefinition = "boolean default true")
-    private boolean isPublic;
+    private Boolean isPublic;
     @Column(columnDefinition = "boolean default false")
-    private boolean isDeleted;
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "rating_id", referencedColumnName = "id")
+    private Boolean isDeleted;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rating_id", referencedColumnName = "id", unique = true)
     private RatingInfo ratingInfo;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "deal_id", referencedColumnName = "id", unique = true)
+    private Deal deal;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private Category category;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sub_category_id", referencedColumnName = "id")
+    @JoinColumn(name = "sub_category_id", referencedColumnName = "id", nullable = false)
     private SubCategory subCategory;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shop_id", referencedColumnName = "id", nullable = false)
     private Shop shop;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductImage> images = new HashSet<>();
-    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, orphanRemoval = true)
-    private Set<Discount> discounts = new HashSet<>();
-    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductAttribute> attributes = new HashSet<>();
-    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductVariant> variants = new HashSet<>();
-//    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, orphanRemoval = true)
-//    private Set<ProductReviews> reviews = new HashSet<>();
     @ManyToMany
     @JoinTable(name = "product_return_policy", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "policy_id"))
     private Set<ReturnPolicy> returnPolicies = new HashSet<>();

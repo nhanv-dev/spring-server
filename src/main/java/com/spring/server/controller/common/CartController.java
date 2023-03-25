@@ -2,14 +2,11 @@ package com.spring.server.controller.common;
 
 import com.spring.server.model.dto.CartDto;
 import com.spring.server.model.dto.CartItemDto;
-import com.spring.server.model.dto.ProductDto;
-import com.spring.server.model.dto.ShopDto;
 import com.spring.server.model.entity.User;
+import com.spring.server.payload.response.MessageResponse;
 import com.spring.server.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -28,30 +25,34 @@ public class CartController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{userId}")
+    @GetMapping("")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<?> getCartByUserId(Authentication authentication, @PathVariable Long userId) {
+    public ResponseEntity<?> getCartByUserId(Authentication authentication) {
         User user = userService.findOneByEmail(authentication.getName());
-        if (!Objects.equals(user.getId(), userId))
-            return ResponseEntity.status(403).body("You do not have permission to access");
-        Set<CartDto> cart = cartService.findAllByUserId(userId);
+        if (user==null)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Don't have permission to access");
+        Set<CartDto> cart = cartService.findAllByUserId(user.getId());
         return ResponseEntity.ok(cart);
     }
 
-
     @PostMapping("/items")
-    @PreAuthorize("hasRole('ROLE_USER')")
+//    @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> addCartItem(Authentication authentication, @RequestBody CartItemDto cartItemDto) {
         User user = userService.findOneByEmail(authentication.getName());
         if (user == null || user.getId() == null)
-            return ResponseEntity.status(403).body("You do not have permission to access");
-        ;
-        return ResponseEntity.ok(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Don't have user");
+        CartItemDto item = cartService.saveCartItem(user, cartItemDto);
+        return ResponseEntity.ok(new MessageResponse("Added cart item", item));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> getCategoryById(@PathVariable(value = "id") Long id) {
-        return ResponseEntity.ok(productService.findOneById(id));
+    @DeleteMapping("/items/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<?> removeCartItem(Authentication authentication, @PathVariable Long id) {
+        User user = userService.findOneByEmail(authentication.getName());
+        if (user == null || user.getId() == null)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Don't have user");
+        cartService.removeCartItem(id);
+        return ResponseEntity.ok(new MessageResponse("Removed cart item"));
     }
 }
 

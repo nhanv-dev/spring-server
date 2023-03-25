@@ -9,6 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CategoryRepo extends JpaRepository<Category, Long> {
     @Query("SELECT cate FROM Category cate")
-    Page<Category> findLimit(Pageable pageable);
-
+    Page<Category> findAll(Pageable pageable);
+    @Query()
+    Category findOneById(Long id);
+    @Query()
+    Category findOneBySlug(String slug);
 }
