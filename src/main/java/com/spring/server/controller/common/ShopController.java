@@ -1,5 +1,6 @@
 package com.spring.server.controller.common;
 
+
 import com.spring.server.model.dto.ProductDto;
 import com.spring.server.model.dto.ShopDto;
 import com.spring.server.model.entity.User;
@@ -7,6 +8,7 @@ import com.spring.server.payload.response.MessageResponse;
 import com.spring.server.service.ProductService;
 import com.spring.server.service.ShopService;
 import com.spring.server.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +16,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.security.core.Authentication;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,6 +30,9 @@ public class ShopController {
     private ShopService shopService;
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    JwtUtils jwtUtils;
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getByShopId(@PathVariable(value = "id") Long id) {

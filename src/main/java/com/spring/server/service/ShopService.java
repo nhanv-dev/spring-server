@@ -9,4 +9,8 @@ public interface ShopService {
     ShopDto findOneByUserId(Long id);
 
     ShopDto save(Shop shop);
+
+    Shop updateShop(Shop currentShop);
+
+    Shop findById(long id);
 }
