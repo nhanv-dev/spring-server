@@ -4,6 +4,7 @@ import com.spring.server.model.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Set;
@@ -28,6 +29,7 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
     @Query()
     Page<Product> findAllByOrderByCreatedAtAsc(Pageable pageable);
 
+    @Modifying
     @Query(value = "DELETE FROM Product p WHERE p.id =:id")
     void deleteById(Long id);
 }
