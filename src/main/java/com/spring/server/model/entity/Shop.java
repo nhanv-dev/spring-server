@@ -21,7 +21,7 @@ public class Shop extends BaseEntity implements Serializable {
     @Column
     private String city, district, wards, addressDetail, warehouseRegionName;
     @Column(columnDefinition = "varchar(255) default 'Đang cập nhật'")
-    private String responseTime, timePrepareProduct;
+    private  String responseTime, timePrepareProduct;
     @Column(columnDefinition = "bigint default 0")
     private Integer productTotal = 0;
     @Column(columnDefinition = "boolean default false")
