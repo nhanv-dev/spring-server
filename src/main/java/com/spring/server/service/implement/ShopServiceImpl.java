@@ -12,6 +12,7 @@ import com.spring.server.util.SlugGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -51,5 +52,17 @@ public class ShopServiceImpl implements ShopService {
         user.setRoles(roles);
         userRepo.save(user);
         return ShopMapper.toDto(savedShop);
+    }
+
+    @Override
+    public Shop updateShop(Shop currentShop) {
+        Shop shop = shopRepo.save(currentShop);
+        return shop;
+    }
+
+    @Override
+    public Shop findById(long id) {
+        Optional<Shop> list = shopRepo.findById(id);
+        return list.get();
     }
 }

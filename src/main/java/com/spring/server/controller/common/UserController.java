@@ -44,16 +44,12 @@ public class UserController {
         System.out.println(userDto.toString());
         User currentUser = userService.findById(id);
 
-//        if (currentUser.getId()==null) {
-//            return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//        }
-
         System.out.println(currentUser.getId());
         currentUser.setName(userDto.getName());
         currentUser.setPhoneNumber(userDto.getPhoneNumber());
 
         userService.updateUser(currentUser);
-        return ResponseEntity.ok(new MessageResponse("upadte success"));
+        return ResponseEntity.ok(new MessageResponse("Update successfully"));
     }
 }
 
