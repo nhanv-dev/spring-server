@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
 @Component
 public class ProductDetailMapper {
     public static ProductDto toDto(Product product) {
@@ -15,7 +16,6 @@ public class ProductDetailMapper {
         result.setDescription(product.getDescription());
         result.setShortDescription(product.getShortDescription());
         result.setReturnPolicies(ReturnPolicyMapper.toDtos(product.getReturnPolicies()));
-        result.setDiscounts(DiscountMapper.toDtos(product.getDiscounts()));
         result.setAttributes(ProductAttributeMapper.toDtos(product.getAttributes()));
         result.setVariants(ProductVariantMapper.toDtos(product.getVariants()));
 
@@ -28,15 +28,14 @@ public class ProductDetailMapper {
         result.setDescription(product.getDescription());
         result.setShortDescription(product.getShortDescription());
         result.setReturnPolicies(ReturnPolicyMapper.toEntities(product.getReturnPolicies()));
-        result.setDiscounts(DiscountMapper.toEntities(product.getDiscount(), result));
+        result.setDeal(DealMapper.toEntity(product.getDeal()));
         result.setAttributes(ProductAttributeMapper.toEntities(product.getAttributes(), result));
 
         if (product.getVariants() != null && !product.getVariants().isEmpty()) {
             Set<ProductVariant> variants = new HashSet<>();
             for (ProductVariantDto variantDto : product.getVariants()) {
                 ProductVariant variant = new ProductVariant();
-                variant.setPrice(variantDto.getPrice());
-                variant.setSkuUser(variantDto.getSkuUser());
+                variant.setDeal(DealMapper.toEntity(variantDto.getDeal()));
                 variant.setAttributeHash(variantDto.getAttributeHash());
                 variant.setQuantity(variantDto.getQuantity());
                 variant.setProduct(result);

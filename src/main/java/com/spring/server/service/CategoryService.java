@@ -10,17 +10,19 @@ import java.util.List;
 
 public interface CategoryService {
 
-    CategoryDto findOneById(long id);
+    CategoryDto findOneById(Long id);
+
+    CategoryDto findOneBySlug(String slug);
 
     List<CategoryDto> findAll();
 
     List<CategoryDto> findAllWithoutSub();
 
-    List<CategoryDto> findByCategoryId(long id);
+    List<CategoryDto> findByCategoryId(Long id);
 
     Page<CategoryDto> findByPageable(Pageable pageable);
 
-    List<SubCategoryDto> findSubCategoryByCategoryId(long id);
+    List<SubCategoryDto> findSubCategoryByCategoryId(Long id);
 
     void update(CategoryDto category);
 

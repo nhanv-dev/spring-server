@@ -39,6 +39,12 @@ public class CategoryController {
         return ResponseEntity.ok(category);
     }
 
+    @GetMapping("/slug/{slug}")
+    public ResponseEntity<?> getCategoryById(@PathVariable String slug) {
+        CategoryDto category = categoryService.findOneBySlug(slug);
+        return ResponseEntity.ok(category);
+    }
+
     @GetMapping("/{id}/sub-categories")
     public ResponseEntity<?> getSubCategoryByCategoryId(@PathVariable(value = "id") Long id) {
         List<SubCategoryDto> category = categoryService.findSubCategoryByCategoryId(id);

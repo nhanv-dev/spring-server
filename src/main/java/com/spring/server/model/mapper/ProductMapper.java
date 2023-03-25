@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Function;
+
 @Component
 public class ProductMapper {
     public static ProductDto toDto(Product product) {
@@ -42,13 +43,14 @@ public class ProductMapper {
         result.setName(product.getName());
         result.setSlug(product.getSlug());
         result.setOrderCount(product.getOrderCount());
-        result.setPrice(product.getPrice());
         result.setQuantity(product.getQuantity());
+        result.setKeywords(product.getKeywords());
 
         result.setCategory(CategoryMapper.toEntity(product.getCategory()));
         result.setSubCategory(SubCategoryMapper.toEntity(product.getSubCategory()));
         result.setShop(ShopMapper.toEntity(product.getShop()));
         result.setRatingInfo(RatingInfoMapper.toEntity(product.getRatingInfo()));
+        result.setDeal(DealMapper.toEntity(product.getDeal()));
         result.setImages(ProductImageMapper.toEntity(product.getImages(), result));
 
         return result;

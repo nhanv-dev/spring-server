@@ -1,9 +1,9 @@
 package com.spring.server.service.implement;
 
-import com.spring.server.model.entity.Category;
-import com.spring.server.model.entity.SubCategory;
 import com.spring.server.model.dto.CategoryDto;
 import com.spring.server.model.dto.SubCategoryDto;
+import com.spring.server.model.entity.Category;
+import com.spring.server.model.entity.SubCategory;
 import com.spring.server.model.mapper.CategoryMapper;
 import com.spring.server.model.mapper.SubCategoryMapper;
 import com.spring.server.repository.CategoryRepo;
@@ -23,46 +23,56 @@ import java.util.function.Function;
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
-    private CategoryRepo categoryEntityRepo;
+    private CategoryRepo categoryRepo;
 
     @Autowired
     private SubCategoryRepo subCategoryRepo;
 
     @Override
-    public CategoryDto findOneById(long id) {
-        Optional<Category> optional = categoryEntityRepo.findById(id);
+    public CategoryDto findOneById(Long id) {
+        Optional<Category> optional = categoryRepo.findById(id);
         if (optional.isEmpty()) return null;
         return CategoryMapper.toDto(optional.orElse(null));
     }
 
     @Override
+    public CategoryDto findOneBySlug(String slug) {
+        Category category = categoryRepo.findOneBySlug(slug);
+        if (category != null) return CategoryMapper.toDto(category);
+        SubCategory subCategory = subCategoryRepo.findOneBySlug(slug);
+        if (subCategory == null) return null;
+        category = categoryRepo.findOneById(subCategory.getCategory().getId());
+        return CategoryMapper.toDto(category);
+    }
+
+    @Override
     public List<CategoryDto> findAll() {
-        List<Category> list = categoryEntityRepo.findAll();
+        List<Category> list = categoryRepo.findAll();
         for (Category category : list) {
             if (category.getSlug() != null) break;
             category.setSlug(SlugGenerator.toSlug(category.getTitle()));
             for (SubCategory sub : category.getSubCategories()) {
                 sub.setSlug(SlugGenerator.toSlug(sub.getTitle()));
             }
-            categoryEntityRepo.save(category);
+            categoryRepo.save(category);
         }
         return CategoryMapper.toDtos(list);
     }
 
     @Override
     public List<CategoryDto> findAllWithoutSub() {
-        List<Category> list = categoryEntityRepo.findAll();
+        List<Category> list = categoryRepo.findAll();
         return CategoryMapper.toDtoWithoutSub(list);
     }
 
     @Override
-    public List<CategoryDto> findByCategoryId(long id) {
+    public List<CategoryDto> findByCategoryId(Long id) {
         return null;
     }
 
     @Override
     public Page<CategoryDto> findByPageable(Pageable pageable) {
-        Page<Category> entities = categoryEntityRepo.findLimit(pageable);
+        Page<Category> entities = categoryRepo.findAll(pageable);
         return entities.map(new Function<Category, CategoryDto>() {
             @Override
             public CategoryDto apply(Category category) {
@@ -72,7 +82,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<SubCategoryDto> findSubCategoryByCategoryId(long id) {
+    public List<SubCategoryDto> findSubCategoryByCategoryId(Long id) {
         List<SubCategory> list = subCategoryRepo.findByCategoryId(id);
         return SubCategoryMapper.toDtos(list);
     }
@@ -80,7 +90,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void update(CategoryDto category) {
         Category categoryEntity = CategoryMapper.toEntity(category);
-        categoryEntityRepo.save(categoryEntity);
+        categoryRepo.save(categoryEntity);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.spring.server.model.mapper;
 
 import com.spring.server.model.dto.CartItemDto;
+import com.spring.server.model.dto.ProductVariantDto;
 import com.spring.server.model.entity.CartItem;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ public class CartItemMapper {
         result.setId(cartItem.getId());
         result.setQuantity(cartItem.getQuantity());
         result.setProduct(ProductMinimalMapper.toDto(cartItem.getProduct()));
+        result.setVariant(ProductVariantMapper.toDto(cartItem.getVariant()));
         return result;
     }
 

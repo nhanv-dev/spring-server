@@ -14,5 +14,13 @@ public interface ProductService {
 
     Page<ProductDto> findByOrderByCreatedAt(Pageable pageable);
 
+    Page<ProductDto> findByCategorySlug(Pageable pageable, String categorySlug);
+
+    Page<ProductDto> findByShopId(Pageable pageable, Long shopId);
+
+    Page<ProductDto> findTopByShopId(Long shopId, Long top);
+
     ProductDto save(ProductDto productDto);
+
+    void delete(Long id);
 }

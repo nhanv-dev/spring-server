@@ -12,10 +12,14 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CartDto {
+public class CartDto implements Comparable<CartDto> {
     private Long id;
     private Long userId;
     private ShopDto shop;
     private Set<CartItemDto> items;
 
+    @Override
+    public int compareTo(CartDto o) {
+        return id.compareTo(o.getId());
+    }
 }

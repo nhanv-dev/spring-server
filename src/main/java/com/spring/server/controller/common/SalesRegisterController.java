@@ -10,6 +10,7 @@ import com.spring.server.service.UserService;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +29,8 @@ public class SalesRegisterController {
     private ShopService shopService;
 
     @PostMapping("")
-    public ResponseEntity<?> authenticateUser(Authentication authentication, @Valid @RequestBody SalesRegisterRequest req) {
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<?> registerSales(Authentication authentication, @Valid @RequestBody SalesRegisterRequest req) {
         User user = userService.findOneByEmail(authentication.getName());
 
         Shop shop = new Shop();

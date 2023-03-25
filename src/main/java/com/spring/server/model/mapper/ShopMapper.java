@@ -13,11 +13,9 @@ public class ShopMapper {
     public static ShopDto toDto(Shop shop) {
         ShopDto result = ShopMinimalMapper.toDto(shop);
 
-
         result.setShopBackground(shop.getShopBackground());
         result.setResponseTime(shop.getResponseTime());
         result.setTimePrepareProduct(shop.getTimePrepareProduct());
-        result.setRatingInfo(RatingInfoMapper.toDto(shop.getRatingInfo()));
         result.setCity(shop.getCity());
         result.setDistrict(shop.getDistrict());
         result.setWards(shop.getWards());

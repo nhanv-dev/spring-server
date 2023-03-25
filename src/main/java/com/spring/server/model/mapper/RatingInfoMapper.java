@@ -10,6 +10,7 @@ public class RatingInfoMapper {
 
 
     public static RatingInfoDto toDto(RatingInfo ratingInfo) {
+        if (ratingInfo == null) return null;
         RatingInfoDto result = new RatingInfoDto();
 
         result.setId(ratingInfo.getId());
