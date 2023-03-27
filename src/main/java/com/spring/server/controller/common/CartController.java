@@ -29,20 +29,34 @@ public class CartController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> getCartByUserId(Authentication authentication) {
         User user = userService.findOneByEmail(authentication.getName());
-        if (user==null)
+        if (user == null)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Don't have permission to access");
-        Set<CartDto> cart = cartService.findAllByUserId(user.getId());
+        CartDto cart = cartService.findOneByUserId(user.getId());
         return ResponseEntity.ok(cart);
     }
 
     @PostMapping("/items")
-//    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> addCartItem(Authentication authentication, @RequestBody CartItemDto cartItemDto) {
         User user = userService.findOneByEmail(authentication.getName());
         if (user == null || user.getId() == null)
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Don't have user");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Don't have user");
         CartItemDto item = cartService.saveCartItem(user, cartItemDto);
         return ResponseEntity.ok(new MessageResponse("Added cart item", item));
+    }
+
+    @PutMapping("/items/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<?> updateCartItem(Authentication authentication, @RequestBody CartItemDto cartItemDto) {
+        User user = userService.findOneByEmail(authentication.getName());
+        if (user == null || user.getId() == null)
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Don't have user");
+        if (cartItemDto.getVariant() != null && cartItemDto.getQuantity() > cartItemDto.getVariant().getQuantity())
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Quantity of item larger than quantity of variant");
+        if (cartItemDto.getProduct() != null && cartItemDto.getQuantity() > cartItemDto.getProduct().getQuantity())
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Quantity of item larger than quantity of product");
+        cartService.updateCartItem(cartItemDto);
+        return ResponseEntity.ok(new MessageResponse("Updated cart item"));
     }
 
     @DeleteMapping("/items/{id}")

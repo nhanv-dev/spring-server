@@ -1,7 +1,9 @@
 package com.spring.server.controller.common;
 
+import com.spring.server.model.dto.UserAddressDto;
 import com.spring.server.model.entity.User;
 import com.spring.server.model.dto.UserDto;
+import com.spring.server.model.entity.UserAddress;
 import com.spring.server.model.mapper.UserMapper;
 import com.spring.server.payload.response.MessageResponse;
 import com.spring.server.service.UserService;
@@ -16,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Set;
 
 
 @RestController
@@ -27,6 +30,12 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable(value = "id") Long id) {
         UserDto user = userService.findOneById(id);
+        return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/{id}/address")
+    public ResponseEntity<?> getAddressByUserId(@PathVariable(value = "id") Long id) {
+        Set<UserAddressDto> user = userService.findAddressByUserId(id);
         return ResponseEntity.ok(user);
     }
 
@@ -42,15 +51,10 @@ public class UserController {
     public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody UserDto userDto) {
         System.out.println(userDto.toString());
         User currentUser = userService.findById(id);
-
-        System.out.println(currentUser.getId());
         currentUser.setName(userDto.getName());
         currentUser.setPhoneNumber(userDto.getPhoneNumber());
-
-        userService.updateUser(currentUser);
-
+        userService.update(currentUser);
         return ResponseEntity.ok(new MessageResponse("User saved successfully!!"));
-
     }
 }
 

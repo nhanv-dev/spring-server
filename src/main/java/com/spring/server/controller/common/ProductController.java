@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -22,10 +23,6 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
     @Autowired
     private ProductService productService;
-    @Autowired
-    private ShopService shopService;
-    @Autowired
-    private UserService userService;
     @Autowired
     private ReturnPolicyService returnPolicyService;
 
@@ -52,7 +49,7 @@ public class ProductController {
     @GetMapping("/shop/{shopId}")
     public ResponseEntity<?> getProductsByShopId(@PathVariable Long shopId, @RequestParam(required = false, defaultValue = "1") Integer page) {
         Pageable pageable = PageRequest.of(page - 1, 30);
-        ProductDto product = productService.findOneById(shopId);
+        Page<ProductDto> product = productService.findByShopId(pageable, shopId);
         return ResponseEntity.ok(product);
     }
 

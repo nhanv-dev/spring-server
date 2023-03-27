@@ -16,6 +16,7 @@ public class ProductMinimalMapper {
         result.setIsDeleted(product.getIsDeleted());
         result.setCreatedAt(product.getCreatedAt());
         result.setUpdatedAt(product.getUpdatedAt());
+        result.setShopId(product.getShop().getId());
         result.setDeal(DealMapper.toDto(product.getDeal()));
         result.setRatingInfo(RatingInfoMapper.toDto(product.getRatingInfo()));
         result.setImages(ProductImageMapper.toDto(product.getImages()));

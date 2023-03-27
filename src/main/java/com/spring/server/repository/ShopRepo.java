@@ -10,6 +10,9 @@ public interface ShopRepo extends JpaRepository<Shop, Long> {
     Shop findOneById(Long id);
 
     @Query()
+    Shop findOneBySlug(String slug);
+
+    @Query()
     Shop findOneByUserId(Long id);
 
 }

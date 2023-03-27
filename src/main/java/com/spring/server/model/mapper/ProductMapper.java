@@ -45,6 +45,8 @@ public class ProductMapper {
         result.setOrderCount(product.getOrderCount());
         result.setQuantity(product.getQuantity());
         result.setKeywords(product.getKeywords());
+        result.setIsPublic(product.getIsPublic());
+        result.setIsDeleted(product.getIsDeleted());
 
         result.setCategory(CategoryMapper.toEntity(product.getCategory()));
         result.setSubCategory(SubCategoryMapper.toEntity(product.getSubCategory()));

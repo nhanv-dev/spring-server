@@ -17,6 +17,6 @@ public class ProductAttributeOptionDto implements Comparable<ProductAttributeOpt
 
     @Override
     public int compareTo(ProductAttributeOptionDto o) {
-        return this.id.compareTo(o.getId());
+        return 1;
     }
 }

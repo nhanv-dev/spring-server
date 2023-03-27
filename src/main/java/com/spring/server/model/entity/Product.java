@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,6 +18,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "product")
+@SQLDelete(sql = "UPDATE product p  SET p.is_deleted = true WHERE p.id=?")
+@Where(clause = "is_deleted=false")
 public class Product extends BaseEntity implements Serializable {
     @Column(columnDefinition = "varchar(255)")
     private String name;
