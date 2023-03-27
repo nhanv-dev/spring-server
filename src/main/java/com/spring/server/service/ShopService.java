@@ -12,7 +12,7 @@ public interface ShopService {
     Page<ProductDto> findProductByShopId(Pageable pageable, Long shopId);
 
     ShopDto findOneById(Long id);
-
+    Shop findById(Long id);
     ShopDto findOneByUserId(Long id);
 
     ShopDto findOneBySlug(String slug);
@@ -21,9 +21,11 @@ public interface ShopService {
 
     Shop updateShop(Shop currentShop);
 
+
     Shop findById(long id);
 
     ProductDto saveProduct(ProductDto productDto);
 
     void deleteProduct(Long id);
+
 }

@@ -429,7 +429,7 @@ values (1, 'ROLE_USER'),
 # INSERT INTO ecommerce.variant (id, product_id, discount_id, attribute_hash, sku_user, price, quantity, is_deleted,
 #                                created_at,
 #                                updated_at)
-VALUES (2, 1, null, 'xam-kaki', 'xam-kaki', 119000, 32, 0, '2023-03-10 11:30:49', '2023-03-10 11:30:49');
+# VALUES (2, 1, null, 'xam-kaki', 'xam-kaki', 119000, 32, 0, '2023-03-10 11:30:49', '2023-03-10 11:30:49');
 
 
 
