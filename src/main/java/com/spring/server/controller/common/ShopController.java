@@ -6,20 +6,17 @@ import com.spring.server.model.dto.ShopDto;
 import com.spring.server.model.entity.User;
 import com.spring.server.payload.response.MessageResponse;
 import com.spring.server.security.jwt.JwtUtils;
-import com.spring.server.service.ProductService;
 import com.spring.server.service.ShopService;
 import com.spring.server.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-
 import org.springframework.security.core.Authentication;
-
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,8 +26,6 @@ public class ShopController {
     private UserService userService;
     @Autowired
     private ShopService shopService;
-    @Autowired
-    private ProductService productService;
 
     @Autowired
     JwtUtils jwtUtils;
@@ -40,6 +35,15 @@ public class ShopController {
         return ResponseEntity.ok(shopService.findOneById(id));
     }
 
+    @GetMapping("/slug/{slug}")
+    public ResponseEntity<?> getByShopSlug(@PathVariable(value = "slug") String slug) {
+        return ResponseEntity.ok(shopService.findOneBySlug(slug));
+    }
+    @GetMapping("/products/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable Long id) {
+        ProductDto product = shopService.findProductById(id);
+        return ResponseEntity.ok(product);
+    }
     @GetMapping("/products")
     @PreAuthorize("hasRole('ROLE_SHOP')")
     public ResponseEntity<?> getProductsByShopId(
@@ -50,8 +54,9 @@ public class ShopController {
         User user = userService.findOneByEmail(authentication.getName());
         if (user == null || user.getId() == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         ShopDto shop = shopService.findOneByUserId(user.getId());
-        Pageable pageable = PageRequest.of(page, size);
-        Page<ProductDto> products = productService.findByShopId(pageable, shop.getId());
+        System.out.println(shop.getId());
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.by("updatedAt").descending());
+        Page<ProductDto> products = shopService.findProductByShopId(pageable, shop.getId());
         return ResponseEntity.ok(products);
     }
 
@@ -61,14 +66,18 @@ public class ShopController {
         User user = userService.findOneByEmail(authentication.getName());
         ShopDto shop = shopService.findOneByUserId(user.getId());
         productDto.setShop(shop);
-        ProductDto product = productService.save(productDto);
+        if (productDto.getIsPublic() == null)
+            productDto.setIsPublic(true);
+        if (productDto.getIsDeleted() == null)
+            productDto.setIsDeleted(false);
+        ProductDto product = shopService.saveProduct(productDto);
         return ResponseEntity.ok(product);
     }
 
     @DeleteMapping("/products/{id}")
     @PreAuthorize("hasRole('ROLE_SHOP')")
     public ResponseEntity<?> deleteProduct(@PathVariable(value = "id") Long id) {
-        productService.delete(id);
+        shopService.deleteProduct(id);
         return ResponseEntity.ok(new MessageResponse("Deleted product with id " + id));
     }
 

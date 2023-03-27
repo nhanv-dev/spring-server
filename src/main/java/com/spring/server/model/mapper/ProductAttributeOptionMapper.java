@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.swing.text.html.Option;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Component
 public class ProductAttributeOptionMapper {
@@ -26,7 +27,7 @@ public class ProductAttributeOptionMapper {
     }
 
     public static Set<ProductAttributeOptionDto> toDtos(Set<ProductAttributeOption> options) {
-        Set<ProductAttributeOptionDto> list = new HashSet<>();
+        Set<ProductAttributeOptionDto> list = new TreeSet<>();
         for (ProductAttributeOption option : options) {
             list.add(ProductAttributeOptionMapper.toDto(option));
         }

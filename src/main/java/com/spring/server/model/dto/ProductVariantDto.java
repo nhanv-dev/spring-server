@@ -3,6 +3,8 @@ package com.spring.server.model.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -18,8 +20,14 @@ public class ProductVariantDto implements Comparable<ProductVariantDto> {
     private int quantity;
     private boolean isDeleted;
     private Set<ProductAttributeOptionDto> options;
+
     @Override
-    public int compareTo(ProductVariantDto o) {
-        return this.getId().compareTo(o.getId());
+    public int compareTo(ProductVariantDto productVariant) {
+        String str1 = "", str2 = "";
+        for (ProductAttributeOptionDto o1 : options)
+            str1 += o1.getName();
+        for (ProductAttributeOptionDto o1 : productVariant.getOptions())
+            str2 += o1.getName();
+        return str1.compareTo(str2);
     }
 }

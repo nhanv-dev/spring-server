@@ -15,7 +15,6 @@ public class CartMapper {
         result.setId(cart.getId());
         result.setUserId(cart.getUser().getId());
         result.setItems(CartItemMapper.toDtos(cart.getItems()));
-        result.setShop(ShopMinimalMapper.toDto(cart.getShop()));
         return result;
     }
 

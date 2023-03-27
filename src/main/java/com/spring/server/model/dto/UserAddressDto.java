@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.util.Date;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -11,14 +12,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CartItemDto implements Comparable<CartItemDto> {
-    private Long id, productId, variantId, shopId;
-    private ProductDto product;
-    private ProductVariantDto variant;
-    private Integer quantity;
-    private Date createdAt;
+public class UserAddressDto implements Comparable<UserAddressDto> {
+    private Long id, userId;
+    private String city, district, wards, addressDetail, customerName, phoneNumber, email;
+    private Date createdAt, updatedAt;
     @Override
-    public int compareTo(CartItemDto o) {
+    public int compareTo(UserAddressDto o) {
         return createdAt.compareTo(o.getCreatedAt());
     }
 }

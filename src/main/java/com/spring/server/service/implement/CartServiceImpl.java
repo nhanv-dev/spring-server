@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Component
 public class CartServiceImpl implements CartService {
@@ -28,9 +29,9 @@ public class CartServiceImpl implements CartService {
     private ProductVariantRepo productVariantRepo;
 
     @Override
-    public Set<CartDto> findAllByUserId(Long userId) {
-        Set<Cart> carts = cartRepo.findAllByUser_Id(userId);
-        return CartMapper.toDtos(carts);
+    public CartDto findOneByUserId(Long userId) {
+        Cart cart = cartRepo.findOneByUser_Id(userId);
+        return CartMapper.toDto(cart);
     }
 
     @Override
@@ -51,22 +52,24 @@ public class CartServiceImpl implements CartService {
     @Transactional
     public CartItemDto saveCartItem(User user, CartItemDto cartItemDto) {
         CartItem cartItem = new CartItem();
-        Product product = productRepo.findOneById(cartItemDto.getProductId());
+        Product product = productRepo.findOneByIdAndIsPublic(cartItemDto.getProductId(), true);
         ProductVariant productVariant = productVariantRepo.findOneByIdAndProduct_Id(cartItemDto.getVariantId(), cartItemDto.getProductId());
-        Shop shop = shopRepo.findOneById(cartItemDto.getShopId());
-        Cart cart = cartRepo.findOneByUser_IdAndShop_Id(user.getId(), shop.getId());
-        if (cart == null) cart = cartRepo.save(new Cart(user, shop, new HashSet<>()));
+        Cart cart = cartRepo.findOneByUser_Id(user.getId());
+        if (cart == null) cart = cartRepo.save(new Cart(user, new HashSet<>()));
         cartItem.setQuantity(cartItemDto.getQuantity());
         cartItem.setProduct(product);
         cartItem.setVariant(productVariant);
         cartItem.setCart(cart);
-        if(cart.containItem(cartItem)) {
-            cartItem = cart.updateItem(cartItem);
-        }else {
-            cartItem=cartItemRepo.save(cartItem);
-        }
+        if (cart.containItem(cartItem)) cartItem = cart.updateItem(cartItem);
+        else cartItem = cartItemRepo.save(cartItem);
         cartRepo.save(cart);
         return CartItemMapper.toDto(cartItem);
+    }
+
+    @Override
+    @Transactional
+    public void updateCartItem(CartItemDto cartItemDto) {
+        cartItemRepo.updateQuantity(cartItemDto.getId(), cartItemDto.getQuantity());
     }
 
     @Override

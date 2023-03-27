@@ -35,6 +35,7 @@ public class ProductVariantMapper {
     }
 
     public static ProductVariant toEntity(ProductVariantDto variant, Product product) {
+        if (variant == null) return null;
         ProductVariant result = new ProductVariant();
         result.setId(variant.getId());
         result.setAttributeHash(variant.getAttributeHash());

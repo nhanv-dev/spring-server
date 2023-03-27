@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -25,7 +26,7 @@ public class ProductAttributeOption extends BaseEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attribute_id", nullable = false)
     private ProductAttribute attribute;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<ProductVariant> variant;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<ProductVariant> variant = new HashSet<>();
 
 }

@@ -15,9 +15,7 @@ import java.util.Set;
 public class CartDto implements Comparable<CartDto> {
     private Long id;
     private Long userId;
-    private ShopDto shop;
     private Set<CartItemDto> items;
-
     @Override
     public int compareTo(CartDto o) {
         return id.compareTo(o.getId());
