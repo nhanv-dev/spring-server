@@ -7,6 +7,7 @@ import com.spring.server.model.entity.Cart;
 import com.spring.server.model.entity.UserAddress;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -16,7 +17,7 @@ public class UserAddressMapper {
     public static UserAddressDto toDto(UserAddress userAddress) {
         UserAddressDto result = new UserAddressDto();
         result.setId(userAddress.getId());
-        result.setUserId(userAddress.getUser().getId());
+//        result.setUserId(userAddress.getUser().getId());
         result.setCustomerName(userAddress.getCustomerName());
         result.setEmail(userAddress.getEmail());
         result.setPhoneNumber(userAddress.getPhoneNumber());
@@ -24,20 +25,21 @@ public class UserAddressMapper {
         result.setCity(userAddress.getCity());
         result.setDistrict(userAddress.getDistrict());
         result.setWards(userAddress.getWards());
+        result.setIsDefault(userAddress.getIsDefault());
         result.setCreatedAt(userAddress.getCreatedAt());
         result.setUpdatedAt(userAddress.getUpdatedAt());
         return result;
     }
 
     public static Set<UserAddressDto> toDtos(List<UserAddress> userAddresses) {
-        if (userAddresses == null || userAddresses.isEmpty()) return null;
+        if (userAddresses == null || userAddresses.isEmpty()) return new TreeSet<>();
         Set<UserAddressDto> result = new TreeSet<>();
         for (UserAddress userAddress : userAddresses) result.add(toDto(userAddress));
         return result;
     }
 
     public static Set<UserAddressDto> toDtos(Set<UserAddress> userAddresses) {
-        if (userAddresses == null || userAddresses.isEmpty()) return null;
+        if (userAddresses == null || userAddresses.isEmpty()) return new TreeSet<>();
         Set<UserAddressDto> result = new TreeSet<>();
         for (UserAddress userAddress : userAddresses) result.add(toDto(userAddress));
         return result;
@@ -53,6 +55,7 @@ public class UserAddressMapper {
         result.setCity(userAddress.getCity());
         result.setDistrict(userAddress.getDistrict());
         result.setWards(userAddress.getWards());
+        result.setIsDefault(userAddress.getIsDefault());
         result.setCreatedAt(userAddress.getCreatedAt());
         result.setUpdatedAt(userAddress.getUpdatedAt());
         return result;

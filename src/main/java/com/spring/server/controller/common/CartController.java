@@ -32,6 +32,8 @@ public class CartController {
         if (user == null)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Don't have permission to access");
         CartDto cart = cartService.findOneByUserId(user.getId());
+        if (cart == null)
+            return ResponseEntity.ok(new MessageResponse("Don't have user's cart"));
         return ResponseEntity.ok(cart);
     }
 
