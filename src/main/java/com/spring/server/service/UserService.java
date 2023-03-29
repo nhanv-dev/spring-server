@@ -15,12 +15,20 @@ public interface UserService {
 
     UserDto findOneById(Long id);
 
-    Set<UserAddressDto> findAddressByUserId(Long userId);
-
     Boolean existsByEmail(String email);
 
     UserDto save(User user);
 
     void update(User currentUser);
+
+    UserAddressDto findAddressById(Long id);
+
+    Set<UserAddressDto> findAddressByUserId(Long userId);
+
+    UserAddressDto saveAddress(UserAddressDto userAddressDto);
+
+    UserAddressDto updateAddress(UserAddressDto userAddressDto);
+
+    void deleteAddress(Long id);
 
 }

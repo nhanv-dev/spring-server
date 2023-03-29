@@ -11,6 +11,7 @@ import java.util.TreeSet;
 @Component
 public class CartMapper {
     public static CartDto toDto(Cart cart) {
+        if (cart == null) return null;
         CartDto result = new CartDto();
         result.setId(cart.getId());
         result.setUserId(cart.getUser().getId());

@@ -8,6 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 public interface UserRepo extends JpaRepository<User, Long> {
     @Query()
+    User findOneById(Long id);
+
+    @Query()
     User findOneByEmail(String email);
     
     @Query()

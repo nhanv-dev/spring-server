@@ -11,6 +11,7 @@ import com.spring.server.repository.UserRepo;
 import com.spring.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,19 +22,50 @@ public class UserServiceImpl implements UserService {
 
 
     @Autowired
-    private UserRepo userEntityRepo;
+    private UserRepo userRepo;
     @Autowired
     private UserAddressRepo userAddressRepo;
 
     @Override
     public User findById(Long id) {
-        Optional<User> list = userEntityRepo.findById(id);
+        Optional<User> list = userRepo.findById(id);
         return list.get();
     }
 
     @Override
     public UserDto findOneById(Long id) {
-        return UserMapper.toDto(userEntityRepo.findById(id).get());
+        return UserMapper.toDto(userRepo.findById(id).get());
+    }
+
+
+    @Override
+    public User findOneByEmail(String email) {
+        return userRepo.findOneByEmail(email);
+    }
+
+    @Override
+    public Boolean existsByEmail(String email) {
+        return userRepo.existsByEmail(email);
+    }
+
+
+    @Override
+    @Transactional
+    public UserDto save(User user) {
+        User userDto = userRepo.save(user);
+        return UserMapper.toDto(userDto);
+    }
+
+    @Override
+    @Transactional
+    public void update(User currentUser) {
+        userRepo.save(currentUser);
+    }
+
+    @Override
+    public UserAddressDto findAddressById(Long id) {
+        UserAddress address = userAddressRepo.findOneById(id);
+        return UserAddressMapper.toDto(address);
     }
 
     @Override
@@ -43,25 +75,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findOneByEmail(String email) {
-        return userEntityRepo.findOneByEmail(email);
+    @Transactional
+    public UserAddressDto saveAddress(UserAddressDto userAddressDto) {
+        User user = userRepo.findOneById(userAddressDto.getUserId());
+        UserAddress address = UserAddressMapper.toEntity(userAddressDto);
+        address.setUser(user);
+        address = userAddressRepo.save(address);
+        return UserAddressMapper.toDto(address);
     }
 
     @Override
-    public Boolean existsByEmail(String email) {
-        return userEntityRepo.existsByEmail(email);
+    @Transactional
+    public UserAddressDto updateAddress(UserAddressDto userAddressDto) {
+        User user = userRepo.findOneById(userAddressDto.getUserId());
+        UserAddress address = UserAddressMapper.toEntity(userAddressDto);
+        address.setUser(user);
+        if (address.getIsDefault() != null && address.getIsDefault()) {
+            userAddressRepo.updateDefaultStatus(user.getId());
+        }
+        address = userAddressRepo.save(address);
+        return UserAddressMapper.toDto(address);
     }
-
 
     @Override
-    public UserDto save(User user) {
-        User userDto = userEntityRepo.save(user);
-        return UserMapper.toDto(userDto);
+    @Transactional
+    public void deleteAddress(Long id) {
+        userAddressRepo.deleteById(id);
     }
 
-    @Override
-    public void update(User currentUser) {
-        userEntityRepo.save(currentUser);
-    }
 
 }
