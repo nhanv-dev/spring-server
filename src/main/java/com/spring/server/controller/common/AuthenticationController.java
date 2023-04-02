@@ -1,6 +1,6 @@
 package com.spring.server.controller.common;
 
-import com.spring.server.model.entity.ERole;
+import com.spring.server.model.constant.ERole;
 import com.spring.server.model.entity.Role;
 import com.spring.server.model.entity.User;
 import com.spring.server.payload.request.LoginRequest;
@@ -14,7 +14,6 @@ import com.spring.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -75,6 +74,7 @@ public class AuthenticationController {
 
     @PostMapping("/sign-up")
     public ResponseEntity<?> register(@Valid @RequestBody SignUpRequest signUpRequest) {
+        System.out.println(signUpRequest.getName());
         if (userService.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }

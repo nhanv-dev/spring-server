@@ -1,6 +1,6 @@
 package com.spring.server.service.implement;
 
-import com.spring.server.model.entity.ERole;
+import com.spring.server.model.constant.ERole;
 import com.spring.server.model.entity.Role;
 import com.spring.server.repository.RoleRepo;
 import com.spring.server.service.RoleService;

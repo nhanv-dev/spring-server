@@ -19,8 +19,6 @@ import java.util.Set;
 @RequestMapping("/api/cart")
 public class CartController {
     @Autowired
-    private ProductService productService;
-    @Autowired
     private CartService cartService;
     @Autowired
     private UserService userService;
@@ -29,9 +27,12 @@ public class CartController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> getCartByUserId(Authentication authentication) {
         User user = userService.findOneByEmail(authentication.getName());
-        if (user == null)
+        if (user == null) {
+            System.out.println("false");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Don't have permission to access");
+        }
         CartDto cart = cartService.findOneByUserId(user.getId());
+        System.out.println(cart);
         if (cart == null)
             return ResponseEntity.ok(new MessageResponse("Don't have user's cart"));
         return ResponseEntity.ok(cart);
@@ -41,7 +42,7 @@ public class CartController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> addCartItem(Authentication authentication, @RequestBody CartItemDto cartItemDto) {
         User user = userService.findOneByEmail(authentication.getName());
-        if (user == null || user.getId() == null)
+        if (user == null)
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Don't have user");
         CartItemDto item = cartService.saveCartItem(user, cartItemDto);
         return ResponseEntity.ok(new MessageResponse("Added cart item", item));
@@ -51,7 +52,7 @@ public class CartController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> updateCartItem(Authentication authentication, @RequestBody CartItemDto cartItemDto) {
         User user = userService.findOneByEmail(authentication.getName());
-        if (user == null || user.getId() == null)
+        if (user == null)
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Don't have user");
         if (cartItemDto.getVariant() != null && cartItemDto.getQuantity() > cartItemDto.getVariant().getQuantity())
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Quantity of item larger than quantity of variant");
@@ -65,7 +66,7 @@ public class CartController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> removeCartItem(Authentication authentication, @PathVariable Long id) {
         User user = userService.findOneByEmail(authentication.getName());
-        if (user == null || user.getId() == null)
+        if (user == null)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Don't have user");
         cartService.removeCartItem(id);
         return ResponseEntity.ok(new MessageResponse("Removed cart item"));

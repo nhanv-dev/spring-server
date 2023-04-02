@@ -1,4 +1,4 @@
-package com.spring.server.model.entity;
+package com.spring.server.model.constant;
 
 public enum ERole {
     ROLE_USER,

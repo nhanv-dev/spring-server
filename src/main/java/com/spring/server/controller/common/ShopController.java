@@ -42,23 +42,25 @@ public class ShopController {
     public ResponseEntity<?> getByShopSlug(@PathVariable(value = "slug") String slug) {
         return ResponseEntity.ok(shopService.findOneBySlug(slug));
     }
+
     @GetMapping("/products/{id}")
     public ResponseEntity<?> getProductById(@PathVariable Long id) {
         ProductDto product = shopService.findProductById(id);
         return ResponseEntity.ok(product);
     }
+
     @GetMapping("/products")
     @PreAuthorize("hasRole('ROLE_SHOP')")
     public ResponseEntity<?> getProductsByShopId(
             Authentication authentication,
-            @RequestParam(required = false, defaultValue = "1") Integer page,
-            @RequestParam(required = false, defaultValue = "10") Integer size
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            @RequestParam(required = false, defaultValue = "10") Integer limit
     ) {
         User user = userService.findOneByEmail(authentication.getName());
         if (user == null || user.getId() == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         ShopDto shop = shopService.findOneByUserId(user.getId());
         System.out.println(shop.getId());
-        Pageable pageable = PageRequest.of(page - 1, size, Sort.by("updatedAt").descending());
+        Pageable pageable = PageRequest.of(page, limit, Sort.by("updatedAt").descending());
         Page<ProductDto> products = shopService.findProductByShopId(pageable, shop.getId());
         return ResponseEntity.ok(products);
     }
@@ -86,12 +88,11 @@ public class ShopController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_SHOP')")
-
-    public ResponseEntity<?> updateUser(@PathVariable( "id") Long id, @RequestBody ShopDto shopDto, Authentication authentication){
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody ShopDto shopDto, Authentication authentication) {
         User user = userService.findOneByEmail(authentication.getName());
         Shop currentShop = shopService.findById(id);
-       if(user.getShop().getId()!= id )
-           return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("Update Fail"));
+        if (user.getShop().getId() != id)
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("Update Fail"));
 
         currentShop.setShopName(shopDto.getShopName());
         currentShop.setEmail(shopDto.getShopEmail());

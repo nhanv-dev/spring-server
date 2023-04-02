@@ -52,7 +52,7 @@ public class CartServiceImpl implements CartService {
     @Transactional
     public CartItemDto saveCartItem(User user, CartItemDto cartItemDto) {
         CartItem cartItem = new CartItem();
-        Product product = productRepo.findOneByIdAndIsPublic(cartItemDto.getProductId(), true);
+        Product product = productRepo.findOneByIdAndIsPublicAndIsDeleted(cartItemDto.getProductId(), true, false);
         ProductVariant productVariant = productVariantRepo.findOneByIdAndProduct_Id(cartItemDto.getVariantId(), cartItemDto.getProductId());
         Cart cart = cartRepo.findOneByUser_Id(user.getId());
         if (cart == null) cart = cartRepo.save(new Cart(user, new HashSet<>()));
