@@ -1,5 +1,6 @@
 package com.spring.server.service.implement;
 
+import com.spring.server.model.constant.ERole;
 import com.spring.server.model.dto.ProductDto;
 import com.spring.server.model.dto.ShopDto;
 import com.spring.server.model.entity.*;
@@ -41,18 +42,20 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public Page<ProductDto> findProductByShopId(Pageable pageable, Long shopId) {
-        return ProductMapper.toDtos(productRepo.findAllByShop_Id(pageable, shopId));
+        return ProductMapper.toDtos(productRepo.findAllByShop_IdAndIsDeleted(pageable, shopId, false));
     }
 
     @Override
     public ShopDto findOneById(Long id) {
         return ShopMapper.toDto(shopRepo.findOneById(id));
     }
+
     @Override
     public Shop findById(Long id) {
         Optional<Shop> list = shopRepo.findById(id);
         return list.get();
     }
+
     @Override
     public ShopDto findOneByUserId(Long id) {
         return ShopMapper.toDto(shopRepo.findOneByUserId(id));

@@ -16,17 +16,20 @@ import java.util.TreeSet;
 @Component
 public class ProductAttributeOptionMapper {
     public static ProductAttributeOptionDto toDto(ProductAttributeOption option) {
+        if (option == null) return null;
         ProductAttributeOptionDto result = new ProductAttributeOptionDto();
         result.setId(option.getId());
         result.setName(option.getName());
         result.setValue(option.getValue());
         result.setImage(option.getImage());
         result.setDeleted(option.isDeleted());
-        result.setAttributeId(option.getAttribute().getId());
+        if (option.getAttribute() != null)
+            result.setAttributeId(option.getAttribute().getId());
         return result;
     }
 
     public static Set<ProductAttributeOptionDto> toDtos(Set<ProductAttributeOption> options) {
+        if (options == null || options.isEmpty()) return null;
         Set<ProductAttributeOptionDto> list = new TreeSet<>();
         for (ProductAttributeOption option : options) {
             list.add(ProductAttributeOptionMapper.toDto(option));
@@ -47,15 +50,13 @@ public class ProductAttributeOptionMapper {
 
 
     public static ProductAttributeOption toEntity(ProductAttributeOptionDto option, ProductVariant variant, Product product) {
-        for (ProductAttribute attribute : product.getAttributes()) {
-            for (ProductAttributeOption opt : attribute.getOptions()) {
-                if (!opt.getName().equals(option.getName())) continue;
-                if (!opt.getValue().equals(option.getValue())) continue;
-                ProductAttributeOption result = toEntity(option, attribute);
-
-            }
-        }
-        return null;
+        ProductAttributeOption result = new ProductAttributeOption();
+        result.setId(option.getId());
+        result.setName(option.getName());
+        result.setValue(option.getValue());
+        result.setImage(option.getImage());
+        result.setDeleted(option.isDeleted());
+        return result;
     }
 
     public static Set<ProductAttributeOption> toEntities(Set<ProductAttributeOptionDto> options, ProductAttribute attribute) {

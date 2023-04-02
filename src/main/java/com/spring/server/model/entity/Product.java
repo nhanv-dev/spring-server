@@ -19,7 +19,7 @@ import java.util.Set;
 @Entity
 @Table(name = "product")
 @SQLDelete(sql = "UPDATE product p  SET p.is_deleted = true WHERE p.id=?")
-@Where(clause = "is_deleted=false")
+//@Where(clause = "is_deleted=false")
 public class Product extends BaseEntity implements Serializable {
     @Column(columnDefinition = "varchar(255)")
     private String name;

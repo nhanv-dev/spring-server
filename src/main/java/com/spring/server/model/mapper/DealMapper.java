@@ -12,6 +12,7 @@ import java.util.Set;
 @Component
 public class DealMapper {
     public static DealDto toDto(Deal deal) {
+        if (deal == null) return null;
         DealDto result = new DealDto();
         result.setPrice(deal.getPrice());
         result.setFinalPrice(deal.getFinalPrice());

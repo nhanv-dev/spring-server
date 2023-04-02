@@ -26,6 +26,7 @@ public class ProductController {
     @Autowired
     private ReturnPolicyService returnPolicyService;
 
+
     @GetMapping("")
     public ResponseEntity<?> getProducts(@RequestParam(required = false, defaultValue = "1") Integer page) {
         Pageable pageable = PageRequest.of(page - 1, 30);
@@ -40,11 +41,6 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getProductById(@PathVariable Long id) {
-        ProductDto product = productService.findOneById(id);
-        return ResponseEntity.ok(product);
-    }
 
     @GetMapping("/shop/{shopId}")
     public ResponseEntity<?> getProductsByShopId(@PathVariable Long shopId, @RequestParam(required = false, defaultValue = "1") Integer page) {
@@ -58,6 +54,12 @@ public class ProductController {
         Pageable pageable = PageRequest.of(0, top);
         Page<ProductDto> list = productService.findByShopId(pageable, shopId);
         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable Long id) {
+        ProductDto product = productService.findOneById(id);
+        return ResponseEntity.ok(product);
     }
 
     @GetMapping("/slug/{slug}")
