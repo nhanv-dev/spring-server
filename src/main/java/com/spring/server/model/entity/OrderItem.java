@@ -15,11 +15,11 @@ import java.io.Serializable;
 @Entity
 @Table(name = "order_item")
 public class OrderItem extends BaseEntity implements Serializable {
-    @Column(columnDefinition = "double not null", nullable = false)
+    @Column(nullable = false)
     private double discountPercent;
-    @Column(columnDefinition = "double not null", nullable = false)
+    @Column(nullable = false)
     private double price;
-    @Column(columnDefinition = "double not null", nullable = false)
+    @Column(nullable = false)
     private double finalPrice;
     @Column(columnDefinition = "bigint not null", nullable = false)
     private int quantity;

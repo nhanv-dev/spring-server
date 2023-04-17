@@ -16,6 +16,8 @@ public class ShopMinimalMapper {
         result.setSlug(shop.getSlug());
         result.setShopLogo(shop.getShopLogo());
         result.setProductTotal(shop.getProductTotal());
+        result.setShopEmail(shop.getEmail());
+        result.setShopPhone(shop.getPhoneNumber());
         result.setOfficial(shop.isOfficialShop());
         result.setWarehouseRegionName(shop.getWarehouseRegionName());
         result.setDeleted(shop.isDeleted());

@@ -23,7 +23,6 @@ public class Cart extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<CartItem> items = new HashSet<>();
 
-
     public CartItem updateItem(CartItem item) {
         if (items == null) items = new HashSet<>();
         for (CartItem i : items) {

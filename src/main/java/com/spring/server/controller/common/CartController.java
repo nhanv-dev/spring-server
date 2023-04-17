@@ -19,9 +19,9 @@ import java.util.Set;
 @RequestMapping("/api/cart")
 public class CartController {
     @Autowired
-    private CartService cartService;
+    CartService cartService;
     @Autowired
-    private UserService userService;
+    UserService userService;
 
     @GetMapping("")
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -32,7 +32,6 @@ public class CartController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Don't have permission to access");
         }
         CartDto cart = cartService.findOneByUserId(user.getId());
-        System.out.println(cart);
         if (cart == null)
             return ResponseEntity.ok(new MessageResponse("Don't have user's cart"));
         return ResponseEntity.ok(cart);

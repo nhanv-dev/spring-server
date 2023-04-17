@@ -14,16 +14,15 @@ import java.io.Serializable;
 @Entity
 @Table(name = "deal")
 @SQLDelete(sql = "UPDATE deal SET is_deleted = true WHERE id=?")
-//@Where(clause = "is_deleted=false")
 public class Deal extends BaseEntity implements Serializable {
-    @Column(nullable = false, columnDefinition = "decimal(15,2)")
+    @Column(columnDefinition = "decimal(15,2)", nullable = false)
     private double price;
     @Column(columnDefinition = "decimal(15,2)")
     private double finalPrice;
-    @Column()
+    @Column
     private double discountPercent;
-    @Column(columnDefinition = "boolean default false")
-    private Boolean isDeleted;
+    @Column
+    private Boolean isDeleted = false;
     @OneToOne(mappedBy = "deal")
     private Product product;
     @OneToOne(mappedBy = "deal")

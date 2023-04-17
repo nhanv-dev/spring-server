@@ -1,59 +1,39 @@
 package com.spring.server.service.implement;
 
 import com.spring.server.model.constant.ERole;
-import com.spring.server.model.dto.ProductDto;
+import com.spring.server.model.dto.SalesRegisterDto;
 import com.spring.server.model.dto.ShopDto;
 import com.spring.server.model.entity.*;
-import com.spring.server.model.mapper.ProductDetailMapper;
-import com.spring.server.model.mapper.ProductMapper;
+import com.spring.server.model.mapper.SalesRegisterMapper;
 import com.spring.server.model.mapper.ShopMapper;
 import com.spring.server.repository.*;
 import com.spring.server.service.ShopService;
 import com.spring.server.util.SlugGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.Set;
 
 
 @Component
 public class ShopServiceImpl implements ShopService {
     @Autowired
-    private ShopRepo shopRepo;
+    ShopRepo shopRepo;
     @Autowired
-    private ProductRepo productRepo;
+    UserRepo userRepo;
     @Autowired
-    private UserRepo userRepo;
+    RoleRepo roleRepo;
     @Autowired
-    private RoleRepo roleRepo;
-    @Autowired
-    private RatingInfoRepo ratingInfoRepo;
-
-    @Override
-    public ProductDto findProductById(Long id) {
-        Product product = productRepo.findOneById(id);
-        if (product == null) return null;
-        return ProductDetailMapper.toDto(product);
-    }
-
-    @Override
-    public Page<ProductDto> findProductByShopId(Pageable pageable, Long shopId) {
-        return ProductMapper.toDtos(productRepo.findAllByShop_IdAndIsDeleted(pageable, shopId, false));
-    }
+    RatingInfoRepo ratingInfoRepo;
 
     @Override
     public ShopDto findOneById(Long id) {
         return ShopMapper.toDto(shopRepo.findOneById(id));
-    }
-
-    @Override
-    public Shop findById(Long id) {
-        Optional<Shop> list = shopRepo.findById(id);
-        return list.get();
     }
 
     @Override
@@ -67,6 +47,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
+    @Transactional
     public ShopDto save(Shop shop) {
         RatingInfo ratingInfo = ratingInfoRepo.save(new RatingInfo());
         shop.setRatingInfo(ratingInfo);
@@ -83,34 +64,16 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Shop updateShop(Shop currentShop) {
-        Shop shop = shopRepo.save(currentShop);
-        return shop;
-    }
-
-
-    @Override
-    public Shop findById(long id) {
-        Optional<Shop> list = shopRepo.findById(id);
-        return list.get();
-    }
-
-    @Override
     @Transactional
-    public ProductDto saveProduct(ProductDto productDto) {
-        Product product = ProductDetailMapper.toEntity(productDto);
-        RatingInfo ratingInfo = ratingInfoRepo.save(new RatingInfo());
-        product.setRatingInfo(ratingInfo);
-        product = productRepo.save(product);
-        product.setSlug(SlugGenerator.toSlug(product.getName() + "-" + product.getId()));
-        product = productRepo.save(product);
-        return ProductDetailMapper.toDto(product);
+    public ShopDto update(ShopDto shopDto) {
+        User user = userRepo.findOneById(shopDto.getUserId());
+        Shop shop = ShopMapper.toEntity(shopDto);
+        shop.setUser(user);
+        shop.setSlug(SlugGenerator.toSlug(shop.getShopName() + "-" + shop.getId()));
+        shopRepo.save(shop);
+        shop = shopRepo.findOneById(shop.getId());
+        return ShopMapper.toDto(shop);
     }
 
-    @Override
-    @Transactional
-    public void deleteProduct(Long id) {
-        productRepo.deleteById(id);
-    }
 
 }

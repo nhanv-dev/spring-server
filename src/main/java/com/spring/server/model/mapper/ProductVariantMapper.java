@@ -21,13 +21,13 @@ public class ProductVariantMapper {
         result.setId(variant.getId());
         result.setAttributeHash(variant.getAttributeHash());
         result.setQuantity(variant.getQuantity());
-        result.setDeleted(variant.isDeleted());
+        result.setIsDeleted(variant.isDeleted());
         result.setDeal(DealMapper.toDto(variant.getDeal()));
-        result.setOptions(ProductAttributeOptionMapper.toDtos(variant.getOptions()));
+        result.setOptions(ProductAttributeOptionMapper.toDto(variant.getOptions()));
         return result;
     }
 
-    public static Set<ProductVariantDto> toDtos(Set<ProductVariant> variants) {
+    public static Set<ProductVariantDto> toDto(Set<ProductVariant> variants) {
         if (variants == null || variants.isEmpty()) return null;
         Set<ProductVariantDto> list = new TreeSet<>();
         for (ProductVariant variant : variants) list.add(ProductVariantMapper.toDto(variant));
@@ -40,9 +40,9 @@ public class ProductVariantMapper {
         result.setId(variant.getId());
         result.setAttributeHash(variant.getAttributeHash());
         result.setQuantity(variant.getQuantity());
-        result.setDeleted(variant.isDeleted());
+        result.setDeleted(variant.getIsDeleted());
         result.setProduct(product);
-        result.setOptions(ProductAttributeOptionMapper.toEntities(variant.getOptions(), result, product));
+        result.setOptions(ProductAttributeOptionMapper.toEntities(variant.getOptions()));
         return result;
     }
 

@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ShopDto {
-    private Long id;
+    private Long id, userId;
     private String shopName;
     private String shopPhone;
     private String shopEmail;

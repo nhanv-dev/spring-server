@@ -17,9 +17,6 @@ public class ProductMapper {
     public static ProductDto toDto(Product product) {
         ProductDto result = ProductMinimalMapper.toDto(product);
 
-        result.setOrderCount(product.getOrderCount());
-        result.setQuantity(product.getQuantity());
-
         result.setCategory(CategoryMapper.toDtoWithoutSub(product.getCategory()));
         result.setSubCategory(SubCategoryMapper.toDto(product.getSubCategory()));
         result.setShop(ShopMapper.toDto(product.getShop()));
@@ -27,11 +24,11 @@ public class ProductMapper {
         return result;
     }
 
-    public static Page<ProductDto> toDtos(Page<Product> products) {
+    public static Page<ProductDto> toDto(Page<Product> products) {
         return products.map(new Function<Product, ProductDto>() {
             @Override
             public ProductDto apply(Product product) {
-                return ProductMapper.toDto(product);
+                return toDto(product);
             }
         });
     }

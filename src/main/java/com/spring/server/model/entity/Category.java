@@ -17,9 +17,9 @@ import java.util.TreeSet;
 @Entity
 @Table(name = "category")
 public class Category extends BaseEntity implements Serializable {
-    @Column(columnDefinition = "varchar(100) not null unique")
+    @Column(length = 100, nullable = false, unique = true)
     private String title;
-    @Column(columnDefinition = "varchar(255) unique")
+    @Column(length = 150, unique = true)
     private String slug;
     @Column(columnDefinition = "text")
     private String icon;

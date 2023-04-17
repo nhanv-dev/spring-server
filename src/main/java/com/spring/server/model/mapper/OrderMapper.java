@@ -1,21 +1,28 @@
 package com.spring.server.model.mapper;
 
 import com.spring.server.model.dto.OrderDto;
+import com.spring.server.model.dto.ProductDto;
+import com.spring.server.model.dto.UserAddressDto;
 import com.spring.server.model.entity.Order;
+import com.spring.server.model.entity.OrderStatusHistory;
+import com.spring.server.model.entity.Product;
+import org.springframework.data.domain.Page;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 public class OrderMapper {
 
     public static OrderDto toDto(Order order) {
         OrderDto result = new OrderDto();
         result.setId(order.getId());
-        result.setShopId(order.getShop().getId());
         result.setShop(ShopMinimalMapper.toDto(order.getShop()));
         result.setOrderStatus(OrderStatusMapper.toDto(order.getOrderStatus()));
-        result.setItems(OrderItemMapper.toDtos(order.getItems()));
+        result.setStatusHistory(OrderStatusHistoryMapper.toDto(order.getOrderStatusHistories()));
+        result.setItems(OrderItemMapper.toDto(order.getItems()));
+        result.setAddress(UserAddressMapper.toDto(order.getUserAddress()));
         result.setNote(order.getNote());
         result.setTotalPrice(order.getTotalPrice());
         result.setCreatedAt(order.getCreatedAt());
@@ -23,13 +30,22 @@ public class OrderMapper {
         return result;
     }
 
-    public static Set<OrderDto> toDtos(List<Order> orders) {
+    public static Set<OrderDto> toDto(List<Order> orders) {
         if (orders == null) return null;
         Set<OrderDto> result = new HashSet<>();
         for (Order order : orders) {
             result.add(toDto(order));
         }
         return result;
+    }
+
+    public static Page<OrderDto> toDto(Page<Order> orders) {
+        return orders.map(new Function<Order, OrderDto>() {
+            @Override
+            public OrderDto apply(Order order) {
+                return toDto(order);
+            }
+        });
     }
 
     public static Order toEntity(OrderDto order) {

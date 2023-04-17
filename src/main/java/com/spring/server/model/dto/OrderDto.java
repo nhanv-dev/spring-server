@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDto {
-    private Long id, userId, shopId, addressId;
+    private Long id;
     private String note, status;
     private Double totalPrice;
     private OrderStatusDto orderStatus;
@@ -22,4 +22,5 @@ public class OrderDto {
     private ShopDto shop;
     private Set<OrderItemDto> items;
     private Date createdAt, updatedAt;
+    private Set<OrderStatusHistoryDto> statusHistory;
 }

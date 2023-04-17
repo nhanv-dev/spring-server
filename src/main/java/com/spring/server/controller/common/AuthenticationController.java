@@ -32,32 +32,27 @@ import java.util.Set;
 @RequestMapping("/api/auth")
 public class AuthenticationController {
     @Autowired
-    private AuthenticationManager authenticationManager;
+    AuthenticationManager authenticationManager;
     @Autowired
-    private RoleService roleService;
+    RoleService roleService;
     @Autowired
-    private UserService userService;
+    UserService userService;
     @Autowired
-    private PasswordEncoder encoder;
+    PasswordEncoder encoder;
     @Autowired
-    private JwtUtils jwtUtils;
+    JwtUtils jwtUtils;
 
     @PostMapping("/sign-in")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+        User user = userService.findOneByEmail(loginRequest.getEmail());
+        if (user == null)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email invalid");
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
-        return ResponseEntity.ok(
-                new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), userDetails.getName(), roles)
-        );
-    }
-
-    @GetMapping("/refresh-token")
-    public ResponseEntity<?> reLogin(Authentication authentication) {
-        return ResponseEntity.status(400).build();
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), userDetails.getName(), roles));
     }
 
     @GetMapping("/token-valid")

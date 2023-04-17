@@ -23,6 +23,9 @@ public class ProductReviews extends BaseEntity implements Serializable {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "variant_id", nullable = true)
+    private ProductVariant variant;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id", nullable = false)
     private OrderItem orderItem;
     @ManyToOne(fetch = FetchType.LAZY)

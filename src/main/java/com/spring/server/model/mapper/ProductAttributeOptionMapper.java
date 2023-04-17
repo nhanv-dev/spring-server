@@ -28,8 +28,8 @@ public class ProductAttributeOptionMapper {
         return result;
     }
 
-    public static Set<ProductAttributeOptionDto> toDtos(Set<ProductAttributeOption> options) {
-        if (options == null || options.isEmpty()) return null;
+    public static Set<ProductAttributeOptionDto> toDto(Set<ProductAttributeOption> options) {
+        if (options == null || options.isEmpty()) return new TreeSet<>();
         Set<ProductAttributeOptionDto> list = new TreeSet<>();
         for (ProductAttributeOption option : options) {
             list.add(ProductAttributeOptionMapper.toDto(option));
@@ -49,7 +49,7 @@ public class ProductAttributeOptionMapper {
     }
 
 
-    public static ProductAttributeOption toEntity(ProductAttributeOptionDto option, ProductVariant variant, Product product) {
+    public static ProductAttributeOption toEntity(ProductAttributeOptionDto option) {
         ProductAttributeOption result = new ProductAttributeOption();
         result.setId(option.getId());
         result.setName(option.getName());
@@ -67,10 +67,10 @@ public class ProductAttributeOptionMapper {
         return result;
     }
 
-    public static Set<ProductAttributeOption> toEntities(Set<ProductAttributeOptionDto> options, ProductVariant variant, Product product) {
+    public static Set<ProductAttributeOption> toEntities(Set<ProductAttributeOptionDto> options) {
         Set<ProductAttributeOption> result = new HashSet<>();
         for (ProductAttributeOptionDto option : options) {
-            result.add(ProductAttributeOptionMapper.toEntity(option, variant, product));
+            result.add(ProductAttributeOptionMapper.toEntity(option));
         }
         return result;
     }

@@ -56,7 +56,7 @@ public class CategoryServiceImpl implements CategoryService {
             }
             categoryRepo.save(category);
         }
-        return CategoryMapper.toDtos(list);
+        return CategoryMapper.toDto(list);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<SubCategoryDto> findSubCategoryByCategoryId(Long id) {
         List<SubCategory> list = subCategoryRepo.findByCategoryId(id);
-        return SubCategoryMapper.toDtos(list);
+        return SubCategoryMapper.toDto(list);
     }
 
     @Override

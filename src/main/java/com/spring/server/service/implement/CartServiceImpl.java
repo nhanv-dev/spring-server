@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 @Component
 public class CartServiceImpl implements CartService {
@@ -29,8 +27,20 @@ public class CartServiceImpl implements CartService {
     private ProductVariantRepo productVariantRepo;
 
     @Override
+    @Transactional
     public CartDto findOneByUserId(Long userId) {
         Cart cart = cartRepo.findOneByUser_Id(userId);
+        if (cart != null && cart.getItems() != null && !cart.getItems().isEmpty()) {
+            Set<CartItem> items = cart.getItems();
+            for (CartItem item : new ArrayList<>(items)) {
+                if (item.getProduct() != null && (item.getProduct().getIsDeleted() || !item.getProduct().getIsPublic()))
+                    items.remove(item);
+                else if (item.getVariant() != null && item.getVariant().isDeleted())
+                    items.remove(item);
+            }
+            cart.setItems(items);
+            cart = cartRepo.save(cart);
+        }
         return CartMapper.toDto(cart);
     }
 

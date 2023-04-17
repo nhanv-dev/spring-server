@@ -15,11 +15,11 @@ public class CartMapper {
         CartDto result = new CartDto();
         result.setId(cart.getId());
         result.setUserId(cart.getUser().getId());
-        result.setItems(CartItemMapper.toDtos(cart.getItems()));
+        result.setItems(CartItemMapper.toDto(cart.getItems()));
         return result;
     }
 
-    public static Set<CartDto> toDtos(Set<Cart> carts) {
+    public static Set<CartDto> toDto(Set<Cart> carts) {
         if (carts == null || carts.isEmpty()) return null;
         Set<CartDto> result = new TreeSet<>();
         for (Cart cart : carts) result.add(toDto(cart));
