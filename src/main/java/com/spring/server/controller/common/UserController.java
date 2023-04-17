@@ -1,24 +1,18 @@
 package com.spring.server.controller.common;
 
 import com.spring.server.model.dto.UserAddressDto;
-import com.spring.server.model.entity.User;
 import com.spring.server.model.dto.UserDto;
-import com.spring.server.model.entity.UserAddress;
+import com.spring.server.model.entity.User;
 import com.spring.server.model.mapper.UserMapper;
 import com.spring.server.payload.response.MessageResponse;
 import com.spring.server.service.UserService;
-import org.apache.catalina.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
 

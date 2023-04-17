@@ -12,11 +12,12 @@ public class ShopMapper {
 
     public static ShopDto toDto(Shop shop) {
         ShopDto result = ShopMinimalMapper.toDto(shop);
-
+        result.setShopSlogan(shop.getShopSlogan());
         result.setShopBackground(shop.getShopBackground());
         result.setResponseTime(shop.getResponseTime());
         result.setTimePrepareProduct(shop.getTimePrepareProduct());
         result.setCity(shop.getCity());
+        result.setAddressDetail(shop.getAddressDetail());
         result.setDistrict(shop.getDistrict());
         result.setWards(shop.getWards());
         result.setWarehouseRegionName(shop.getWarehouseRegionName());
@@ -37,6 +38,9 @@ public class ShopMapper {
 
         result.setId(shop.getId());
         result.setShopName(shop.getShopName());
+        result.setEmail(shop.getShopEmail());
+        result.setPhoneNumber(shop.getShopPhone());
+        result.setShopSlogan(shop.getShopSlogan());
         result.setSlug(shop.getSlug());
         result.setShopLogo(shop.getShopLogo());
         result.setShopBackground(shop.getShopBackground());
@@ -45,7 +49,7 @@ public class ShopMapper {
         result.setProductTotal(shop.getProductTotal());
         result.setOfficialShop(shop.isOfficial());
         result.setRatingInfo(RatingInfoMapper.toEntity(shop.getRatingInfo()));
-
+        result.setAddressDetail(shop.getAddressDetail());
         result.setCity(shop.getCity());
         result.setDistrict(shop.getDistrict());
         result.setWards(shop.getWards());

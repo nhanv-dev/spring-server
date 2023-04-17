@@ -17,7 +17,7 @@ public class SubCategoryMapper {
         return result;
     }
 
-    public static Set<SubCategoryDto> toDtos(Set<SubCategory> categories) {
+    public static Set<SubCategoryDto> toDto(Set<SubCategory> categories) {
         Set<SubCategoryDto> list = new TreeSet<>();
         for (SubCategory category : categories)
             list.add(SubCategoryMapper.toDto(category));
@@ -25,7 +25,7 @@ public class SubCategoryMapper {
         return list;
     }
 
-    public static List<SubCategoryDto> toDtos(List<SubCategory> categories) {
+    public static List<SubCategoryDto> toDto(List<SubCategory> categories) {
         List<SubCategoryDto> list = new ArrayList<>();
         for (SubCategory category : categories)
             list.add(SubCategoryMapper.toDto(category));

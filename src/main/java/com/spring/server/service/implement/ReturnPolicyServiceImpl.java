@@ -25,6 +25,6 @@ public class ReturnPolicyServiceImpl implements ReturnPolicyService {
     @Override
     public List<ReturnPolicyDto> findAll() {
         List<ReturnPolicy> list = returnPolicyRepo.findAll();
-        return new ArrayList<>(ReturnPolicyMapper.toDtos(list));
+        return new ArrayList<>(ReturnPolicyMapper.toDto(list));
     }
 }

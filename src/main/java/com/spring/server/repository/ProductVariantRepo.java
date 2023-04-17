@@ -8,5 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ProductVariantRepo extends JpaRepository<ProductVariant, Long> {
     @Query()
+    ProductVariant findOneById(Long id);
+
+    @Query()
     ProductVariant findOneByIdAndProduct_Id(Long id, Long productId);
 }

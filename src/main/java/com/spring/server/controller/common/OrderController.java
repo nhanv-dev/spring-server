@@ -23,14 +23,14 @@ import java.util.Objects;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/users/{userId}")
+@RequestMapping("/api")
 public class OrderController {
     @Autowired
-    private OrderService orderService;
+    OrderService orderService;
     @Autowired
-    private UserService userService;
+    UserService userService;
 
-    @GetMapping("/orders")
+    @GetMapping("/users/{userId}/orders")
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> getOrdersByUserId(Authentication authentication, @PathVariable Long userId) {
         User user = userService.findOneByEmail(authentication.getName());
@@ -40,7 +40,7 @@ public class OrderController {
         return ResponseEntity.ok(orderDtos);
     }
 
-    @PostMapping("/orders/place-order")
+    @PostMapping("/users/{userId}/orders/place-order")
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> placeOrder(Authentication authentication, @PathVariable Long userId, @RequestBody Set<OrderDto> orders) {
         User user = userService.findOneByEmail(authentication.getName());
@@ -55,5 +55,21 @@ public class OrderController {
         return ResponseEntity.ok(orderDtos);
     }
 
+    @PutMapping("/users/{userId}/orders/{orderId}/cancel-order")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<?> cancelOrder(Authentication authentication, @PathVariable Long userId, @PathVariable Long orderId) {
+        User user = userService.findOneByEmail(authentication.getName());
+        if (user == null || !Objects.equals(user.getId(), userId))
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Don't have permission to access");
+        OrderStatusDto status = orderService.findStatusByType(EOrderStatus.CANCELLED);
+        return ResponseEntity.ok(status);
+    }
+
+
+    @GetMapping("/order-status")
+    public ResponseEntity<?> getOrderStatus() {
+        Set<OrderStatusDto> status = orderService.findAllStatus();
+        return ResponseEntity.ok(status);
+    }
 }
 

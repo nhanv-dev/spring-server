@@ -18,11 +18,13 @@ public class ProductVariantDto implements Comparable<ProductVariantDto> {
     private String attributeHash;
     private DealDto deal;
     private int quantity;
-    private boolean isDeleted;
+    private Boolean isDeleted;
     private Set<ProductAttributeOptionDto> options;
 
     @Override
     public int compareTo(ProductVariantDto productVariant) {
+        if (options == null || options.isEmpty() || productVariant.getOptions() == null || productVariant.getOptions().isEmpty())
+            return id.compareTo(productVariant.getId());
         String str1 = "", str2 = "";
         for (ProductAttributeOptionDto o1 : options)
             str1 += o1.getName();

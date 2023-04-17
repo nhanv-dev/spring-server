@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -33,7 +34,11 @@ public class Order extends BaseEntity implements Serializable {
     @JoinColumn(name = "status_id", nullable = false)
     private OrderStatus orderStatus;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OrderItem> items;
+    private Set<OrderItem> items = new HashSet<>();
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<OrderStatusHistory> orderStatusHistories = new HashSet<>();
 
-
+    public void addHistory(OrderStatusHistory history) {
+        orderStatusHistories.add(history);
+    }
 }

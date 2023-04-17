@@ -22,7 +22,7 @@ public class CartItemMapper {
         return result;
     }
 
-    public static Set<CartItemDto> toDtos(Set<CartItem> cartItems) {
+    public static Set<CartItemDto> toDto(Set<CartItem> cartItems) {
         if (cartItems == null || cartItems.isEmpty()) return null;
         Set<CartItemDto> result = new TreeSet<>();
         for (CartItem item : cartItems) {

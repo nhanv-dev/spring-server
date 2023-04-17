@@ -11,6 +11,8 @@ public class ProductMinimalMapper {
         result.setId(product.getId());
         result.setName(product.getName());
         result.setSlug(product.getSlug());
+        result.setOrderCount(product.getOrderCount());
+        result.setQuantity(product.getQuantity());
         result.setKeywords(product.getKeywords());
         result.setIsPublic(product.getIsPublic());
         result.setIsDeleted(product.getIsDeleted());

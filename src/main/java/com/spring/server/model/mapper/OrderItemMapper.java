@@ -24,7 +24,7 @@ public class OrderItemMapper {
         return result;
     }
 
-    public static Set<OrderItemDto> toDtos(Set<OrderItem> orderItems) {
+    public static Set<OrderItemDto> toDto(Set<OrderItem> orderItems) {
         Set<OrderItemDto> result = new TreeSet<>();
         for (OrderItem item : orderItems) {
             result.add(toDto(item));

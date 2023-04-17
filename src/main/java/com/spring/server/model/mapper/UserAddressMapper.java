@@ -31,14 +31,14 @@ public class UserAddressMapper {
         return result;
     }
 
-    public static Set<UserAddressDto> toDtos(List<UserAddress> userAddresses) {
+    public static Set<UserAddressDto> toDto(List<UserAddress> userAddresses) {
         if (userAddresses == null || userAddresses.isEmpty()) return new TreeSet<>();
         Set<UserAddressDto> result = new TreeSet<>();
         for (UserAddress userAddress : userAddresses) result.add(toDto(userAddress));
         return result;
     }
 
-    public static Set<UserAddressDto> toDtos(Set<UserAddress> userAddresses) {
+    public static Set<UserAddressDto> toDto(Set<UserAddress> userAddresses) {
         if (userAddresses == null || userAddresses.isEmpty()) return new TreeSet<>();
         Set<UserAddressDto> result = new TreeSet<>();
         for (UserAddress userAddress : userAddresses) result.add(toDto(userAddress));

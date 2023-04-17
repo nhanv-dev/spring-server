@@ -5,17 +5,26 @@ import com.spring.server.model.dto.ProductDto;
 import com.spring.server.model.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 
 public interface ProductService {
     ProductDto findOneById(Long id);
 
+    ProductDto findOneById(Long id, Boolean isPublic, Boolean isDeleted);
+
     ProductDto findOneBySlug(String slug);
 
-    Page<ProductDto> findByOrderByCreatedAt(Pageable pageable);
+    Page<ProductDto> findByOrderByCreatedAt(int page, int size);
 
-    Page<ProductDto> findByCategorySlug(Pageable pageable, String categorySlug);
+    Page<ProductDto> findByCategorySlug(int page, int size, String categorySlug);
 
-    Page<ProductDto> findByShopId(Pageable pageable, Long shopId);
+    Page<ProductDto> findByShopId(int page, int size, Long shopId, Boolean isPublic, Boolean isDeleted);
 
+    ProductDto save(ProductDto productDto);
+
+    @Transactional
+    ProductDto update(ProductDto productDto);
+
+    void delete(Long id);
 }
