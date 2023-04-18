@@ -1,5 +1,6 @@
 package com.spring.server.repository;
 
+import com.spring.server.model.dto.ProductDto;
 import com.spring.server.model.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.Set;
+import java.util.List;
 
 public interface ProductRepo extends JpaRepository<Product, Long> {
     @Query()
@@ -42,4 +43,12 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
     @Modifying
     @Query(value = "UPDATE Product p set p.isDeleted = true WHERE p.id = :id")
     void deleteById(Long id);
+
+//    @Query(value = "SELECT p FROM Product p WHERE p.name LIKE CONCAT('%',:name, '%')")
+    @Query("SELECT p FROM Product p WHERE " +
+            "p.name LIKE CONCAT('%', :name, '%')" +
+            "Or p.keywords LIKE CONCAT('%', :name, '%')")
+    Page<Product> searchProductByName(Pageable pageable, String name);
+
+
 }
