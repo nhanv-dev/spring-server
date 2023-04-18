@@ -15,6 +15,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class ProductServiceImpl implements ProductService {
 
@@ -77,5 +80,10 @@ public class ProductServiceImpl implements ProductService {
         productRepo.deleteById(id);
     }
 
-
+    @Override
+    public Page<ProductDto> searchProducts(Pageable pageable, String name) {
+        Page<Product> products = productRepo.searchProductByName(pageable, name);
+        if(products==null) return null;
+        return ProductMapper.toDtos(products);
+    }
 }

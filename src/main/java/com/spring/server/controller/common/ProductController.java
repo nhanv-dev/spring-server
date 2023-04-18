@@ -1,8 +1,6 @@
 package com.spring.server.controller.common;
 
 import com.spring.server.model.dto.ProductDto;
-import com.spring.server.model.dto.ShopDto;
-import com.spring.server.model.entity.User;
 import com.spring.server.service.ProductService;
 import com.spring.server.service.ReturnPolicyService;
 import com.spring.server.service.ShopService;
@@ -12,8 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 

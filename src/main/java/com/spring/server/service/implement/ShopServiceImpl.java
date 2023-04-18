@@ -2,6 +2,7 @@ package com.spring.server.service.implement;
 
 import com.spring.server.model.dto.ShopDto;
 import com.spring.server.model.entity.*;
+import com.spring.server.model.mapper.ProductMapper;
 import com.spring.server.model.mapper.ShopMapper;
 import com.spring.server.repository.RatingInfoRepo;
 import com.spring.server.repository.RoleRepo;
@@ -10,6 +11,8 @@ import com.spring.server.repository.UserRepo;
 import com.spring.server.service.ShopService;
 import com.spring.server.util.SlugGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -62,6 +65,13 @@ public class ShopServiceImpl implements ShopService {
     public Shop updateShop(Shop currentShop) {
         Shop shop = shopRepo.save(currentShop);
         return shop;
+    }
+
+    @Override
+    public ShopDto searchShop(String name) {
+        Shop shops = shopRepo.searchShopByName(name);
+        if(shops==null) return null;
+        return ShopMapper.toDto(shops);
     }
 
 
