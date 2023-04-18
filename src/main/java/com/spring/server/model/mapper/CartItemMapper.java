@@ -3,6 +3,7 @@ package com.spring.server.model.mapper;
 import com.spring.server.model.dto.CartItemDto;
 import com.spring.server.model.dto.ProductVariantDto;
 import com.spring.server.model.entity.CartItem;
+import com.spring.server.model.entity.ProductVariant;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -15,12 +16,13 @@ public class CartItemMapper {
         CartItemDto result = new CartItemDto();
         result.setId(cartItem.getId());
         result.setQuantity(cartItem.getQuantity());
-        result.setProduct(ProductMinimalMapper.toDto(cartItem.getProduct()));
+        result.setCreatedAt(cartItem.getCreatedAt());
+        result.setProduct(ProductMapper.toDto(cartItem.getProduct()));
         result.setVariant(ProductVariantMapper.toDto(cartItem.getVariant()));
         return result;
     }
 
-    public static Set<CartItemDto> toDtos(Set<CartItem> cartItems) {
+    public static Set<CartItemDto> toDto(Set<CartItem> cartItems) {
         if (cartItems == null || cartItems.isEmpty()) return null;
         Set<CartItemDto> result = new TreeSet<>();
         for (CartItem item : cartItems) {
@@ -34,6 +36,7 @@ public class CartItemMapper {
         result.setId(cartItem.getId());
         result.setQuantity(cartItem.getQuantity());
         result.setProduct(ProductMapper.toEntity(cartItem.getProduct()));
+        result.setVariant(ProductVariantMapper.toEntity(cartItem.getVariant(), result.getProduct()));
         return result;
     }
 

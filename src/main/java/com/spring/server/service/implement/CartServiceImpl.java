@@ -11,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class CartServiceImpl implements CartService {
@@ -28,9 +27,21 @@ public class CartServiceImpl implements CartService {
     private ProductVariantRepo productVariantRepo;
 
     @Override
-    public Set<CartDto> findAllByUserId(Long userId) {
-        Set<Cart> carts = cartRepo.findAllByUser_Id(userId);
-        return CartMapper.toDtos(carts);
+    @Transactional
+    public CartDto findOneByUserId(Long userId) {
+        Cart cart = cartRepo.findOneByUser_Id(userId);
+        if (cart != null && cart.getItems() != null && !cart.getItems().isEmpty()) {
+            Set<CartItem> items = cart.getItems();
+            for (CartItem item : new ArrayList<>(items)) {
+                if (item.getProduct() != null && (item.getProduct().getIsDeleted() || !item.getProduct().getIsPublic()))
+                    items.remove(item);
+                else if (item.getVariant() != null && item.getVariant().isDeleted())
+                    items.remove(item);
+            }
+            cart.setItems(items);
+            cart = cartRepo.save(cart);
+        }
+        return CartMapper.toDto(cart);
     }
 
     @Override
@@ -51,22 +62,24 @@ public class CartServiceImpl implements CartService {
     @Transactional
     public CartItemDto saveCartItem(User user, CartItemDto cartItemDto) {
         CartItem cartItem = new CartItem();
-        Product product = productRepo.findOneById(cartItemDto.getProductId());
+        Product product = productRepo.findOneByIdAndIsPublicAndIsDeleted(cartItemDto.getProductId(), true, false);
         ProductVariant productVariant = productVariantRepo.findOneByIdAndProduct_Id(cartItemDto.getVariantId(), cartItemDto.getProductId());
-        Shop shop = shopRepo.findOneById(cartItemDto.getShopId());
-        Cart cart = cartRepo.findOneByUser_IdAndShop_Id(user.getId(), shop.getId());
-        if (cart == null) cart = cartRepo.save(new Cart(user, shop, new HashSet<>()));
+        Cart cart = cartRepo.findOneByUser_Id(user.getId());
+        if (cart == null) cart = cartRepo.save(new Cart(user, new HashSet<>()));
         cartItem.setQuantity(cartItemDto.getQuantity());
         cartItem.setProduct(product);
         cartItem.setVariant(productVariant);
         cartItem.setCart(cart);
-        if(cart.containItem(cartItem)) {
-            cartItem = cart.updateItem(cartItem);
-        }else {
-            cartItem=cartItemRepo.save(cartItem);
-        }
+        if (cart.containItem(cartItem)) cartItem = cart.updateItem(cartItem);
+        else cartItem = cartItemRepo.save(cartItem);
         cartRepo.save(cart);
         return CartItemMapper.toDto(cartItem);
+    }
+
+    @Override
+    @Transactional
+    public void updateCartItem(CartItemDto cartItemDto) {
+        cartItemRepo.updateQuantity(cartItemDto.getId(), cartItemDto.getQuantity());
     }
 
     @Override

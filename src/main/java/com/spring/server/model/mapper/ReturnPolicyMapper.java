@@ -20,7 +20,7 @@ public class ReturnPolicyMapper {
         return result;
     }
 
-    public static Set<ReturnPolicyDto> toDtos(Set<ReturnPolicy> returnPolicies) {
+    public static Set<ReturnPolicyDto> toDto(Set<ReturnPolicy> returnPolicies) {
         if (returnPolicies == null) return null;
         Set<ReturnPolicyDto> result = new TreeSet<>();
         for (ReturnPolicy returnPolicy : returnPolicies) {
@@ -29,7 +29,7 @@ public class ReturnPolicyMapper {
         return result;
     }
 
-    public static Set<ReturnPolicyDto> toDtos(List<ReturnPolicy> returnPolicies) {
+    public static Set<ReturnPolicyDto> toDto(List<ReturnPolicy> returnPolicies) {
         Set<ReturnPolicyDto> result = new TreeSet<>();
         for (ReturnPolicy returnPolicy : returnPolicies) {
             result.add(ReturnPolicyMapper.toDto(returnPolicy));

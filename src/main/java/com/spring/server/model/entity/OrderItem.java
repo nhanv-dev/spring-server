@@ -15,19 +15,21 @@ import java.io.Serializable;
 @Entity
 @Table(name = "order_item")
 public class OrderItem extends BaseEntity implements Serializable {
-    @Column(columnDefinition = "double not null")
+    @Column(nullable = false)
     private double discountPercent;
-    @Column(columnDefinition = "double not null")
+    @Column(nullable = false)
     private double price;
-    @Column(columnDefinition = "double not null")
+    @Column(nullable = false)
     private double finalPrice;
-    @Column(columnDefinition = "bigint not null")
+    @Column(columnDefinition = "bigint not null", nullable = false)
     private int quantity;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isEvaluated = false;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
     private Product product;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "variant_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "variant_id", referencedColumnName = "id")
     private ProductVariant variant;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")

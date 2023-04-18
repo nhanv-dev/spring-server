@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+import org.springframework.data.jpa.repository.Temporal;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,25 +19,26 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "product")
+@SQLDelete(sql = "UPDATE product p  SET p.is_deleted = true WHERE p.id=?")
 public class Product extends BaseEntity implements Serializable {
-    @Column(columnDefinition = "varchar(255)")
+    @Column
     private String name;
-    @Column(columnDefinition = "varchar(255) unique")
+    @Column(unique = true)
     private String slug;
-    @Column(columnDefinition = "varchar(255)")
+    @Column
     private String keywords;
     @Column(columnDefinition = "text")
     private String description;
     @Column(columnDefinition = "text")
     private String shortDescription;
-    @Column(columnDefinition = "bigint not null")
+    @Column(nullable = false)
     private Integer quantity;
-    @Column(columnDefinition = "bigint")
+    @Column
     private Integer orderCount;
-    @Column(columnDefinition = "boolean default true")
-    private Boolean isPublic;
-    @Column(columnDefinition = "boolean default false")
-    private Boolean isDeleted;
+    @Column
+    private Boolean isPublic = true;
+    @Column
+    private Boolean isDeleted = false;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "rating_id", referencedColumnName = "id", unique = true)
     private RatingInfo ratingInfo;
@@ -53,8 +57,10 @@ public class Product extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductImage> images = new HashSet<>();
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Where(clause = "is_deleted=false")
     private Set<ProductAttribute> attributes = new HashSet<>();
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Where(clause = "is_deleted=false")
     private Set<ProductVariant> variants = new HashSet<>();
     @ManyToMany
     @JoinTable(name = "product_return_policy", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "policy_id"))

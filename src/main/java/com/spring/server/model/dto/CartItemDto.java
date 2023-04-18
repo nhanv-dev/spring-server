@@ -3,6 +3,8 @@ package com.spring.server.model.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @ToString
@@ -14,9 +16,9 @@ public class CartItemDto implements Comparable<CartItemDto> {
     private ProductDto product;
     private ProductVariantDto variant;
     private Integer quantity;
-
+    private Date createdAt;
     @Override
     public int compareTo(CartItemDto o) {
-        return id.compareTo(o.getId());
+        return createdAt.compareTo(o.getCreatedAt());
     }
 }

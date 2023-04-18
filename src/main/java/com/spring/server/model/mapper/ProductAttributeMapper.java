@@ -14,11 +14,11 @@ public class ProductAttributeMapper {
         ProductAttributeDto result = new ProductAttributeDto();
         result.setId(attribute.getId());
         result.setName(attribute.getName());
-        result.setOptions(new TreeSet<>(ProductAttributeOptionMapper.toDtos(attribute.getOptions())));
+        result.setOptions(new TreeSet<>(ProductAttributeOptionMapper.toDto(attribute.getOptions())));
         return result;
     }
 
-    public static Set<ProductAttributeDto> toDtos(Set<ProductAttribute> attributes) {
+    public static Set<ProductAttributeDto> toDto(Set<ProductAttribute> attributes) {
         if (attributes == null) return null;
         Set<ProductAttributeDto> list = new HashSet<>();
         for (ProductAttribute attribute : attributes) {

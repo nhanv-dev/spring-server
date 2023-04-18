@@ -29,6 +29,8 @@ public class User extends BaseEntity implements Serializable {
     private String phoneNumber;
     @OneToOne(mappedBy = "user")
     private Shop shop;
+    @OneToOne(mappedBy = "user")
+    private SalesRegister salesRegister;
     @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<Cart> carts = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)

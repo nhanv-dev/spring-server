@@ -11,22 +11,26 @@ import org.springframework.stereotype.Component;
 import javax.swing.text.html.Option;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Component
 public class ProductAttributeOptionMapper {
     public static ProductAttributeOptionDto toDto(ProductAttributeOption option) {
+        if (option == null) return null;
         ProductAttributeOptionDto result = new ProductAttributeOptionDto();
         result.setId(option.getId());
         result.setName(option.getName());
         result.setValue(option.getValue());
         result.setImage(option.getImage());
         result.setDeleted(option.isDeleted());
-        result.setAttributeId(option.getAttribute().getId());
+        if (option.getAttribute() != null)
+            result.setAttributeId(option.getAttribute().getId());
         return result;
     }
 
-    public static Set<ProductAttributeOptionDto> toDtos(Set<ProductAttributeOption> options) {
-        Set<ProductAttributeOptionDto> list = new HashSet<>();
+    public static Set<ProductAttributeOptionDto> toDto(Set<ProductAttributeOption> options) {
+        if (options == null || options.isEmpty()) return new TreeSet<>();
+        Set<ProductAttributeOptionDto> list = new TreeSet<>();
         for (ProductAttributeOption option : options) {
             list.add(ProductAttributeOptionMapper.toDto(option));
         }
@@ -45,16 +49,14 @@ public class ProductAttributeOptionMapper {
     }
 
 
-    public static ProductAttributeOption toEntity(ProductAttributeOptionDto option, ProductVariant variant, Product product) {
-        for (ProductAttribute attribute : product.getAttributes()) {
-            for (ProductAttributeOption opt : attribute.getOptions()) {
-                if (!opt.getName().equals(option.getName())) continue;
-                if (!opt.getValue().equals(option.getValue())) continue;
-                ProductAttributeOption result = toEntity(option, attribute);
-
-            }
-        }
-        return null;
+    public static ProductAttributeOption toEntity(ProductAttributeOptionDto option) {
+        ProductAttributeOption result = new ProductAttributeOption();
+        result.setId(option.getId());
+        result.setName(option.getName());
+        result.setValue(option.getValue());
+        result.setImage(option.getImage());
+        result.setDeleted(option.isDeleted());
+        return result;
     }
 
     public static Set<ProductAttributeOption> toEntities(Set<ProductAttributeOptionDto> options, ProductAttribute attribute) {
@@ -65,10 +67,10 @@ public class ProductAttributeOptionMapper {
         return result;
     }
 
-    public static Set<ProductAttributeOption> toEntities(Set<ProductAttributeOptionDto> options, ProductVariant variant, Product product) {
+    public static Set<ProductAttributeOption> toEntities(Set<ProductAttributeOptionDto> options) {
         Set<ProductAttributeOption> result = new HashSet<>();
         for (ProductAttributeOptionDto option : options) {
-            result.add(ProductAttributeOptionMapper.toEntity(option, variant, product));
+            result.add(ProductAttributeOptionMapper.toEntity(option));
         }
         return result;
     }

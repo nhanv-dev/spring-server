@@ -12,6 +12,7 @@ import java.util.Set;
 @Component
 public class DealMapper {
     public static DealDto toDto(Deal deal) {
+        if (deal == null) return null;
         DealDto result = new DealDto();
         result.setPrice(deal.getPrice());
         result.setFinalPrice(deal.getFinalPrice());
@@ -20,7 +21,7 @@ public class DealMapper {
         return result;
     }
 
-    public static Set<DealDto> toDtos(Set<Deal> deals) {
+    public static Set<DealDto> toDto(Set<Deal> deals) {
         Set<DealDto> result = new HashSet<>();
         if (deals == null || deals.isEmpty()) return result;
         for (Deal deal : deals) {
@@ -38,6 +39,7 @@ public class DealMapper {
     public static Deal toEntity(DealDto deal) {
         if (deal == null) return null;
         Deal result = new Deal();
+        result.setId(deal.getId());
         result.setPrice(deal.getPrice());
         result.setFinalPrice(deal.getFinalPrice());
         result.setDiscountPercent(deal.getDiscountPercent());

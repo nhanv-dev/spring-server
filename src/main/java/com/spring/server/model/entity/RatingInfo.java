@@ -22,12 +22,31 @@ public class RatingInfo extends BaseEntity implements Serializable {
     @OneToOne(mappedBy = "ratingInfo")
     private Shop shop;
 
-
     public RatingInfo() {
         this.star1 = 0;
         this.star2 = 0;
         this.star3 = 0;
         this.star4 = 0;
         this.star5 = 0;
+    }
+
+    public void setStar(Integer star) {
+        switch (star) {
+            case 1:
+                star1++;
+                break;
+            case 2:
+                star2++;
+                break;
+            case 3:
+                star3++;
+                break;
+            case 4:
+                star4++;
+                break;
+            case 5:
+                star5++;
+                break;
+        }
     }
 }

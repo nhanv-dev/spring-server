@@ -1,6 +1,6 @@
 package com.spring.server.repository;
 
-import com.spring.server.model.entity.ERole;
+import com.spring.server.model.constant.ERole;
 import com.spring.server.model.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 

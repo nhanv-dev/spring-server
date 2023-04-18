@@ -35,7 +35,5 @@ public class Shop extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "shop", cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<ShopReviews> reviews = new HashSet<>();
     @OneToMany(mappedBy = "shop", cascade = CascadeType.MERGE, orphanRemoval = true)
-    private Set<Cart> carts = new HashSet<>();
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<Order> orders = new HashSet<>();
 }

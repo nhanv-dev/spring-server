@@ -11,11 +11,14 @@ public class ProductMinimalMapper {
         result.setId(product.getId());
         result.setName(product.getName());
         result.setSlug(product.getSlug());
+        result.setOrderCount(product.getOrderCount());
+        result.setQuantity(product.getQuantity());
         result.setKeywords(product.getKeywords());
         result.setIsPublic(product.getIsPublic());
         result.setIsDeleted(product.getIsDeleted());
         result.setCreatedAt(product.getCreatedAt());
         result.setUpdatedAt(product.getUpdatedAt());
+        result.setShopId(product.getShop().getId());
         result.setDeal(DealMapper.toDto(product.getDeal()));
         result.setRatingInfo(RatingInfoMapper.toDto(product.getRatingInfo()));
         result.setImages(ProductImageMapper.toDto(product.getImages()));

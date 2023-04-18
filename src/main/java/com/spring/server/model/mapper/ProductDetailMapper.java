@@ -15,9 +15,9 @@ public class ProductDetailMapper {
 
         result.setDescription(product.getDescription());
         result.setShortDescription(product.getShortDescription());
-        result.setReturnPolicies(ReturnPolicyMapper.toDtos(product.getReturnPolicies()));
-        result.setAttributes(ProductAttributeMapper.toDtos(product.getAttributes()));
-        result.setVariants(ProductVariantMapper.toDtos(product.getVariants()));
+        result.setReturnPolicies(ReturnPolicyMapper.toDto(product.getReturnPolicies()));
+        result.setAttributes(ProductAttributeMapper.toDto(product.getAttributes()));
+        result.setVariants(ProductVariantMapper.toDto(product.getVariants()));
 
         return result;
     }

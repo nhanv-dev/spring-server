@@ -21,12 +21,13 @@ public class ProductDto {
     private String keywords;
     private Integer quantity;
     private Integer orderCount;
+    private Long shopId;
     private CategoryDto category;
     private SubCategoryDto subCategory;
     private DealDto deal;
     private ShopDto shop;
     private RatingInfoDto ratingInfo;
-    private Boolean isDeleted, isPublic;
+    private Boolean isDeleted = false, isPublic = true;
     private Date createdAt, updatedAt;
     private Set<ReturnPolicyDto> returnPolicies;
     private Set<ProductImageDto> images;

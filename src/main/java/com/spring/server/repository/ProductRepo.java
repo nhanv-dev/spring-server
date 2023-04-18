@@ -11,27 +11,37 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ProductRepo extends JpaRepository<Product, Long> {
-
     @Query()
     Product findOneById(Long id);
 
     @Query()
-    Product findOneBySlug(String slug);
+    Product findOneByIdAndIsDeleted(Long id, Boolean isDeleted);
 
     @Query()
-    Page<Product> findAllByOrderByCreatedAtDesc(Pageable pageable);
+    Product findOneByIdAndIsPublicAndIsDeleted(Long id, Boolean isPublic, Boolean isDeleted);
+
 
     @Query()
-    Page<Product> findAllByCategory_SlugOrSubCategory_Slug(Pageable pageable, String categorySlug, String subCategorySlug);
+    Product findOneBySlugAndIsPublicAndIsDeleted(String slug, Boolean isPublic, Boolean isDeleted);
 
     @Query()
-    Page<Product> findAllByShop_Id(Pageable pageable, Long shopId);
+    Page<Product> findAllByIsPublicAndIsDeleted(Pageable pageable, Boolean isPublic, Boolean isDeleted);
+
+    @Query("select p from Product p where (p.category.slug = :categorySlug or p.subCategory.slug = :subCategorySlug) and p.isPublic = :isPublic and p.isDeleted = :isDeleted")
+    Page<Product> findAllByCategoryAndIsDeleted(Pageable pageable, boolean isPublic, String categorySlug, String subCategorySlug, Boolean isDeleted);
 
     @Query()
-    Page<Product> findAllByOrderByCreatedAtAsc(Pageable pageable);
+    Page<Product> findAllByShop_IdAndIsDeleted(Pageable pageable, Long shopId, Boolean isDeleted);
+
+    @Query()
+    Page<Product> findAllByShop_IdAndIsPublicAndIsDeleted(Pageable pageable, Long shopId, Boolean isPublic, Boolean isDeleted);
 
     @Modifying
-    @Query(value = "DELETE FROM Product p WHERE p.id =:id")
+    @Query(value = "UPDATE Product p set p.orderCount = p.orderCount  + :count WHERE p.id = :id")
+    void increaseOrderCount(Long id, Integer count);
+
+    @Modifying
+    @Query(value = "UPDATE Product p set p.isDeleted = true WHERE p.id = :id")
     void deleteById(Long id);
 
 //    @Query(value = "SELECT p FROM Product p WHERE p.name LIKE CONCAT('%',:name, '%')")

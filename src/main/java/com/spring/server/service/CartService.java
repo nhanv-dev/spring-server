@@ -9,13 +9,15 @@ import java.util.Set;
 
 
 public interface CartService {
-    Set<CartDto> findAllByUserId(Long userId);
+    CartDto findOneByUserId(Long userId);
 
     CartDto findByUserIdAndShopId(Long userId, Long shopId);
 
     CartDto save(CartDto cartDto);
 
     CartItemDto saveCartItem(User user, CartItemDto cartItemDto);
+
+    void updateCartItem(CartItemDto cartItemDto);
 
     void removeCartItem(Long id);
 }
