@@ -17,5 +17,9 @@ public interface ShopService {
 
     ShopDto save(Shop shop);
 
+
+    ShopDto searchShop(String name);
+
     ShopDto update(ShopDto shopDto);
+
 }

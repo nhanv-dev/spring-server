@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,6 +74,13 @@ public class ShopServiceImpl implements ShopService {
         shopRepo.save(shop);
         shop = shopRepo.findOneById(shop.getId());
         return ShopMapper.toDto(shop);
+    }
+
+    @Override
+    public ShopDto searchShop(String name) {
+        Shop shops = shopRepo.searchShopByName(name);
+        if(shops==null) return null;
+        return ShopMapper.toDto(shops);
     }
 
 
