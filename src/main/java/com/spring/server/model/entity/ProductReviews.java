@@ -15,15 +15,15 @@ import java.io.Serializable;
 @Entity
 @Table(name = "product_reviews")
 public class ProductReviews extends BaseEntity implements Serializable {
-    @Column(columnDefinition = "varchar(255)")
+    @Column
     private String content;
-    @Column(columnDefinition = "tinyint(5) not null")
+    @Column(columnDefinition = "tinyint(5)", nullable = false)
     private int rating;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "variant_id", nullable = true)
+    @JoinColumn(name = "variant_id")
     private ProductVariant variant;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id", nullable = false)

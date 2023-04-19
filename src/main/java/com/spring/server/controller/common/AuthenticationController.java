@@ -55,6 +55,36 @@ public class AuthenticationController {
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), userDetails.getName(), roles));
     }
 
+    @PostMapping("/sign-up")
+    public ResponseEntity<?> register(@Valid @RequestBody SignUpRequest signUpRequest) {
+        if (userService.existsByEmail(signUpRequest.getEmail())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+        }
+        User user = new User(signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()), signUpRequest.getName(), signUpRequest.getPhoneNumber());
+        Set<Role> roles = new HashSet<>();
+        Role userRole = roleService.findOneByType(ERole.ROLE_USER);
+        if (userRole == null) throw new RuntimeException("Error: Role is not found.");
+        roles.add(userRole);
+        user.setRoles(roles);
+        userService.save(user);
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    @PostMapping("/create-admin")
+    public ResponseEntity<?> createAdmin(@Valid @RequestBody SignUpRequest signUpRequest) {
+        if (userService.existsByEmail(signUpRequest.getEmail())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+        }
+        User user = new User(signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()), signUpRequest.getName(), signUpRequest.getPhoneNumber());
+        Set<Role> roles = new HashSet<>();
+        Role userRole = roleService.findOneByType(ERole.ROLE_ADMIN);
+        if (userRole == null) throw new RuntimeException("Error: Role is not found.");
+        roles.add(userRole);
+        user.setRoles(roles);
+        userService.save(user);
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
     @GetMapping("/token-valid")
     public ResponseEntity<?> validateToken(Authentication authentication) {
         if (authentication == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -62,52 +92,7 @@ public class AuthenticationController {
         String jwt = jwtUtils.generateJwtToken(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
-        return ResponseEntity.ok(
-                new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), userDetails.getName(), roles)
-        );
-    }
-
-    @PostMapping("/sign-up")
-    public ResponseEntity<?> register(@Valid @RequestBody SignUpRequest signUpRequest) {
-        System.out.println(signUpRequest.getName());
-        if (userService.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
-        }
-        User user = new User(signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()),
-                signUpRequest.getName(),
-                signUpRequest.getPhoneNumber());
-
-        Set<String> strRoles = signUpRequest.getRole();
-        Set<Role> roles = new HashSet<>();
-        if (strRoles == null) {
-            Role userRole = roleService.findOneByType(ERole.ROLE_USER);
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        Role adminRole = roleService.findOneByType(ERole.ROLE_ADMIN);
-                        if (adminRole == null) throw new RuntimeException("Error: Role is not found.");
-                        roles.add(adminRole);
-
-                        break;
-                    case "shop":
-                        Role shopRole = roleService.findOneByType(ERole.ROLE_SHOP);
-                        if (shopRole == null) throw new RuntimeException("Error: Role is not found.");
-                        roles.add(shopRole);
-
-                        break;
-                    default:
-                        Role userRole = roleService.findOneByType(ERole.ROLE_USER);
-                        if (userRole == null) throw new RuntimeException("Error: Role is not found.");
-                        roles.add(userRole);
-                }
-            });
-        }
-        user.setRoles(roles);
-        userService.save(user);
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), userDetails.getName(), roles));
     }
 }
 

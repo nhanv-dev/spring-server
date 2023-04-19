@@ -23,19 +23,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable(value = "id") Long id) {
-        UserDto user = userService.findOneById(id);
-        return ResponseEntity.ok(user);
-    }
-
-
-    @GetMapping("/email")
-    public ResponseEntity<?> getUserByEmail(@RequestParam String email) {
-        User user = userService.findOneByEmail(email);
-        return ResponseEntity.ok(UserMapper.toDto(user));
-    }
-
     @PutMapping("/user-profile/{id}")
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {

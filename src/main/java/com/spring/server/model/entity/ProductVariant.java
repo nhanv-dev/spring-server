@@ -20,7 +20,7 @@ import java.util.Set;
 @Table(name = "variant")
 @SQLDelete(sql = "UPDATE variant SET is_deleted = true WHERE id=?")
 public class ProductVariant extends BaseEntity implements Serializable {
-    @Column(columnDefinition = "varchar(255) not null")
+    @Column(nullable = false)
     private String attributeHash;
     @Column(columnDefinition = "bigint default 0")
     private Integer quantity;
