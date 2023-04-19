@@ -24,7 +24,7 @@ public class OrderItem extends BaseEntity implements Serializable {
     @Column(columnDefinition = "bigint not null", nullable = false)
     private int quantity;
     @Column(columnDefinition = "boolean default false")
-    private Boolean isEvaluated = false;
+    private Boolean isEvaluated;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
     private Product product;
@@ -34,5 +34,11 @@ public class OrderItem extends BaseEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
+
+    @PrePersist
+    public void prePersist() {
+        if (isEvaluated == null)
+            isEvaluated = false;
+    }
 
 }

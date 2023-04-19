@@ -4,6 +4,7 @@ import com.spring.server.model.dto.ProductDto;
 import com.spring.server.model.dto.ProductReviewsDto;
 import com.spring.server.model.entity.Product;
 import com.spring.server.model.entity.ProductReviews;
+import com.spring.server.model.entity.ProductVariant;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ public class ProductReviewsMapper {
         result.setContent(productReviews.getContent());
         result.setRating(productReviews.getRating());
         result.setCreatedAt(productReviews.getCreatedAt());
+        result.setVariant(ProductVariantMapper.toDto(productReviews.getVariant()));
         return result;
     }
 

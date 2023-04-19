@@ -35,10 +35,10 @@ public class Product extends BaseEntity implements Serializable {
     private Integer quantity;
     @Column
     private Integer orderCount;
-    @Column
-    private Boolean isPublic = true;
-    @Column
-    private Boolean isDeleted = false;
+    @Column(columnDefinition = "boolean default true")
+    private Boolean isPublic;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isDeleted;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "rating_id", referencedColumnName = "id", unique = true)
     private RatingInfo ratingInfo;
@@ -65,4 +65,12 @@ public class Product extends BaseEntity implements Serializable {
     @ManyToMany
     @JoinTable(name = "product_return_policy", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "policy_id"))
     private Set<ReturnPolicy> returnPolicies = new HashSet<>();
+
+
+    @PrePersist
+    public void prePersist() {
+        if (isPublic == null) isPublic = true;
+        if (isDeleted == null) isDeleted = false;
+        if (orderCount == null) orderCount = 0;
+    }
 }

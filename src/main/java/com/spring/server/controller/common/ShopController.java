@@ -37,7 +37,15 @@ public class ShopController {
     @Autowired
     OrderService orderService;
 
+    @GetMapping("")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<?> getShop() {
+
+        return ResponseEntity.ok(null);
+    }
+
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') and hasRole('ROLE_SHOP')")
     public ResponseEntity<?> getShopByShopId(@PathVariable(value = "id") Long id) {
         return ResponseEntity.ok(shopService.findOneById(id));
     }
