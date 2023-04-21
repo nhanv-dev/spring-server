@@ -1,4 +1,4 @@
-package com.spring.server.controller.customer;
+package com.spring.server.controller;
 
 import com.spring.server.model.dto.CartDto;
 import com.spring.server.model.dto.CartItemDto;

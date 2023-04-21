@@ -22,6 +22,7 @@ public class ShopMinimalMapper {
         result.setWarehouseRegionName(shop.getWarehouseRegionName());
         result.setDeleted(shop.isDeleted());
         result.setRatingInfo(RatingInfoMapper.toDto(shop.getRatingInfo()));
+
         return result;
     }
 

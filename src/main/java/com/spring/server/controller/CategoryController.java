@@ -1,4 +1,4 @@
-package com.spring.server.controller.common;
+package com.spring.server.controller;
 
 import com.spring.server.model.dto.CategoryDto;
 import com.spring.server.model.dto.SubCategoryDto;

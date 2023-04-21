@@ -3,6 +3,8 @@ package com.spring.server.model.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @ToString
@@ -23,4 +25,5 @@ public class ShopDto {
     private Integer productTotal;
     private Integer orderCount;
     private RatingInfoDto ratingInfo;
+    private Date createdAt, updatedAt;
 }

@@ -21,10 +21,10 @@ public class SalesRegisterDto implements Comparable<SalesRegisterDto> {
     private String shopEmail;
     private String city, district, wards, addressDetail, warehouseRegionName;
     private UserDto user;
-    private Date createdDate, updatedDate;
+    private Date createdAt, updatedAt;
 
     @Override
     public int compareTo(SalesRegisterDto o) {
-        return createdDate.compareTo(o.getCreatedDate());
+        return createdAt.compareTo(o.getCreatedAt());
     }
 }
