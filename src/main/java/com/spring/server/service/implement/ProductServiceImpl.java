@@ -94,16 +94,6 @@ public class ProductServiceImpl implements ProductService {
         Product savedProduct = productRepo.findOneById(productDto.getId());
         if (savedProduct == null) return null;
         Product product = ProductDetailMapper.toEntity(productDto);
-//        savedProduct.setDeal(product.getDeal());
-//        savedProduct.setName(product.getName());
-//        savedProduct.getAttributes().clear();
-//        savedProduct.getVariants().clear();
-//        savedProduct.getImages().clear();
-//        savedProduct.getAttributes().addAll(product.getAttributes());
-//        savedProduct.getVariants().addAll(product.getVariants());
-//        savedProduct.getImages().addAll(product.getImages());
-//        savedProduct.setIsDeleted(product.getIsDeleted());
-//        savedProduct.setIsPublic(product.getIsPublic());
         product.setSlug(SlugGenerator.toSlug(product.getName() + "-" + product.getId()));
         product = productRepo.save(product);
         shopRepo.updateProductTotalById(savedProduct.getShop().getId());
@@ -122,8 +112,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<ProductDto> searchProducts(Pageable pageable, String name) {
         Page<Product> products = productRepo.searchProductByName(pageable, name);
-        if(products==null) return null;
-        return ProductMapper.toDtos(products);
+        if (products == null) return null;
+        return ProductMapper.toDto(products);
     }
 
 }

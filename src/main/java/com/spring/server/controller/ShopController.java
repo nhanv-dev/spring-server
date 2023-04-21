@@ -1,4 +1,4 @@
-package com.spring.server.controller.common;
+package com.spring.server.controller;
 
 
 import com.spring.server.model.dto.OrderDto;
@@ -39,13 +39,12 @@ public class ShopController {
 
     @GetMapping("")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<?> getShop() {
-
-        return ResponseEntity.ok(null);
+    public ResponseEntity<?> getShop(@RequestParam(required = false, defaultValue = "0") Integer page, @RequestParam(required = false, defaultValue = "10") Integer size) {
+        return ResponseEntity.ok(shopService.findAll(page, size));
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN') and hasRole('ROLE_SHOP')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SHOP')")
     public ResponseEntity<?> getShopByShopId(@PathVariable(value = "id") Long id) {
         return ResponseEntity.ok(shopService.findOneById(id));
     }
@@ -140,23 +139,5 @@ public class ShopController {
         return ResponseEntity.ok(orders);
     }
 
-    @GetMapping("/orders/{orderId}")
-    @PreAuthorize("hasRole('ROLE_SHOP')")
-    public ResponseEntity<?> getOrderById(@PathVariable Long orderId) {
-        OrderDto order = orderService.findOneById(orderId);
-        return ResponseEntity.ok(order);
-    }
-
-    @PutMapping("/orders/{orderId}")
-    @PreAuthorize("hasRole('ROLE_SHOP')")
-    public ResponseEntity<?> updateOrder(
-            @PathVariable Long orderId,
-            @Valid @RequestBody StatusOrderRequest request
-    ) {
-        if (!Objects.equals(orderId, request.getOrderId()))
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        OrderDto order = orderService.updateStatus(request.getOrderId(), request.getStatus());
-        return ResponseEntity.ok(order);
-    }
 }
 

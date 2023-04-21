@@ -1,18 +1,20 @@
 package com.spring.server.service.implement;
 
 import com.spring.server.model.constant.EOrderStatus;
+import com.spring.server.model.dto.CancelledOrderDto;
 import com.spring.server.model.dto.OrderDto;
 import com.spring.server.model.dto.OrderStatusDto;
-import com.spring.server.model.entity.Order;
-import com.spring.server.model.entity.OrderStatus;
-import com.spring.server.model.entity.OrderStatusHistory;
+import com.spring.server.model.entity.*;
+import com.spring.server.model.mapper.CancelledOrderMapper;
 import com.spring.server.model.mapper.OrderMapper;
 import com.spring.server.model.mapper.OrderStatusMapper;
 import com.spring.server.repository.*;
 import com.spring.server.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,8 @@ import java.util.Set;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepo orderRepo;
+    @Autowired
+    private CancelledOrderRepo cancelledOrderRepo;
     @Autowired
     private CartItemRepo cartItemRepo;
     @Autowired
@@ -43,8 +47,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Set<OrderDto> findAllByUserId(Long userId) {
-        List<Order> orders = orderRepo.findAllByUser_Id(userId);
+    public Page<OrderDto> findAllByUserId(int page, int size, Long userId) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
+        Page<Order> orders = orderRepo.findAllByUser_Id(pageable, userId);
+        return OrderMapper.toDto(orders);
+    }
+
+    @Override
+    public Page<OrderDto> findAllByUserIdAndStatusId(int page, int size, Long userId, Long statusId) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
+        Page<Order> orders = orderRepo.findAllByUser_IdAndOrderStatus_Id(pageable, userId, statusId);
         return OrderMapper.toDto(orders);
     }
 
@@ -88,6 +100,19 @@ public class OrderServiceImpl implements OrderService {
         return OrderMapper.toDto(savedOrders);
     }
 
+    @Override
+    @Transactional
+    public void cancelOrder(CancelledOrderDto cancelledOrderDto) {
+        CancelledOrder cancelledOrder = CancelledOrderMapper.toEntity(cancelledOrderDto);
+        Order order = orderRepo.findOneById(cancelledOrderDto.getOrderId());
+        OrderStatus status = orderStatusRepo.findOneByStatus(EOrderStatus.CANCELLED);
+        OrderStatusHistory history = new OrderStatusHistory(order, status);
+        order.addHistory(history);
+        order.setOrderStatus(status);
+        cancelledOrder.setOrder(order);
+        cancelledOrderRepo.save(cancelledOrder);
+    }
+
 
     @Override
     @Transactional
@@ -97,6 +122,16 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderStatus(orderStatus);
         OrderStatusHistory history = new OrderStatusHistory(order, orderStatus);
         order.addHistory(history);
+        if (status.equals(EOrderStatus.CONFIRMED)) {
+            order.getItems().forEach(item -> {
+                Product product = item.getProduct();
+                ProductVariant variant = item.getVariant();
+                if (variant != null) {
+                    variant.setQuantity(variant.getQuantity() - item.getQuantity());
+                }
+                product.setQuantity(product.getQuantity() - item.getQuantity());
+            });
+        }
         order = orderRepo.save(order);
         return OrderMapper.toDto(order);
     }

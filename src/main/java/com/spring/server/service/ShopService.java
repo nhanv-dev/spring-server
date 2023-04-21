@@ -15,8 +15,9 @@ public interface ShopService {
 
     ShopDto findOneBySlug(String slug);
 
-    ShopDto save(Shop shop);
+    Page<ShopDto> findAll(int page, int size);
 
+    ShopDto save(Shop shop);
 
     ShopDto searchShop(String name);
 

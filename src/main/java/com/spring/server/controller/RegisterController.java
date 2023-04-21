@@ -1,4 +1,4 @@
-package com.spring.server.controller.admin;
+package com.spring.server.controller;
 
 import com.spring.server.payload.response.MessageResponse;
 import com.spring.server.service.ShopService;

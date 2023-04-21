@@ -28,7 +28,8 @@ public class ProductAttributeOption extends BaseEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attribute_id", nullable = false)
     private ProductAttribute attribute;
-    @ManyToMany(mappedBy = "options")
-    private Set<ProductVariant> variants;
+
+//    @ManyToMany(mappedBy = "options")
+//    private Set<ProductVariant> productVariants;
 
 }

@@ -29,16 +29,16 @@ public class User extends BaseEntity implements Serializable {
     private String phoneNumber;
     @OneToOne(mappedBy = "user")
     private Shop shop;
-    @OneToOne(mappedBy = "user")
-    private SalesRegister salesRegister;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
-    private Set<Cart> carts = new HashSet<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
-    private Set<Order> orders = new HashSet<>();
+//    @OneToOne(mappedBy = "user")
+//    private SalesRegister salesRegister;
+    //    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
+//    private Set<Cart> carts = new HashSet<>();
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
+//    private Set<Order> orders = new HashSet<>();
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
+//    private Set<ProductReviews> reviews = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<UserAddress> addresses = new HashSet<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
-    private Set<ProductReviews> reviews = new HashSet<>();
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();

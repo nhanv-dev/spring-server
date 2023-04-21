@@ -1,10 +1,10 @@
-package com.spring.server.controller.common;
+package com.spring.server.controller;
 
 import com.spring.server.model.dto.ProductDto;
-import com.spring.server.service.ProductService;
-import com.spring.server.service.ReturnPolicyService;
-import com.spring.server.service.ShopService;
-import com.spring.server.service.UserService;
+import com.spring.server.model.dto.ProductReviewsDto;
+import com.spring.server.model.entity.User;
+import com.spring.server.repository.UserRepo;
+import com.spring.server.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

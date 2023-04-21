@@ -16,7 +16,6 @@ import java.util.function.Function;
 public class ProductMapper {
     public static ProductDto toDto(Product product) {
         ProductDto result = ProductMinimalMapper.toDto(product);
-
         result.setCategory(CategoryMapper.toDtoWithoutSub(product.getCategory()));
         result.setSubCategory(SubCategoryMapper.toDto(product.getSubCategory()));
         result.setShop(ShopMapper.toDto(product.getShop()));

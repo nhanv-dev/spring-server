@@ -1,4 +1,4 @@
-package com.spring.server.controller.common;
+package com.spring.server.controller;
 
 import com.spring.server.model.dto.ProductDto;
 import com.spring.server.model.dto.ShopDto;

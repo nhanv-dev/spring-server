@@ -1,4 +1,4 @@
-package com.spring.server.controller.common;
+package com.spring.server.controller;
 
 import com.spring.server.model.dto.SalesRegisterDto;
 import com.spring.server.model.dto.ShopDto;
@@ -32,7 +32,6 @@ public class SalesRegisterController {
     @GetMapping("")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> getAllSalesRegister(
-            Authentication authentication,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             @RequestParam(required = false, defaultValue = "30") Integer size
     ) {
@@ -41,7 +40,7 @@ public class SalesRegisterController {
     }
 
     @GetMapping("/users/{id}")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_SHOP','ROLE_ADMIN')")
     public ResponseEntity<?> getSalesRegister(Authentication authentication, @PathVariable Long id) {
         User user = userService.findOneByEmail(authentication.getName());
         if (user == null || !user.getId().equals(id))
@@ -60,7 +59,7 @@ public class SalesRegisterController {
     }
 
     @PostMapping("/{id}/confirm")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> confirmSalesRegister(@PathVariable Long id) {
         return ResponseEntity.ok(salesRegisterService.confirm(id));
     }
