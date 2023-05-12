@@ -1,38 +1,38 @@
 # ========================================== CATEGORY ==========================================
 insert into ecommerce.category (id, title, icon)
-values (1, 'Thời Trang Nữ', null),
-       (2, 'Thời Trang Nam', null),
-       (3, 'Nhà Cửa', null),
-       (4, 'Sức Khỏe & Làm Đẹp', null),
-       (5, 'Giày Dép', null),
-       (6, 'Túi Xách', null),
-       (7, 'Đồng Hồ', null),
-       (8, 'Phụ Kiện Thời Trang', null),
-       (9, 'Tân Trang Nhà Cửa', null),
-       (10, 'Đời sống', null),
-       (11, 'Dịch Vụ Tiện Ích', null),
-       (12, 'Phụ kiện công nghệ', null),
-       (13, 'Ô tô - Xe máy', null),
-       (14, 'Thiết bị y tế', null),
-       (15, 'Mẹ và bé', null),
-       (16, 'Thời Trang Trẻ Em', null),
-       (17, 'Bách Hóa Tổng Hợp', null),
-       (18, 'Thực Phẩm Tươi Sống', null),
-       (19, 'Đồ điện gia dụng', null),
-       (20, 'Điện thoại - Máy tính bảng', null),
-       (21, 'Tivi - Thiết bị giải trí', null),
-       (22, 'Máy ảnh - Máy quay phim', null),
-       (23, 'Thiết bị âm thanh', null),
-       (24, 'Thể thao - Dã ngoại - Giải trí', null),
-       (25, 'Sách & Văn phòng phẩm', null),
-       (26, 'Vật phẩm phong thủy', null),
-       (27, 'Chăm sóc thú cưng', null),
-       (28, 'Trang sức', null),
-       (29, 'Điện máy', null),
-       (30, 'Đồ chơi', null),
-       (31, 'Laptop, Máy tính & Thiết bị văn phòng', null),
-       (32, 'Vé máy bay - Du lịch', null),
-       (33, 'Voucher dịch vụ', null);
+values (1, 'Thời Trang Nữ', 'https://salt.tikicdn.com/cache/100x100/ts/category/55/5b/80/48cbaafe144c25d5065786ecace86d38.png.webp'),
+       (2, 'Thời Trang Nam', 'https://salt.tikicdn.com/cache/100x100/ts/category/00/5d/97/384ca1a678c4ee93a0886a204f47645d.png.webp'),
+       (3, 'Nhà Cửa', 'https://salt.tikicdn.com/cache/100x100/ts/category/61/d4/ea/e6ea3ffc1fcde3b6224d2bb691ea16a2.png.webp'),
+       (4, 'Sức Khỏe & Làm Đẹp', 'https://salt.tikicdn.com/cache/100x100/ts/category/73/0e/89/d7ca146de7198a6808580239e381a0c8.png.webp'),
+       (5, 'Giày Dép', 'https://salt.tikicdn.com/cache/100x100/ts/category/d6/7f/6c/5d53b60efb9448b6a1609c825c29fa40.png.webp'),
+       (6, 'Túi Xách', 'https://salt.tikicdn.com/cache/100x100/ts/category/31/a7/94/6524d2ecbec216816d91b6066452e3f2.png.webp'),
+       (7, 'Đồng Hồ', 'https://salt.tikicdn.com/cache/100x100/ts/category/8b/d4/a8/5924758b5c36f3b1c43b6843f52d6dd2.png.webp'),
+       (8, 'Phụ Kiện Thời Trang', 'https://salt.tikicdn.com/cache/100x100/ts/category/ca/53/64/49c6189a0e1c1bf7cb91b01ff6d3fe43.png.webp'),
+       (9, 'Tân Trang Nhà Cửa', 'https://salt.tikicdn.com/cache/100x100/ts/category/f6/22/46/7e2185d2cf1bca72d5aeac385a865b2b.png.webp'),
+       (10, 'Đời sống', 'https://salt.tikicdn.com/cache/100x100/ts/category/f6/22/46/7e2185d2cf1bca72d5aeac385a865b2b.png.webp'),
+       (11, 'Dịch Vụ Tiện Ích', 'https://salt.tikicdn.com/cache/100x100/ts/category/3c/e4/99/eeee1801c838468d94af9997ec2bbe42.png.webp'),
+       (12, 'Phụ kiện công nghệ', 'https://salt.tikicdn.com/cache/100x100/ts/category/75/34/29/d900f845e51e95a2c41b5b035468f959.png.webp'),
+       (13, 'Ô tô - Xe máy', 'https://salt.tikicdn.com/cache/100x100/ts/category/69/f5/36/c6cd9e2849854630ed74ff1678db8f19.png.webp'),
+       (14, 'Thiết bị y tế', 'https://salt.tikicdn.com/cache/100x100/ts/category/3c/e4/99/eeee1801c838468d94af9997ec2bbe42.png.webp'),
+       (15, 'Mẹ và bé', 'https://salt.tikicdn.com/cache/100x100/ts/category/13/64/43/226301adcc7660ffcf44a61bb6df99b7.png.webp'),
+       (16, 'Thời Trang Trẻ Em', 'https://salt.tikicdn.com/cache/100x100/ts/category/13/64/43/226301adcc7660ffcf44a61bb6df99b7.png.webp'),
+       (17, 'Bách Hóa Tổng Hợp', 'https://salt.tikicdn.com/cache/100x100/ts/category/40/0f/9b/62a58fd19f540c70fce804e2a9bb5b2d.png.webp'),
+       (18, 'Thực Phẩm Tươi Sống', 'https://salt.tikicdn.com/cache/100x100/ts/category/f6/22/46/7e2185d2cf1bca72d5aeac385a865b2b.png.webp'),
+       (19, 'Đồ điện gia dụng', 'https://salt.tikicdn.com/cache/100x100/ts/category/61/d4/ea/e6ea3ffc1fcde3b6224d2bb691ea16a2.png.webp'),
+       (20, 'Điện thoại - Máy tính bảng', 'https://salt.tikicdn.com/cache/100x100/ts/category/92/b5/c0/3ffdb7dbfafd5f8330783e1df20747f6.png.webp'),
+       (21, 'Tivi - Thiết bị giải trí', 'https://salt.tikicdn.com/cache/100x100/ts/category/92/b5/c0/3ffdb7dbfafd5f8330783e1df20747f6.png.webp'),
+       (22, 'Máy ảnh - Máy quay phim', 'https://salt.tikicdn.com/cache/100x100/ts/category/2d/7c/45/e4976f3fa4061ab310c11d2a1b759e5b.png.webp'),
+       (23, 'Thiết bị âm thanh', 'https://salt.tikicdn.com/cache/100x100/ts/category/75/34/29/d900f845e51e95a2c41b5b035468f959.png.webp'),
+       (24, 'Thể thao - Dã ngoại - Giải trí', 'https://salt.tikicdn.com/cache/100x100/ts/category/0b/5e/3d/00941c9eb338ea62a47d5b1e042843d8.png.webp'),
+       (25, 'Sách & Văn phòng phẩm', 'https://salt.tikicdn.com/cache/100x100/ts/category/ed/20/60/afa9b3b474bf7ad70f10dd6443211d5f.png.webp'),
+       (26, 'Vật phẩm phong thủy', 'https://salt.tikicdn.com/cache/100x100/ts/upload/cb/64/f7/0ebb0ae297f052e34a8161c9bf8efb96.png.webp'),
+       (27, 'Chăm sóc thú cưng', 'https://salt.tikicdn.com/cache/100x100/ts/category/13/64/43/226301adcc7660ffcf44a61bb6df99b7.png.webp'),
+       (28, 'Trang sức', 'https://salt.tikicdn.com/cache/100x100/ts/category/8b/d4/a8/5924758b5c36f3b1c43b6843f52d6dd2.png.webp'),
+       (29, 'Điện máy', 'https://salt.tikicdn.com/cache/100x100/ts/category/c8/82/d4/64c561c4ced585c74b9c292208e4995a.png.webp'),
+       (30, 'Đồ chơi', 'https://salt.tikicdn.com/cache/100x100/ts/category/13/64/43/226301adcc7660ffcf44a61bb6df99b7.png.webp'),
+       (31, 'Laptop, Máy tính & Thiết bị văn phòng', 'https://salt.tikicdn.com/cache/100x100/ts/category/92/b5/c0/3ffdb7dbfafd5f8330783e1df20747f6.png.webp'),
+       (32, 'Vé máy bay - Du lịch', 'https://salt.tikicdn.com/cache/100x100/ts/category/0a/c9/7b/8e466bdf6d4a5f5e14665ce56e58631d.png.webp'),
+       (33, 'Voucher dịch vụ', 'https://salt.tikicdn.com/cache/100x100/ts/category/0a/c9/7b/8e466bdf6d4a5f5e14665ce56e58631d.png.webp');
 
 insert into ecommerce.sub_category(category_id, title, icon)
 values (1, 'Đầm, váy', null),
@@ -375,61 +375,21 @@ insert into ecommerce.role (id, type)
 values (1, 'ROLE_USER'),
        (2, 'ROLE_SHOP'),
        (3, 'ROLE_ADMIN');
-# ========================================== USER ==========================================
-# insert into ecommerce.user(id, email, password, name, phone_number)
-# values (1, 'nhanvapp@gmail.com', '123', 'Trần Thanh Nhân', '0936216883');
-#
-# ========================================== ACCOUNT_ROLE ==========================================
-# insert into ecommerce.account_role(user_id, role_id)
-# values (1, 1),
-#        (1, 2),
-#        (1, 3);
-#
-# ========================================== RATING_INFO ==========================================
-# insert into ecommerce.rating_info (id, star1, star2, star3, star4, star5)
-# values (1, 23, 16, 32, 372, 1294);
-# insert into ecommerce.rating_info (id, star1, star2, star3, star4, star5)
-# values (2, 23, 16, 32, 372, 1294);
-# ========================================== SHOP ==========================================
-# insert into ecommerce.shop(user_id, rating_id, shop_name, slug, email, phone_number, shop_slogan, shop_logo,
-#                            shop_background, city, district, wards, address_detail, warehouse_region_name)
-# values (1, 1, 'Pigeon Official', 'pigeon-official', 'tthanhnhan1512@gmail.com', '0936216883',
-#         'Chippro Shop uy tín là phương châm , là cách làm việc của chúng tôi !',
-#         'https://media3.scdn.vn/img4/2021/03_09/dejNj53PQPOoSREfIjat.jpg',
-#         'https://media3.scdn.vn/img4/2021/03_09/dejNj53PQPOoSREfIjat.jpg',
-#         'Thành phố Hồ Chí Minh', 'Quận 5', 'Phường 12', '80 Lạc Long Quân', 'TP. Hồ Chí Mính');
-#
-# ========================================== PRODUCT ==========================================
-# insert into ecommerce.product(id, shop_id, category_id, sub_category_id, discount__id, rating_id, name, slug, price,
-#                               description, short_description, quantity, order_count, keywords, is_public, is_deleted)
-# values (1, 1, 1, 1, null, 2,
-#         'Áo Hoodie Form Rộng Unisex Lá thư ranshopm, Áo khoác Sweater Chất Nỉ Dày dặn',
-#         'ao-hoodi-form-rong-unisex',
-#         119000,
-#         'Áo Hoodie Form Rộng Unisex Lá thư ranshopm, Áo khoác Sweater Chất Nỉ Dày dặn',
-#         'Áo Hoodie Form Rộng Unisex Lá thư ranshopm, Áo khoác Sweater Chất Nỉ Dày dặn',
-#         87, 17,
-#         'ao hoodie, ao nam',
-#         true, false);
-#
-# insert into ecommerce.product_image(id, product_id, url)
-# values (1, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/1f/99/a3/49989797c980a65a0a474cda8a330250.jpg.webp'),
-#        (2, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/c8/c0/7f/bbdbcf10c4efc5d11abc07cb54aeaf7f.jpg.webp'),
-#        (3, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/3b/19/0f/c3f32714fbabb7e880bc127a2603b2ba.jpg.webp'),
-#        (4, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/b1/26/e4/1132e69689c8c842f93c8487bbcccca3.jpg.webp'),
-#        (5, 1, 'https://salt.tikicdn.com/cache/750x750/ts/product/32/dd/33/db4a8bedcf328292bfe91fc2cfff240a.jpg.webp')
-#
-# ========================================== ACCOUNT_ROLE ==========================================
-#
-#
-# INSERT INTO ecommerce.variant (id, product_id, discount_id, attribute_hash, sku_user, price, quantity, is_deleted,
-#                                created_at,
-#                                updated_at)
-# VALUES (1, 1, null, 'den-kaki', 'den-kaki', 119000, 32, 0, '2023-03-10 11:27:19', '2023-03-10 11:30:49');
-# INSERT INTO ecommerce.variant (id, product_id, discount_id, attribute_hash, sku_user, price, quantity, is_deleted,
-#                                created_at,
-#                                updated_at)
-# VALUES (2, 1, null, 'xam-kaki', 'xam-kaki', 119000, 32, 0, '2023-03-10 11:30:49', '2023-03-10 11:30:49');
+insert into ecommerce.user(id, email, name, password, phone_number)
+values (1, 'tthanhnhan1512@gmail.com', 'Trần Thanh Nhân', '$2a$10$nC85ASrpuW/qaU06hsney.GW/2pvlw41dnIrJdBXdKILGnDK2FY7.', '0946286951');
 
-
-
+insert ecommerce.user_role(user_id, role_id)
+values (1, 3);
+# ========================================== ROLE ==========================================
+insert into ecommerce.orders_status (id, status, title, description, label_confirm, label_created_at)
+values (1, 'PENDING', 'Đang đợi xác nhận',
+        'Đơn hàng từ người mua đang đợi được xác nhân. Kiểm tra lại đơn hàng và nhấn nút "Xác nhận đơn hàng" để xác nhận.',
+        'Xác nhận đơn hàng', 'Tạo đơn hàng'),
+       (2, 'CONFIRMED', 'Đã xác nhận', 'Đơn hàng đã được xác nhận. Đóng gói đơn hàng và chuyển sang vận chuyển.',
+        'Vận chuyển đơn hàng', 'Đã xác nhận'),
+       (3, 'SHIPPING', 'Đang giao hàng',
+        'Đơn hàng đang được vận chuyển. Hoàn tất giai đoạn giao hàng khi xác nhận người mua đã nhận được hàng.',
+        'Giao hàng thành công', 'Bắt đầu giao hàng'),
+       (4, 'COMPLETED', 'Đã hoàn thành', 'Người dùng đã nhận được hàng. Chọn để hoàn tất và kết thúc đơn hàng.',
+        'Hoàn tất đơn hàng', 'Hoàn tất đơn hàng'),
+       (5, 'CANCELLED', 'Đã hủy', '', 'Hủy đơn hàng', 'Hủy đơn hàng');

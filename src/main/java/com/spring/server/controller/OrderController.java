@@ -4,7 +4,6 @@ import com.spring.server.model.constant.EOrderStatus;
 import com.spring.server.model.dto.CancelledOrderDto;
 import com.spring.server.model.dto.OrderDto;
 import com.spring.server.model.dto.OrderStatusDto;
-import com.spring.server.model.entity.CancelledOrder;
 import com.spring.server.model.entity.User;
 import com.spring.server.model.mapper.UserMapper;
 import com.spring.server.payload.request.StatusOrderRequest;
@@ -18,7 +17,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Objects;
 import java.util.Set;
 
@@ -38,11 +36,7 @@ public class OrderController {
 
     @GetMapping("/users/{userId}/orders")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<?> getOrdersByUserId(Authentication authentication,
-                                               @PathVariable Long userId,
-                                               @RequestParam(required = false) Long status,
-                                               @RequestParam(required = false, defaultValue = "0") Integer page,
-                                               @RequestParam(required = false, defaultValue = "10") Integer size) {
+    public ResponseEntity<?> getOrdersByUserId(Authentication authentication, @PathVariable Long userId, @RequestParam(required = false) Long status, @RequestParam(required = false, defaultValue = "0") Integer page, @RequestParam(required = false, defaultValue = "10") Integer size) {
         User user = userService.findOneByEmail(authentication.getName());
         if (user == null || !Objects.equals(user.getId(), userId))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Don't have permission to access");
@@ -92,7 +86,7 @@ public class OrderController {
 
     @PutMapping("/shops/orders/{orderId}")
     @PreAuthorize("hasRole('ROLE_SHOP')")
-    public ResponseEntity<?> updateOrder(@PathVariable Long orderId, @Valid @RequestBody StatusOrderRequest request) {
+    public ResponseEntity<?> updateOrder(@PathVariable Long orderId, @RequestBody StatusOrderRequest request) {
         if (!Objects.equals(orderId, request.getOrderId()))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         OrderDto order = orderService.updateStatus(request.getOrderId(), request.getStatus());

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -31,13 +32,14 @@ public class User extends BaseEntity implements Serializable {
     private Shop shop;
 //    @OneToOne(mappedBy = "user")
 //    private SalesRegister salesRegister;
-    //    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
 //    private Set<Cart> carts = new HashSet<>();
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
 //    private Set<Order> orders = new HashSet<>();
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
 //    private Set<ProductReviews> reviews = new HashSet<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Where(clause = "is_deleted=false")
     private Set<UserAddress> addresses = new HashSet<>();
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

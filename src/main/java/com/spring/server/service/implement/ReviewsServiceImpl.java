@@ -31,6 +31,13 @@ public class ReviewsServiceImpl implements ReviewsService {
     private UserRepo userRepo;
 
     @Override
+    public Page<ProductReviewsDto> findProductReviewsByUserId(int page, int size, Long userId) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ProductReviews> list = productReviewsRepo.findByUser_Id(pageable, userId);
+        return ProductReviewsMapper.toDto(list);
+    }
+
+    @Override
     public Page<ProductReviewsDto> findProductReviewsByProductId(int page, int size, Long productId) {
         Pageable pageable = PageRequest.of(page, size);
         Page<ProductReviews> list = productReviewsRepo.findByProduct_Id(pageable, productId);

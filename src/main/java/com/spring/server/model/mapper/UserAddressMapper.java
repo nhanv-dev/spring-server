@@ -17,7 +17,6 @@ public class UserAddressMapper {
     public static UserAddressDto toDto(UserAddress userAddress) {
         UserAddressDto result = new UserAddressDto();
         result.setId(userAddress.getId());
-//        result.setUserId(userAddress.getUser().getId());
         result.setCustomerName(userAddress.getCustomerName());
         result.setEmail(userAddress.getEmail());
         result.setPhoneNumber(userAddress.getPhoneNumber());
@@ -26,6 +25,7 @@ public class UserAddressMapper {
         result.setDistrict(userAddress.getDistrict());
         result.setWards(userAddress.getWards());
         result.setIsDefault(userAddress.getIsDefault());
+        result.setIsDeleted(userAddress.getIsDeleted());
         result.setCreatedAt(userAddress.getCreatedAt());
         result.setUpdatedAt(userAddress.getUpdatedAt());
         return result;

@@ -27,7 +27,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebSecurityConfig implements WebMvcConfigurer {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
-
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
 
@@ -44,10 +43,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
-
         return authProvider;
     }
 
@@ -73,7 +70,6 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .requestMatchers("/api/shops/**").permitAll()
                 .requestMatchers("/api/order-status/**").permitAll()
                 .anyRequest().authenticated();
-
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         http.exceptionHandling().authenticationEntryPoint(unauthorizedHandler);
