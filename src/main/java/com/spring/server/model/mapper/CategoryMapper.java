@@ -69,8 +69,6 @@ public class CategoryMapper {
         result.setTitle(category.getTitle());
         result.setSlug(category.getSlug());
         result.setIcon(category.getIcon());
-//        if (category.getSubCategories() != null && category.getSubCategories().size() > 0)
-//            result.setSubCategories(SubCategoryMapper.toEntity(category.getSubCategories()));
         return result;
     }
 }

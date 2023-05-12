@@ -11,6 +11,7 @@ import com.spring.server.security.jwt.JwtUtils;
 import com.spring.server.security.services.UserDetailsImpl;
 import com.spring.server.service.RoleService;
 import com.spring.server.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,22 +44,21 @@ public class AuthenticationController {
 
     @PostMapping("/sign-in")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        User user = userService.findOneByEmail(loginRequest.getEmail());
-        if (user == null)
+        if (!userService.existsByEmail(loginRequest.getEmail()))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email invalid");
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), userDetails.getName(), roles));
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), userDetails.getName(), userDetails.getPhoneNumber(), roles));
     }
 
     @PostMapping("/sign-up")
     public ResponseEntity<?> register(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if (userService.existsByEmail(signUpRequest.getEmail())) {
+        if (userService.existsByEmail(signUpRequest.getEmail()))
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
-        }
+
         User user = new User(signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()), signUpRequest.getName(), signUpRequest.getPhoneNumber());
         Set<Role> roles = new HashSet<>();
         Role userRole = roleService.findOneByType(ERole.ROLE_USER);
@@ -92,7 +91,7 @@ public class AuthenticationController {
         String jwt = jwtUtils.generateJwtToken(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), userDetails.getName(), roles));
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getEmail(), userDetails.getName(), userDetails.getPhoneNumber(), roles));
     }
 }
 

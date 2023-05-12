@@ -1,10 +1,7 @@
 package com.spring.server.model.mapper;
 
-import com.spring.server.model.dto.ProductDto;
 import com.spring.server.model.dto.ProductReviewsDto;
-import com.spring.server.model.entity.Product;
 import com.spring.server.model.entity.ProductReviews;
-import com.spring.server.model.entity.ProductVariant;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +12,9 @@ public class ProductReviewsMapper {
     public static ProductReviewsDto toDto(ProductReviews productReviews) {
         ProductReviewsDto result = new ProductReviewsDto();
         result.setId(productReviews.getId());
-        result.setUser(UserMapper.toDto(productReviews.getUser()));
+        result.setUser(UserMinimalMapper.toDto(productReviews.getUser()));
+        result.setProduct(ProductMinimalMapper.toDto(productReviews.getProduct()));
+        result.setVariant(ProductVariantMapper.toDto(productReviews.getVariant()));
         result.setContent(productReviews.getContent());
         result.setRating(productReviews.getRating());
         result.setCreatedAt(productReviews.getCreatedAt());

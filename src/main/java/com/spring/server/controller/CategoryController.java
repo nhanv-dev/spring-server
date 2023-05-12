@@ -29,6 +29,7 @@ public class CategoryController {
             return ResponseEntity.ok(categoryService.findAll());
         }
         Pageable pageable = PageRequest.of(page - 1, limit);
+        if (type != null && type.equals("short")) return ResponseEntity.ok(categoryService.findByPageableWithoutSub(pageable));
         return ResponseEntity.ok(categoryService.findByPageable(pageable));
     }
 

@@ -15,8 +15,9 @@ import java.util.Set;
 public class UserAddressDto implements Comparable<UserAddressDto> {
     private Long id, userId;
     private String city, district, wards, addressDetail, customerName, phoneNumber, email;
-    private Boolean isDefault;
+    private Boolean isDefault, isDeleted;
     private Date createdAt, updatedAt;
+
     @Override
     public int compareTo(UserAddressDto o) {
         return createdAt.compareTo(o.getCreatedAt());

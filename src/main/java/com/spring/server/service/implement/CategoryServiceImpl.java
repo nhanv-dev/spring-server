@@ -82,6 +82,17 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Page<CategoryDto> findByPageableWithoutSub(Pageable pageable) {
+        Page<Category> entities = categoryRepo.findAll(pageable);
+        return entities.map(new Function<Category, CategoryDto>() {
+            @Override
+            public CategoryDto apply(Category category) {
+                return CategoryMapper.toDtoWithoutSub(category);
+            }
+        });
+    }
+
+    @Override
     public List<SubCategoryDto> findSubCategoryByCategoryId(Long id) {
         List<SubCategory> list = subCategoryRepo.findByCategoryId(id);
         return SubCategoryMapper.toDto(list);
