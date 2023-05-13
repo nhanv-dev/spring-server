@@ -46,7 +46,7 @@ public class UserController {
     public ResponseEntity<?> saveAddress(
             @PathVariable("id") Long id,
             Authentication authentication,
-            @RequestBody UserAddressDto userAddressDto
+            @Valid @RequestBody UserAddressDto userAddressDto
     ) {
         User user = userService.findOneByEmail(authentication.getName());
         if (!Objects.equals(user.getId(), id))
@@ -83,9 +83,9 @@ public class UserController {
     ) {
         User user = userService.findOneByEmail(authentication.getName());
         if (!Objects.equals(user.getId(), id))
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("User saved successfully!!"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("User don't have permission."));
         userService.deleteAddress(addressId);
-        return ResponseEntity.ok(new MessageResponse("Deleted user address!!"));
+        return ResponseEntity.ok(new MessageResponse("Deleted user address."));
     }
 }
 

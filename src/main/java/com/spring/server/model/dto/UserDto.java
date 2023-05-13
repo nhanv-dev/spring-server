@@ -2,6 +2,7 @@ package com.spring.server.model.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.Set;
@@ -15,8 +16,10 @@ import java.util.Set;
 public class UserDto {
     private Long id;
     private String email;
+    @NotBlank
     private String name;
     private String password;
+    @NotBlank
     private String phoneNumber;
     private Set<RoleDto> roles;
 }

@@ -110,7 +110,8 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public Page<ProductDto> searchProducts(Pageable pageable, String name) {
+    public Page<ProductDto> searchProducts(int page, int size, String name) {
+        Pageable pageable = PageRequest.of(page, size);
         Page<Product> products = productRepo.searchProductByName(pageable, name);
         if (products == null) return null;
         return ProductMapper.toDto(products);

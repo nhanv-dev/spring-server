@@ -113,6 +113,12 @@ public class OrderServiceImpl implements OrderService {
         cancelledOrderRepo.save(cancelledOrder);
     }
 
+    @Override
+    public CancelledOrderDto findCancelledOrderByOrderId(Long orderId) {
+        CancelledOrder cancelledOrder = cancelledOrderRepo.findOneByOrder_Id(orderId);
+        return CancelledOrderMapper.toDto(cancelledOrder);
+    }
+
 
     @Override
     @Transactional

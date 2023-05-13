@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Set<UserAddressDto> findAddressByUserId(Long userId) {
-        List<UserAddress> list = userAddressRepo.findAllByUser_Id(userId);
+        List<UserAddress> list = userAddressRepo.findAllByUser_IdAndIsDeleted(userId, false);
         return UserAddressMapper.toDto(list);
     }
 

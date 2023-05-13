@@ -44,11 +44,8 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
     @Query(value = "UPDATE Product p set p.isDeleted = true WHERE p.id = :id")
     void deleteById(Long id);
 
-//    @Query(value = "SELECT p FROM Product p WHERE p.name LIKE CONCAT('%',:name, '%')")
     @Query("SELECT p FROM Product p WHERE " +
             "p.name LIKE CONCAT('%', :name, '%')" +
             "Or p.keywords LIKE CONCAT('%', :name, '%')")
     Page<Product> searchProductByName(Pageable pageable, String name);
-
-
 }
