@@ -19,7 +19,7 @@ public interface ShopService {
 
     ShopDto save(Shop shop);
 
-    ShopDto searchShop(String name);
+    Page<ShopDto> searchShop(int page, int size, String name);
 
     ShopDto update(ShopDto shopDto);
 

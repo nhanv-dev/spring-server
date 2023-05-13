@@ -20,16 +20,19 @@ public interface OrderService {
 
     Page<OrderDto> findAllByUserIdAndStatusId(int page, int size, Long userId, Long statusId);
 
+    OrderDto save(OrderDto orderDto);
+
+    OrderDto updateStatus(Long orderId, EOrderStatus status);
+
     Set<OrderDto> placeOrder(Set<OrderDto> orderDtos);
 
     void cancelOrder(CancelledOrderDto cancelledOrderDto);
+
+    CancelledOrderDto findCancelledOrderByOrderId(Long orderId);
 
     Set<OrderStatusDto> findAllStatus();
 
     OrderStatusDto findStatusByType(EOrderStatus type);
 
-    OrderDto save(OrderDto orderDto);
-
-    OrderDto updateStatus(Long orderId, EOrderStatus status);
 
 }

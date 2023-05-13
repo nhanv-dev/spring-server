@@ -15,9 +15,14 @@ public interface UserAddressRepo extends JpaRepository<UserAddress, Long> {
 
     @Query()
     List<UserAddress> findAllByUser_Id(Long userId);
+
+    @Query()
+    List<UserAddress> findAllByUser_IdAndIsDeleted(Long userId, boolean isDeleted);
+
     @Modifying
     @Query(value = "UPDATE UserAddress u set u.isDefault = false WHERE u.user.id = :id")
     void updateDefaultStatus(Long id);
+
     @Modifying
     @Query(value = "UPDATE UserAddress u set u.isDeleted = true WHERE u.id = :id")
     void deleteById(Long id);

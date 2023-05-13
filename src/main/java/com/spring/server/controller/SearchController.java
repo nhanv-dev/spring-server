@@ -23,16 +23,19 @@ public class SearchController {
     @Autowired
     private ShopService shopService;
 
-    @GetMapping("/search-product")
-    public ResponseEntity<Page<ProductDto>> searchProducts(@RequestParam("name") String name, Integer page) {
-        Pageable pageable = PageRequest.of(0, 30);
-        Page<ProductDto> products = productService.searchProducts(pageable, name);
+    @GetMapping("/products")
+    public ResponseEntity<?> searchProducts(@RequestParam String search,
+                                            @RequestParam(required = false, defaultValue = "0") Integer page,
+                                            @RequestParam(required = false, defaultValue = "30") Integer size) {
+        Page<ProductDto> products = productService.searchProducts(page, size, search);
         return ResponseEntity.ok(products);
     }
 
-    @GetMapping("/search-shop")
-    public ResponseEntity<ShopDto> searchShops(@RequestParam("name") String name) {
-        ShopDto shops = shopService.searchShop(name);
+    @GetMapping("/shops")
+    public ResponseEntity<?> searchShops(@RequestParam("search") String search,
+                                         @RequestParam(required = false, defaultValue = "0") Integer page,
+                                         @RequestParam(required = false, defaultValue = "5") Integer size) {
+        Page<ShopDto> shops = shopService.searchShop(page, size, search);
         return ResponseEntity.ok(shops);
     }
 

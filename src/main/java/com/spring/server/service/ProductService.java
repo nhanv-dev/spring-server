@@ -31,6 +31,6 @@ public interface ProductService {
 
     void delete(Long id);
 
-    Page<ProductDto> searchProducts(Pageable pageable, String name);
+    Page<ProductDto> searchProducts(int page, int size, String name);
 
 }

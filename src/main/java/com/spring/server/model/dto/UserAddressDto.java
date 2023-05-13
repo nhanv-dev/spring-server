@@ -1,6 +1,7 @@
 package com.spring.server.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserAddressDto implements Comparable<UserAddressDto> {
     private Long id, userId;
+    @NotBlank
     private String city, district, wards, addressDetail, customerName, phoneNumber, email;
     private Boolean isDefault, isDeleted;
     private Date createdAt, updatedAt;

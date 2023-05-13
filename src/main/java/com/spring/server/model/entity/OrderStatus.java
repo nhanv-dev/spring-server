@@ -30,8 +30,8 @@ public class OrderStatus extends BaseEntity implements Serializable {
     private String labelConfirm;
     @Column
     private String labelCreatedAt;
-    @OneToMany(mappedBy = "orderStatus", cascade = CascadeType.MERGE, orphanRemoval = true)
-    private Set<Order> orders = new HashSet<>();
-    @OneToMany(mappedBy = "orderStatus", cascade = CascadeType.MERGE, orphanRemoval = true)
-    private Set<OrderStatusHistory> orderStatusHistories = new HashSet<>();
+//    @OneToMany(mappedBy = "orderStatus", cascade = CascadeType.MERGE, orphanRemoval = true)
+//    private Set<Order> orders = new HashSet<>();
+//    @OneToMany(mappedBy = "orderStatus", cascade = CascadeType.MERGE, orphanRemoval = true)
+//    private Set<OrderStatusHistory> orderStatusHistories = new HashSet<>();
 }

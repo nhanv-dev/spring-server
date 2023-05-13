@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CancelledOrderRepo extends JpaRepository<CancelledOrder, Long> {
     @Query()
-    Order findOneById(Long id);
+    CancelledOrder findOneByOrder_Id(Long orderId);
 
 }

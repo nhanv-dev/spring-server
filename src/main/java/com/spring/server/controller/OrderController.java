@@ -77,6 +77,13 @@ public class OrderController {
         return ResponseEntity.ok(order);
     }
 
+    @GetMapping("/orders/{orderId}/cancel-order")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_SHOP')")
+    public ResponseEntity<?> getCancelledOrderById(@PathVariable Long orderId) {
+        CancelledOrderDto order = orderService.findCancelledOrderByOrderId(orderId);
+        return ResponseEntity.ok(order);
+    }
+
     @GetMapping("/shops/orders/{orderId}")
     @PreAuthorize("hasRole('ROLE_SHOP')")
     public ResponseEntity<?> getOrderById(@PathVariable Long orderId) {

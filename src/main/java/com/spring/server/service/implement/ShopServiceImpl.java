@@ -84,8 +84,9 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public ShopDto searchShop(String name) {
-        Shop shops = shopRepo.searchShopByName(name);
+    public Page<ShopDto> searchShop(int page, int size, String name) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Shop> shops = shopRepo.searchShopByName(pageable, name);
         if (shops == null) return null;
         return ShopMapper.toDto(shops);
     }
