@@ -20,8 +20,7 @@ public class Cart extends BaseEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
-    @OneToMany( cascade = CascadeType.MERGE, orphanRemoval = true)
-    @JoinColumn(name = "cart_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<CartItem> items = new HashSet<>();
 
     public CartItem updateItem(CartItem item) {
