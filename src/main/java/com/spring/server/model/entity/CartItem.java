@@ -22,10 +22,6 @@ public class CartItem extends BaseEntity implements Serializable {
     @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
     private Product product;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "variant_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "variant_id", referencedColumnName = "id")
     private ProductVariant variant;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id", referencedColumnName = "id", nullable = false)
-    private Cart cart;
-
 }

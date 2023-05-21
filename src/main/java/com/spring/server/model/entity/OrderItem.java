@@ -31,9 +31,6 @@ public class OrderItem extends BaseEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "variant_id", referencedColumnName = "id")
     private ProductVariant variant;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    private Order order;
 
     @PrePersist
     public void prePersist() {

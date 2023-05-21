@@ -23,8 +23,9 @@ public class Deal extends BaseEntity implements Serializable {
     private double discountPercent;
     @Column(columnDefinition = "boolean default false")
     private Boolean isDeleted;
-    @OneToOne(mappedBy = "deal")
-    private Product product;
-    @OneToOne(mappedBy = "deal")
-    private ProductVariant variant;
+//    @OneToOne(mappedBy = "deal")
+//    private Product product;
+
+//    @OneToOne(mappedBy = "deal")
+//    private ProductVariant variant;
 }

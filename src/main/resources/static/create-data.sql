@@ -1,38 +1,38 @@
 # ========================================== CATEGORY ==========================================
-insert into ecommerce.category (id, title, icon)
-values (1, 'Thời Trang Nữ', null),
-       (2, 'Thời Trang Nam', null),
-       (3, 'Nhà Cửa', null),
-       (4, 'Sức Khỏe & Làm Đẹp', null),
-       (5, 'Giày Dép', null),
-       (6, 'Túi Xách', null),
-       (7, 'Đồng Hồ', null),
-       (8, 'Phụ Kiện Thời Trang', null),
-       (9, 'Tân Trang Nhà Cửa', null),
-       (10, 'Đời sống', null),
-       (11, 'Dịch Vụ Tiện Ích', null),
-       (12, 'Phụ kiện công nghệ', null),
-       (13, 'Ô tô - Xe máy', null),
-       (14, 'Thiết bị y tế', null),
-       (15, 'Mẹ và bé', null),
-       (16, 'Thời Trang Trẻ Em', null),
-       (17, 'Bách Hóa Tổng Hợp', null),
-       (18, 'Thực Phẩm Tươi Sống', null),
-       (19, 'Đồ điện gia dụng', null),
-       (20, 'Điện thoại - Máy tính bảng', null),
-       (21, 'Tivi - Thiết bị giải trí', null),
-       (22, 'Máy ảnh - Máy quay phim', null),
-       (23, 'Thiết bị âm thanh', null),
-       (24, 'Thể thao - Dã ngoại - Giải trí', null),
-       (25, 'Sách & Văn phòng phẩm', null),
-       (26, 'Vật phẩm phong thủy', null),
-       (27, 'Chăm sóc thú cưng', null),
-       (28, 'Trang sức', null),
-       (29, 'Điện máy', null),
-       (30, 'Đồ chơi', null),
-       (31, 'Laptop, Máy tính & Thiết bị văn phòng', null),
-       (32, 'Vé máy bay - Du lịch', null),
-       (33, 'Voucher dịch vụ', null);
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (1, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/55/5b/80/48cbaafe144c25d5065786ecace86d38.png.webp', 'thoi-trang-nu', 'Thời Trang Nữ');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (2, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/00/5d/97/384ca1a678c4ee93a0886a204f47645d.png.webp', 'thoi-trang-nam', 'Thời Trang Nam');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (3, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/61/d4/ea/e6ea3ffc1fcde3b6224d2bb691ea16a2.png.webp', 'nha-cua', 'Nhà Cửa');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (4, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/73/0e/89/d7ca146de7198a6808580239e381a0c8.png.webp', 'suc-khoe-lam-dep', 'Sức Khỏe & Làm Đẹp');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (5, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/d6/7f/6c/5d53b60efb9448b6a1609c825c29fa40.png.webp', 'giay-dep', 'Giày Dép');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (6, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/31/a7/94/6524d2ecbec216816d91b6066452e3f2.png.webp', 'tui-xach', 'Túi Xách');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (7, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/8b/d4/a8/5924758b5c36f3b1c43b6843f52d6dd2.png.webp', 'dong-ho', 'Đồng Hồ');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (8, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/ca/53/64/49c6189a0e1c1bf7cb91b01ff6d3fe43.png.webp', 'phu-kien-thoi-trang', 'Phụ Kiện Thời Trang');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (9, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/f6/22/46/7e2185d2cf1bca72d5aeac385a865b2b.png.webp', 'tan-trang-nha-cua', 'Tân Trang Nhà Cửa');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (10, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/f6/22/46/7e2185d2cf1bca72d5aeac385a865b2b.png.webp', 'doi-song', 'Đời sống');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (11, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/3c/e4/99/eeee1801c838468d94af9997ec2bbe42.png.webp', 'dich-vu-tien-ich', 'Dịch Vụ Tiện Ích');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (12, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/75/34/29/d900f845e51e95a2c41b5b035468f959.png.webp', 'phu-kien-cong-nghe', 'Phụ kiện công nghệ');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (13, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/69/f5/36/c6cd9e2849854630ed74ff1678db8f19.png.webp', 'o-to-xe-may', 'Ô tô - Xe máy');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (14, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/3c/e4/99/eeee1801c838468d94af9997ec2bbe42.png.webp', 'thiet-bi-y-te', 'Thiết bị y tế');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (15, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/13/64/43/226301adcc7660ffcf44a61bb6df99b7.png.webp', 'me-va-be', 'Mẹ và bé');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (16, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/13/64/43/226301adcc7660ffcf44a61bb6df99b7.png.webp', 'thoi-trang-tre-em', 'Thời Trang Trẻ Em');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (17, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/40/0f/9b/62a58fd19f540c70fce804e2a9bb5b2d.png.webp', 'bach-hoa-tong-hop', 'Bách Hóa Tổng Hợp');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (18, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/f6/22/46/7e2185d2cf1bca72d5aeac385a865b2b.png.webp', 'thuc-pham-tuoi-song', 'Thực Phẩm Tươi Sống');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (19, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/61/d4/ea/e6ea3ffc1fcde3b6224d2bb691ea16a2.png.webp', 'do-dien-gia-dung', 'Đồ điện gia dụng');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (20, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/92/b5/c0/3ffdb7dbfafd5f8330783e1df20747f6.png.webp', 'dien-thoai-may-tinh-bang', 'Điện thoại - Máy tính bảng');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (21, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/92/b5/c0/3ffdb7dbfafd5f8330783e1df20747f6.png.webp', 'tivi-thiet-bi-giai-tri', 'Tivi - Thiết bị giải trí');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (22, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/2d/7c/45/e4976f3fa4061ab310c11d2a1b759e5b.png.webp', 'may-anh-may-quay-phim', 'Máy ảnh - Máy quay phim');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (23, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/75/34/29/d900f845e51e95a2c41b5b035468f959.png.webp', 'thiet-bi-am-thanh', 'Thiết bị âm thanh');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (24, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/0b/5e/3d/00941c9eb338ea62a47d5b1e042843d8.png.webp', 'the-thao-da-ngoai-giai-tri', 'Thể thao - Dã ngoại - Giải trí');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (25, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/ed/20/60/afa9b3b474bf7ad70f10dd6443211d5f.png.webp', 'sach-van-phong-pham', 'Sách & Văn phòng phẩm');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (26, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/upload/cb/64/f7/0ebb0ae297f052e34a8161c9bf8efb96.png.webp', 'vat-pham-phong-thuy', 'Vật phẩm phong thủy');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (27, '2023-05-12 01:47:30', '2023-05-12 23:46:26', 'https://salt.tikicdn.com/cache/100x100/ts/category/13/64/43/226301adcc7660ffcf44a61bb6df99b7.png.webp', 'cham-soc-thu-cung', 'Chăm sóc thú cưng');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (28, '2023-05-12 01:47:30', '2023-05-12 23:46:27', 'https://salt.tikicdn.com/cache/100x100/ts/category/8b/d4/a8/5924758b5c36f3b1c43b6843f52d6dd2.png.webp', 'trang-suc', 'Trang sức');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (29, '2023-05-12 01:47:30', '2023-05-12 23:46:27', 'https://salt.tikicdn.com/cache/100x100/ts/category/c8/82/d4/64c561c4ced585c74b9c292208e4995a.png.webp', 'dien-may', 'Điện máy');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (30, '2023-05-12 01:47:30', '2023-05-12 23:46:27', 'https://salt.tikicdn.com/cache/100x100/ts/category/13/64/43/226301adcc7660ffcf44a61bb6df99b7.png.webp', 'do-choi', 'Đồ chơi');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (31, '2023-05-12 01:47:30', '2023-05-12 23:46:27', 'https://salt.tikicdn.com/cache/100x100/ts/category/92/b5/c0/3ffdb7dbfafd5f8330783e1df20747f6.png.webp', 'laptop-may-tinh-thiet-bi-van-phong', 'Laptop, Máy tính & Thiết bị văn phòng');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (32, '2023-05-12 01:47:30', '2023-05-12 23:46:27', 'https://salt.tikicdn.com/cache/100x100/ts/category/0a/c9/7b/8e466bdf6d4a5f5e14665ce56e58631d.png.webp', 've-may-bay-du-lich', 'Vé máy bay - Du lịch');
+INSERT INTO ecommerce.category (id, created_at, updated_at, icon, slug, title) VALUES (33, '2023-05-12 01:47:30', '2023-05-12 23:46:27', 'https://salt.tikicdn.com/cache/100x100/ts/category/0a/c9/7b/8e466bdf6d4a5f5e14665ce56e58631d.png.webp', 'voucher-dich-vu', 'Voucher dịch vụ');
+
 
 insert into ecommerce.sub_category(category_id, title, icon)
 values (1, 'Đầm, váy', null),
@@ -394,3 +394,17 @@ values (1, 'PENDING', 'Đang đợi xác nhận',
        (4, 'COMPLETED', 'Đã hoàn thành', 'Người dùng đã nhận được hàng. Chọn để hoàn tất và kết thúc đơn hàng.',
         'Hoàn tất đơn hàng', 'Hoàn tất đơn hàng'),
        (5, 'CANCELLED', 'Đã hủy', 'Đơn hàng đã bị hủy', 'Hủy đơn hàng', 'Hủy đơn hàng');
+
+INSERT INTO ecommerce.user (id, created_at, updated_at, email, name, password, phone_number)
+VALUES (2, '2023-05-21 21:31:06', '2023-05-21 21:31:06', 'yg@gmail.com', 'Trần Thanh Nhân', '$2a$10$tFdWMI.wkKu1TYy39iCeXuJrDvN7S0WVTYg/GmQnnVyWJOMLpF/ae', '0946286951');
+
+INSERT INTO ecommerce.sales_register (id, created_at, updated_at, address_detail, city, district, shop_email, shop_name, shop_phone, status, wards, warehouse_region_name, user_id)
+VALUES (1, '2023-05-21 21:31:24', '2023-05-21 21:31:34', '', '', '', 'yg@gmail.com', 'JoliOfficial', '0946286951', 1, '', 'Thành phố Hà Nội', 2);
+
+INSERT INTO ecommerce.user_role (user_id, role_id) VALUES (2, 1);
+INSERT INTO ecommerce.user_role (user_id, role_id) VALUES (2, 2);
+INSERT INTO ecommerce.rating_info(id,  star1, star2, star3, star4, star5)
+values (1,0,0,0,0,0);
+INSERT INTO ecommerce.shop (id, created_at, updated_at, address_detail, city, district, email, is_deleted, is_official_shop, phone_number, product_total, response_time, shop_background, shop_logo, shop_name, shop_slogan, slug, time_prepare_product, wards, warehouse_region_name, rating_id, user_id)
+VALUES (1, '2023-05-21 21:31:34', '2023-05-21 21:31:34', '', '', '', 'yg@gmail.com', 0, 0, '0946286951', 0, null, null, null, 'JoliOfficial', null, 'joliofficial-1', null, '', 'Thành phố Hà Nội', 1, 2);
+

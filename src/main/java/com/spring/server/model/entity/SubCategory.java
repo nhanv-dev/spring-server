@@ -10,27 +10,18 @@ import java.util.Set;
 
 
 @Entity
+@Getter
+@Setter
 @Table(name = "sub_category")
 public class SubCategory extends BaseEntity implements Serializable {
-    @Getter
-    @Setter
     @Column
     private String title;
-    @Getter
-    @Setter
     @Column
     private String slug;
-    @Getter
-    @Setter
     @Column
     private String icon;
-    @Getter
-    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
-
-    @OneToMany(mappedBy = "subCategory", cascade = CascadeType.MERGE, orphanRemoval = true)
-    private Set<Product> products = new HashSet<>();
 
 }

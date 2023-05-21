@@ -33,7 +33,7 @@ public class ProductImageMapper {
             ProductImage productImage = new ProductImage();
             productImage.setId(image.getId());
             productImage.setUrl(image.getUrl());
-            productImage.setProduct(product);
+//            productImage.setProduct(product);
             result.add(productImage);
         }
         return result;

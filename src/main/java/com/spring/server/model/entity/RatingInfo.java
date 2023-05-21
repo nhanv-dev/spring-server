@@ -17,10 +17,10 @@ public class RatingInfo extends BaseEntity implements Serializable {
 
     @Column(columnDefinition = "tinyint default 0")
     private Integer star1, star2, star3, star4, star5;
-    @OneToOne(mappedBy = "ratingInfo")
-    private Product product;
-    @OneToOne(mappedBy = "ratingInfo")
-    private Shop shop;
+//    @OneToOne(mappedBy = "ratingInfo")
+//    private Product product;
+//    @OneToOne(mappedBy = "ratingInfo")
+//    private Shop shop;
 
     public RatingInfo() {
         this.star1 = 0;
