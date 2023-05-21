@@ -66,6 +66,7 @@ public class CartServiceImpl implements CartService {
         cartItem.setQuantity(cartItemDto.getQuantity());
         cartItem.setProduct(product);
         cartItem.setVariant(productVariant);
+        cartItem.setCart(cart);
         if (cart.containItem(cartItem)) cartItem = cart.updateItem(cartItem);
         else cartItem = cartItemRepo.save(cartItem);
         cartRepo.save(cart);
