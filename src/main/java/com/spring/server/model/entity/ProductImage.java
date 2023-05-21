@@ -18,8 +18,4 @@ import java.util.Comparator;
 public class ProductImage extends BaseEntity  implements Serializable {
     @Column(columnDefinition = "text")
     private String url;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "product_id")
-//    private Product product;
 }

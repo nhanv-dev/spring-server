@@ -25,8 +25,4 @@ public class ProductAttributeOption extends BaseEntity implements Serializable {
     private String image;
     @Column(columnDefinition = "boolean")
     private boolean isDeleted = false;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "attribute_id", nullable = false)
-//    private ProductAttribute attribute;
-
 }

@@ -32,7 +32,6 @@ public class ProductAttributeMapper {
         result.setId(attribute.getId());
         result.setName(attribute.getName());
         result.setOptions(ProductAttributeOptionMapper.toEntities(attribute.getOptions(), result));
-//        result.setProduct(product);
         return result;
     }
 

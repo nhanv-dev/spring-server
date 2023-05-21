@@ -38,7 +38,6 @@ public class ProductDetailMapper {
                 variant.setDeal(DealMapper.toEntity(variantDto.getDeal()));
                 variant.setAttributeHash(variantDto.getAttributeHash());
                 variant.setQuantity(variantDto.getQuantity());
-//                variant.setProduct(result);
                 Set<ProductAttributeOption> options = new HashSet<>();
                 for (ProductAttributeOptionDto optionDto : variantDto.getOptions()) {
                     A:

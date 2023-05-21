@@ -25,9 +25,4 @@ public class ProductAttribute extends BaseEntity implements Serializable {
     @JoinColumn(referencedColumnName = "id")
     @Where(clause = "is_deleted=false")
     private Set<ProductAttributeOption> options = new HashSet<>();
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "product_id", nullable = false)
-//    private Product product;
-
-
 }
