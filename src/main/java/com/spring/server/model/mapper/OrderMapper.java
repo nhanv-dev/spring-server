@@ -54,7 +54,7 @@ public class OrderMapper {
         result.setTotalPrice(order.getTotalPrice());
         result.setOrderStatus(OrderStatusMapper.toEntity(order.getOrderStatus()));
         result.setUserAddress(UserAddressMapper.toEntity(order.getAddress()));
-        result.setItems(OrderItemMapper.toEntities(order.getItems(), result));
+        result.setItems(OrderItemMapper.toEntities(order.getItems()));
         result.setShop(ShopMapper.toEntity(order.getShop()));
         result.setUser(UserMapper.toEntity(order.getUser()));
         result.setNote(order.getNote());

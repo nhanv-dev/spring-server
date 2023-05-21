@@ -21,12 +21,13 @@ public class ProductAttribute extends BaseEntity implements Serializable {
     private String name;
     @Column(columnDefinition = "boolean default false")
     private boolean isDeleted;
-    @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(referencedColumnName = "id")
     @Where(clause = "is_deleted=false")
     private Set<ProductAttributeOption> options = new HashSet<>();
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "product_id", nullable = false)
+//    private Product product;
 
 
 }

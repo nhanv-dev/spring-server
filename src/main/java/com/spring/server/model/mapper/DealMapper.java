@@ -43,17 +43,8 @@ public class DealMapper {
         result.setPrice(deal.getPrice());
         result.setFinalPrice(deal.getFinalPrice());
         result.setDiscountPercent(deal.getDiscountPercent());
-//        result.setProduct(product);
         return result;
     }
 
-    public static Deal toEntity(DealDto deal, ProductVariant variant) {
-        if (deal == null) return null;
-        Deal result = new Deal();
-        result.setPrice(deal.getPrice());
-        result.setFinalPrice(deal.getFinalPrice());
-        result.setDiscountPercent(deal.getDiscountPercent());
-        result.setVariant(variant);
-        return result;
-    }
+
 }
