@@ -23,8 +23,6 @@ public class ProductAttributeOptionMapper {
         result.setValue(option.getValue());
         result.setImage(option.getImage());
         result.setDeleted(option.isDeleted());
-//        if (option.getAttribute() != null)
-//            result.setAttributeId(option.getAttribute().getId());
         return result;
     }
 
@@ -44,7 +42,6 @@ public class ProductAttributeOptionMapper {
         result.setValue(option.getValue());
         result.setImage(option.getImage());
         result.setDeleted(option.isDeleted());
-//        if (attribute != null) result.setAttribute(attribute);
         return result;
     }
 

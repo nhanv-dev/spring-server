@@ -41,7 +41,6 @@ public class ProductVariantMapper {
         result.setAttributeHash(variant.getAttributeHash());
         result.setQuantity(variant.getQuantity());
         result.setDeleted(variant.getIsDeleted());
-//        result.setProduct(product);
         result.setOptions(ProductAttributeOptionMapper.toEntities(variant.getOptions()));
         return result;
     }
