@@ -1,8 +1,7 @@
 package com.spring.server.model.mapper;
 
-import com.spring.server.model.entity.Category;
-import com.spring.server.model.entity.SubCategory;
 import com.spring.server.model.dto.CategoryDto;
+import com.spring.server.model.entity.Category;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

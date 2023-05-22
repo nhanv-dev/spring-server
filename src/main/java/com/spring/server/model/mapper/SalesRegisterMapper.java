@@ -1,8 +1,6 @@
 package com.spring.server.model.mapper;
 
-import com.spring.server.model.dto.ProductDto;
 import com.spring.server.model.dto.SalesRegisterDto;
-import com.spring.server.model.entity.Product;
 import com.spring.server.model.entity.SalesRegister;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;

@@ -21,8 +21,7 @@ public class ProductAttribute extends BaseEntity implements Serializable {
     private String name;
     @Column(columnDefinition = "boolean default false")
     private boolean isDeleted;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(referencedColumnName = "id")
+    @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
     @Where(clause = "is_deleted=false")
     private Set<ProductAttributeOption> options = new HashSet<>();
 }

@@ -1,14 +1,10 @@
 package com.spring.server.model.mapper;
 
-import com.spring.server.model.dto.ProductAttributeDto;
 import com.spring.server.model.dto.ProductAttributeOptionDto;
-import com.spring.server.model.entity.Product;
 import com.spring.server.model.entity.ProductAttribute;
 import com.spring.server.model.entity.ProductAttributeOption;
-import com.spring.server.model.entity.ProductVariant;
 import org.springframework.stereotype.Component;
 
-import javax.swing.text.html.Option;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
@@ -19,6 +15,8 @@ public class ProductAttributeOptionMapper {
         if (option == null) return null;
         ProductAttributeOptionDto result = new ProductAttributeOptionDto();
         result.setId(option.getId());
+        if (option.getAttribute() != null)
+            result.setAttributeId(option.getAttribute().getId());
         result.setName(option.getName());
         result.setValue(option.getValue());
         result.setImage(option.getImage());
@@ -42,6 +40,7 @@ public class ProductAttributeOptionMapper {
         result.setValue(option.getValue());
         result.setImage(option.getImage());
         result.setDeleted(option.isDeleted());
+        result.setAttribute(attribute);
         return result;
     }
 

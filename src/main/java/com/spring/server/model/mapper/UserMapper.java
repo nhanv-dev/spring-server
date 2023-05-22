@@ -1,9 +1,9 @@
 package com.spring.server.model.mapper;
 
-import com.spring.server.model.entity.Role;
-import com.spring.server.model.entity.User;
 import com.spring.server.model.dto.RoleDto;
 import com.spring.server.model.dto.UserDto;
+import com.spring.server.model.entity.Role;
+import com.spring.server.model.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
