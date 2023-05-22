@@ -1,7 +1,6 @@
 package com.spring.server.model.mapper;
 
 import com.spring.server.model.dto.OrderItemDto;
-import com.spring.server.model.entity.Order;
 import com.spring.server.model.entity.OrderItem;
 
 import java.util.HashSet;

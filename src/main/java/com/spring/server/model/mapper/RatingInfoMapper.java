@@ -1,9 +1,8 @@
 package com.spring.server.model.mapper;
 
-import com.spring.server.model.entity.RatingInfo;
 import com.spring.server.model.dto.RatingInfoDto;
+import com.spring.server.model.entity.RatingInfo;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class RatingInfoMapper {

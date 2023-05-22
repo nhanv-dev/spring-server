@@ -29,7 +29,7 @@ public class ProductDetailMapper {
         result.setShortDescription(product.getShortDescription());
         result.setReturnPolicies(ReturnPolicyMapper.toEntities(product.getReturnPolicies()));
         result.setDeal(DealMapper.toEntity(product.getDeal()));
-        result.setAttributes(ProductAttributeMapper.toEntities(product.getAttributes(), result));
+        result.setAttributes(ProductAttributeMapper.toEntities(product.getAttributes()));
 
         if (product.getVariants() != null && !product.getVariants().isEmpty()) {
             Set<ProductVariant> variants = new HashSet<>();
