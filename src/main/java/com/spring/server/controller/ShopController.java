@@ -84,12 +84,12 @@ public class ShopController {
     public ResponseEntity<?> getProductsByShopId(
             Authentication authentication,
             @RequestParam(required = false, defaultValue = "0") Integer page,
-            @RequestParam(required = false, defaultValue = "10") Integer limit
+            @RequestParam(required = false, defaultValue = "10") Integer size
     ) {
         User user = userService.findOneByEmail(authentication.getName());
         if (user == null || user.getId() == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         ShopDto shop = shopService.findOneByUserId(user.getId());
-        Page<ProductDto> products = productService.findByShopId(page, limit, shop.getId(), null, false);
+        Page<ProductDto> products = productService.findByShopId(page, size, shop.getId(), null, false);
         return ResponseEntity.ok(products);
     }
 
