@@ -1,7 +1,8 @@
 package com.spring.server.service.implement;
 
-import com.spring.server.model.entity.*;
 import com.spring.server.model.dto.ProductDto;
+import com.spring.server.model.entity.Product;
+import com.spring.server.model.entity.RatingInfo;
 import com.spring.server.model.mapper.ProductDetailMapper;
 import com.spring.server.model.mapper.ProductMapper;
 import com.spring.server.repository.ProductRepo;
@@ -15,9 +16,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class ProductServiceImpl implements ProductService {

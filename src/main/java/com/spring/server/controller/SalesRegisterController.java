@@ -40,7 +40,7 @@ public class SalesRegisterController {
     }
 
     @GetMapping("/users/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_SHOP','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_SHOP','ROLE_ADMIN')")
     public ResponseEntity<?> getSalesRegister(Authentication authentication, @PathVariable Long id) {
         User user = userService.findOneByEmail(authentication.getName());
         if (user == null || !user.getId().equals(id))
