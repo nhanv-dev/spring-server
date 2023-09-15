@@ -1,10 +1,15 @@
-FROM openjdk:17
+FROM maven as builder
 
-ADD ./target/spring-server-0.0.1-SNAPSHOT.jar app.jar
+COPY ./src src/
+COPY ./pom.xml pom.xml
 
-# ENV PORT 8080
+RUN mvn clean package -DskipTests
 
-# EXPOSE 8080
+FROM eclipse-temurin:17-jre-alpine
+COPY --from-builder target/*.jar app.jar
+EXPOSE 8080
+
+
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
