@@ -1,8 +1,8 @@
-FROM maven:3.8.4-openjdk-17-slim AS build
-
-# Set the working directory inside the container
+#FROM maven:3.8.4-openjdk-17-slim AS build
+FROM ubuntu:latest as build
+RUN apt-get update
+RUN apt-get install openjdk:17-jdk-slim -y
 WORKDIR /app
-#ADD ./target/*.jar app.jar
 COPY . .
 RUN mvn clean package
 
