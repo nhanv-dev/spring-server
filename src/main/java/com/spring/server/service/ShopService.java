@@ -15,10 +15,11 @@ public interface ShopService {
 
     ShopDto findOneBySlug(String slug);
 
+    Page<ShopDto> findAll(int page, int size);
+
     ShopDto save(Shop shop);
 
-
-    ShopDto searchShop(String name);
+    Page<ShopDto> searchShop(int page, int size, String name);
 
     ShopDto update(ShopDto shopDto);
 

@@ -1,11 +1,7 @@
 package com.spring.server.model.mapper;
 
 import com.spring.server.model.dto.OrderDto;
-import com.spring.server.model.dto.ProductDto;
-import com.spring.server.model.dto.UserAddressDto;
 import com.spring.server.model.entity.Order;
-import com.spring.server.model.entity.OrderStatusHistory;
-import com.spring.server.model.entity.Product;
 import org.springframework.data.domain.Page;
 
 import java.util.HashSet;
@@ -14,7 +10,6 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class OrderMapper {
-
     public static OrderDto toDto(Order order) {
         OrderDto result = new OrderDto();
         result.setId(order.getId());
@@ -54,7 +49,7 @@ public class OrderMapper {
         result.setTotalPrice(order.getTotalPrice());
         result.setOrderStatus(OrderStatusMapper.toEntity(order.getOrderStatus()));
         result.setUserAddress(UserAddressMapper.toEntity(order.getAddress()));
-        result.setItems(OrderItemMapper.toEntities(order.getItems(), result));
+        result.setItems(OrderItemMapper.toEntities(order.getItems()));
         result.setShop(ShopMapper.toEntity(order.getShop()));
         result.setUser(UserMapper.toEntity(order.getUser()));
         result.setNote(order.getNote());

@@ -21,10 +21,10 @@ public class Shop extends BaseEntity implements Serializable {
     @Column
     private String city, district, wards, addressDetail, warehouseRegionName;
     @Column(columnDefinition = "varchar(255) default 'Đang cập nhật'")
-    private  String responseTime, timePrepareProduct;
-    @Column(columnDefinition = "bigint default 0")
+    private String responseTime, timePrepareProduct;
+    @Column()
     private Integer productTotal = 0;
-    @Column(columnDefinition = "boolean default false")
+    @Column()
     private boolean isOfficialShop, isDeleted;
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, unique = true)

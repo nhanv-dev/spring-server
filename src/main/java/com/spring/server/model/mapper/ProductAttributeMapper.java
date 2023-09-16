@@ -27,20 +27,19 @@ public class ProductAttributeMapper {
         return list;
     }
 
-    public static ProductAttribute toEntity(ProductAttributeDto attribute, Product product) {
+    public static ProductAttribute toEntity(ProductAttributeDto attribute) {
         ProductAttribute result = new ProductAttribute();
         result.setId(attribute.getId());
         result.setName(attribute.getName());
         result.setOptions(ProductAttributeOptionMapper.toEntities(attribute.getOptions(), result));
-        result.setProduct(product);
         return result;
     }
 
-    public static Set<ProductAttribute> toEntities(Set<ProductAttributeDto> attributes, Product product) {
+    public static Set<ProductAttribute> toEntities(Set<ProductAttributeDto> attributes) {
         if (attributes == null) return null;
         Set<ProductAttribute> list = new HashSet<>();
         for (ProductAttributeDto attribute : attributes) {
-            list.add(ProductAttributeMapper.toEntity(attribute, product));
+            list.add(ProductAttributeMapper.toEntity(attribute));
         }
         return list;
     }

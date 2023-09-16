@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -17,7 +18,7 @@ import java.util.Set;
 @Entity
 @Table(name = "orders")
 public class Order extends BaseEntity implements Serializable {
-    @Column(columnDefinition = "double not null", nullable = false)
+    @Column(nullable = false)
     private double totalPrice;
     @Column
     private String note;
@@ -33,7 +34,10 @@ public class Order extends BaseEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", nullable = false)
     private OrderStatus orderStatus;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "order")
+    private CancelledOrder cancelledOrder;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Set<OrderItem> items = new HashSet<>();
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderStatusHistory> orderStatusHistories = new HashSet<>();

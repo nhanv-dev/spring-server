@@ -1,8 +1,7 @@
 package com.spring.server.model.mapper;
 
-import com.spring.server.model.entity.Category;
-import com.spring.server.model.entity.SubCategory;
 import com.spring.server.model.dto.CategoryDto;
+import com.spring.server.model.entity.Category;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -69,8 +68,6 @@ public class CategoryMapper {
         result.setTitle(category.getTitle());
         result.setSlug(category.getSlug());
         result.setIcon(category.getIcon());
-//        if (category.getSubCategories() != null && category.getSubCategories().size() > 0)
-//            result.setSubCategories(SubCategoryMapper.toEntity(category.getSubCategories()));
         return result;
     }
 }

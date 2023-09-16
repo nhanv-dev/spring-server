@@ -19,9 +19,4 @@ public class ReturnPolicy extends BaseEntity implements Serializable {
     @Column
     private String title, tooltipTitle, tooltipContent;
 
-    @Getter
-    @Setter
-    @ManyToMany(mappedBy = "returnPolicies")
-    private List<Product> products;
-
 }

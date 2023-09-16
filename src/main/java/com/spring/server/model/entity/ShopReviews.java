@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class ShopReviews extends BaseEntity implements Serializable {
     @Column(columnDefinition = "varchar(255)")
     private String content;
-    @Column(columnDefinition = "tinyint(5) not null")
+    @Column()
     private int rating;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id", nullable = false)

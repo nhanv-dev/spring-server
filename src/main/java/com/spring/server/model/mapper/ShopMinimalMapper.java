@@ -1,6 +1,5 @@
 package com.spring.server.model.mapper;
 
-import com.spring.server.model.dto.RatingInfoDto;
 import com.spring.server.model.dto.ShopDto;
 import com.spring.server.model.entity.Shop;
 import org.springframework.stereotype.Component;
@@ -22,6 +21,7 @@ public class ShopMinimalMapper {
         result.setWarehouseRegionName(shop.getWarehouseRegionName());
         result.setDeleted(shop.isDeleted());
         result.setRatingInfo(RatingInfoMapper.toDto(shop.getRatingInfo()));
+
         return result;
     }
 

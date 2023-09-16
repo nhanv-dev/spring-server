@@ -52,9 +52,6 @@ public class CartServiceImpl implements CartService {
     @Override
     @Transactional
     public CartDto save(CartDto cartDto) {
-//        Cart savedCart = cartRepo.findOneByUser_Id(cartDto.getUserId());
-//        System.out.println(CartMapper.toDto(savedCart));
-//        Cart cart = CartMapper.toEntity(cartDto);
         return null;
     }
 
@@ -63,7 +60,7 @@ public class CartServiceImpl implements CartService {
     public CartItemDto saveCartItem(User user, CartItemDto cartItemDto) {
         CartItem cartItem = new CartItem();
         Product product = productRepo.findOneByIdAndIsPublicAndIsDeleted(cartItemDto.getProductId(), true, false);
-        ProductVariant productVariant = productVariantRepo.findOneByIdAndProduct_Id(cartItemDto.getVariantId(), cartItemDto.getProductId());
+        ProductVariant productVariant = productVariantRepo.findOneById(cartItemDto.getVariantId());
         Cart cart = cartRepo.findOneByUser_Id(user.getId());
         if (cart == null) cart = cartRepo.save(new Cart(user, new HashSet<>()));
         cartItem.setQuantity(cartItemDto.getQuantity());

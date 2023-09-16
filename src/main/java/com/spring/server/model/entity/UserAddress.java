@@ -17,7 +17,6 @@ import java.util.Set;
 @Entity()
 @Table(name = "user_address")
 @SQLDelete(sql = "update user_address u set u.is_deleted=true where u.id=:id")
-@Where(clause = "is_deleted=false")
 public class UserAddress extends BaseEntity implements Serializable {
     @Column
     private String city, district, wards, addressDetail, customerName, phoneNumber, email;

@@ -20,11 +20,11 @@ import java.util.Set;
 @Table(name = "variant")
 @SQLDelete(sql = "UPDATE variant SET is_deleted = true WHERE id=?")
 public class ProductVariant extends BaseEntity implements Serializable {
-    @Column(columnDefinition = "varchar(255) not null")
+    @Column(nullable = false)
     private String attributeHash;
-    @Column(columnDefinition = "bigint default 0")
+    @Column()
     private Integer quantity;
-    @Column(columnDefinition = "boolean default false")
+    @Column()
     private boolean isDeleted;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "deal_id", referencedColumnName = "id", unique = true)
@@ -33,8 +33,5 @@ public class ProductVariant extends BaseEntity implements Serializable {
     @JoinTable(name = "variant_option", joinColumns = @JoinColumn(name = "variant_id"), inverseJoinColumns = @JoinColumn(name = "option_id"))
     @Where(clause = "is_deleted=false")
     private Set<ProductAttributeOption> options = new HashSet<>();
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
 
 }

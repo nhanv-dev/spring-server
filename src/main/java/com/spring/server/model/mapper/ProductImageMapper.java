@@ -1,17 +1,13 @@
 package com.spring.server.model.mapper;
 
-import com.spring.server.model.dto.ProductDto;
 import com.spring.server.model.dto.ProductImageDto;
 import com.spring.server.model.entity.Product;
 import com.spring.server.model.entity.ProductImage;
-import com.spring.server.model.entity.RatingInfo;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.function.Function;
 @Component
 public class ProductImageMapper {
     public static Set<ProductImageDto> toDto(Set<ProductImage> images) {
@@ -33,7 +29,6 @@ public class ProductImageMapper {
             ProductImage productImage = new ProductImage();
             productImage.setId(image.getId());
             productImage.setUrl(image.getUrl());
-            productImage.setProduct(product);
             result.add(productImage);
         }
         return result;

@@ -1,22 +1,16 @@
 package com.spring.server.model.mapper;
 
+import com.spring.server.model.dto.ProductDto;
 import com.spring.server.model.entity.Product;
-import com.spring.server.model.entity.ProductImage;
-import com.spring.server.model.dto.*;
-import com.spring.server.model.entity.RatingInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.function.Function;
 
 @Component
 public class ProductMapper {
     public static ProductDto toDto(Product product) {
         ProductDto result = ProductMinimalMapper.toDto(product);
-
         result.setCategory(CategoryMapper.toDtoWithoutSub(product.getCategory()));
         result.setSubCategory(SubCategoryMapper.toDto(product.getSubCategory()));
         result.setShop(ShopMapper.toDto(product.getShop()));

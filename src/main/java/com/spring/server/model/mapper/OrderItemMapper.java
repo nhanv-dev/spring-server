@@ -1,7 +1,6 @@
 package com.spring.server.model.mapper;
 
 import com.spring.server.model.dto.OrderItemDto;
-import com.spring.server.model.entity.Order;
 import com.spring.server.model.entity.OrderItem;
 
 import java.util.HashSet;
@@ -32,9 +31,8 @@ public class OrderItemMapper {
         return result;
     }
 
-    public static OrderItem toEntity(OrderItemDto orderItemDto, Order order) {
+    public static OrderItem toEntity(OrderItemDto orderItemDto) {
         OrderItem result = new OrderItem();
-        result.setOrder(order);
         result.setPrice(orderItemDto.getPrice());
         result.setFinalPrice(orderItemDto.getFinalPrice());
         result.setDiscountPercent(orderItemDto.getDiscountPercent());
@@ -46,10 +44,10 @@ public class OrderItemMapper {
         return result;
     }
 
-    public static Set<OrderItem> toEntities(Set<OrderItemDto> orderItemDtos, Order order) {
+    public static Set<OrderItem> toEntities(Set<OrderItemDto> orderItemDtos) {
         Set<OrderItem> result = new HashSet<>();
         for (OrderItemDto item : orderItemDtos) {
-            result.add(toEntity(item, order));
+            result.add(toEntity(item));
         }
         return result;
     }

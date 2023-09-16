@@ -1,11 +1,13 @@
 package com.spring.server.model.mapper;
 
-import com.spring.server.model.entity.Shop;
 import com.spring.server.model.dto.ShopDto;
+import com.spring.server.model.entity.Shop;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Function;
 
 @Component
 public class ShopMapper {
@@ -20,8 +22,8 @@ public class ShopMapper {
         result.setAddressDetail(shop.getAddressDetail());
         result.setDistrict(shop.getDistrict());
         result.setWards(shop.getWards());
-        result.setWarehouseRegionName(shop.getWarehouseRegionName());
-        result.setDeleted(shop.isDeleted());
+        result.setCreatedAt(shop.getCreatedAt());
+        result.setUpdatedAt(shop.getUpdatedAt());
 
         return result;
     }
@@ -31,6 +33,15 @@ public class ShopMapper {
         Set<ShopDto> result = new HashSet<>();
         for (Shop shop : shops) result.add(toDto(shop));
         return result;
+    }
+
+    public static Page<ShopDto> toDto(Page<Shop> shops) {
+        return shops.map(new Function<Shop, ShopDto>() {
+            @Override
+            public ShopDto apply(Shop shop) {
+                return toDto(shop);
+            }
+        });
     }
 
     public static Shop toEntity(ShopDto shop) {
@@ -55,6 +66,7 @@ public class ShopMapper {
         result.setWards(shop.getWards());
         result.setWarehouseRegionName(shop.getWarehouseRegionName());
         result.setDeleted(shop.isDeleted());
+
         return result;
     }
 }

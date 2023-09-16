@@ -22,6 +22,8 @@ public interface CategoryService {
 
     Page<CategoryDto> findByPageable(Pageable pageable);
 
+    Page<CategoryDto> findByPageableWithoutSub(Pageable pageable);
+
     List<SubCategoryDto> findSubCategoryByCategoryId(Long id);
 
     void update(CategoryDto category);

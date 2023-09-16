@@ -2,8 +2,6 @@ package com.spring.server.model.mapper;
 
 import com.spring.server.model.dto.DealDto;
 import com.spring.server.model.entity.Deal;
-import com.spring.server.model.entity.Product;
-import com.spring.server.model.entity.ProductVariant;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -43,17 +41,8 @@ public class DealMapper {
         result.setPrice(deal.getPrice());
         result.setFinalPrice(deal.getFinalPrice());
         result.setDiscountPercent(deal.getDiscountPercent());
-//        result.setProduct(product);
         return result;
     }
 
-    public static Deal toEntity(DealDto deal, ProductVariant variant) {
-        if (deal == null) return null;
-        Deal result = new Deal();
-        result.setPrice(deal.getPrice());
-        result.setFinalPrice(deal.getFinalPrice());
-        result.setDiscountPercent(deal.getDiscountPercent());
-        result.setVariant(variant);
-        return result;
-    }
+
 }

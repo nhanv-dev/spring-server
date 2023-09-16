@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class OrderStatusHistoryMapper {
-
     public static OrderStatusHistoryDto toDto(OrderStatusHistory history) {
         OrderStatusHistoryDto result = new OrderStatusHistoryDto();
         result.setId(history.getId());

@@ -1,10 +1,7 @@
 package com.spring.server.model.mapper;
 
-import com.spring.server.model.dto.ProductAttributeOptionDto;
 import com.spring.server.model.dto.ProductVariantDto;
 import com.spring.server.model.entity.Product;
-import com.spring.server.model.entity.ProductAttribute;
-import com.spring.server.model.entity.ProductAttributeOption;
 import com.spring.server.model.entity.ProductVariant;
 import org.springframework.stereotype.Component;
 
@@ -41,7 +38,6 @@ public class ProductVariantMapper {
         result.setAttributeHash(variant.getAttributeHash());
         result.setQuantity(variant.getQuantity());
         result.setDeleted(variant.getIsDeleted());
-        result.setProduct(product);
         result.setOptions(ProductAttributeOptionMapper.toEntities(variant.getOptions()));
         return result;
     }

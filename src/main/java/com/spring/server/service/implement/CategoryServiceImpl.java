@@ -48,14 +48,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryDto> findAll() {
         List<Category> list = categoryRepo.findAll();
-        for (Category category : list) {
-            if (category.getSlug() != null) break;
-            category.setSlug(SlugGenerator.toSlug(category.getTitle()));
-            for (SubCategory sub : category.getSubCategories()) {
-                sub.setSlug(SlugGenerator.toSlug(sub.getTitle()));
-            }
-            categoryRepo.save(category);
-        }
         return CategoryMapper.toDto(list);
     }
 
@@ -77,6 +69,17 @@ public class CategoryServiceImpl implements CategoryService {
             @Override
             public CategoryDto apply(Category category) {
                 return CategoryMapper.toDto(category);
+            }
+        });
+    }
+
+    @Override
+    public Page<CategoryDto> findByPageableWithoutSub(Pageable pageable) {
+        Page<Category> entities = categoryRepo.findAll(pageable);
+        return entities.map(new Function<Category, CategoryDto>() {
+            @Override
+            public CategoryDto apply(Category category) {
+                return CategoryMapper.toDtoWithoutSub(category);
             }
         });
     }

@@ -1,15 +1,8 @@
 package com.spring.server.service;
 
-
 import com.spring.server.model.dto.ProductDto;
-import com.spring.server.model.dto.ShopDto;
-import com.spring.server.model.entity.Product;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-
 
 public interface ProductService {
     ProductDto findOneById(Long id);
@@ -31,6 +24,6 @@ public interface ProductService {
 
     void delete(Long id);
 
-    Page<ProductDto> searchProducts(Pageable pageable, String name);
+    Page<ProductDto> searchProducts(int page, int size, String name);
 
 }

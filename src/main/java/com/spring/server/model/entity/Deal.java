@@ -19,12 +19,8 @@ public class Deal extends BaseEntity implements Serializable {
     private double price;
     @Column(columnDefinition = "decimal(15,2)")
     private double finalPrice;
-    @Column
+    @Column()
     private double discountPercent;
-    @Column
-    private Boolean isDeleted = false;
-    @OneToOne(mappedBy = "deal")
-    private Product product;
-    @OneToOne(mappedBy = "deal")
-    private ProductVariant variant;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isDeleted;
 }

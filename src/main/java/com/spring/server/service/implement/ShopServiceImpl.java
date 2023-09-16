@@ -48,6 +48,13 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
+    public Page<ShopDto> findAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Shop> shops = shopRepo.findAll(pageable);
+        return ShopMapper.toDto(shops);
+    }
+
+    @Override
     @Transactional
     public ShopDto save(Shop shop) {
         RatingInfo ratingInfo = ratingInfoRepo.save(new RatingInfo());
@@ -77,9 +84,10 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public ShopDto searchShop(String name) {
-        Shop shops = shopRepo.searchShopByName(name);
-        if(shops==null) return null;
+    public Page<ShopDto> searchShop(int page, int size, String name) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Shop> shops = shopRepo.searchShopByName(pageable, name);
+        if (shops == null) return null;
         return ShopMapper.toDto(shops);
     }
 
