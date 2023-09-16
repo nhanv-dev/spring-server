@@ -18,12 +18,12 @@ public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
-    @Column(columnDefinition = "datetime default CURRENT_TIMESTAMP", updatable = false)
+//    @Column(columnDefinition = "timestamp default NOW()", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     @LastModifiedDate
     protected Date createdAt;
-    @Column(columnDefinition = "datetime default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+//    @Column(columnDefinition = "timestamp default NOW() ON UPDATE NOW()")
     @UpdateTimestamp
     @LastModifiedDate
     protected Date updatedAt;

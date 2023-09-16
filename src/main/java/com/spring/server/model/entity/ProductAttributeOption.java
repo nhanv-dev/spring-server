@@ -19,11 +19,11 @@ import java.util.Set;
 @Table(name = "attribute_option")
 @SQLDelete(sql = "UPDATE attribute_option SET is_deleted = true WHERE id=?")
 public class ProductAttributeOption extends BaseEntity implements Serializable {
-    @Column(columnDefinition = "varchar(100)", nullable = false)
+    @Column(nullable = false)
     private String name, value;
-    @Column(columnDefinition = "text")
+    @Column()
     private String image;
-    @Column(columnDefinition = "boolean")
+    @Column()
     private boolean isDeleted = false;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attribute_id", nullable = false)

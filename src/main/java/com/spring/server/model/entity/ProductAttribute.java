@@ -19,7 +19,7 @@ import java.util.Set;
 public class ProductAttribute extends BaseEntity implements Serializable {
     @Column
     private String name;
-    @Column(columnDefinition = "boolean default false")
+    @Column()
     private boolean isDeleted;
     @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
     @Where(clause = "is_deleted=false")

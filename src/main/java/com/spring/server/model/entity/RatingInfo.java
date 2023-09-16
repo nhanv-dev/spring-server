@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Table(name = "rating_info")
 public class RatingInfo extends BaseEntity implements Serializable {
 
-    @Column(columnDefinition = "tinyint default 0")
+    @Column()
     private Integer star1, star2, star3, star4, star5;
 
     public RatingInfo() {

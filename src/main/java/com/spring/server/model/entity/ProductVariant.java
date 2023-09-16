@@ -22,9 +22,9 @@ import java.util.Set;
 public class ProductVariant extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private String attributeHash;
-    @Column(columnDefinition = "bigint default 0")
+    @Column()
     private Integer quantity;
-    @Column(columnDefinition = "boolean default false")
+    @Column()
     private boolean isDeleted;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "deal_id", referencedColumnName = "id", unique = true)

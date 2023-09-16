@@ -9,7 +9,6 @@ import org.hibernate.annotations.Where;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -18,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User extends BaseEntity implements Serializable {
     @Column(columnDefinition = "varchar(255) not null")
     private String name;
